@@ -5,3 +5,23 @@
 .imported-content{overflow-wrap:anywhere}.imported-content img{max-width:100%;height:auto}.imported-content table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13px}.imported-content td,.imported-content th{border:1px solid #ddd;padding:8px;vertical-align:top}.imported-content td p{margin:0 0 6px}.imported-content hr{border:0;border-top:1px solid #ddd;margin:22px 0}.imported-content pre{overflow-x:auto;white-space:pre-wrap}.course-menu{background:#f6f8fa;padding:14px 18px;border:1px solid #e3e7eb;border-radius:4px;margin-bottom:24px}.course-menu h2{margin:0 0 10px}.course-menu ul{padding-left:20px;margin:0;columns:2}.course-menu li{break-inside:avoid;margin-bottom:6px}@media(max-width:760px){.course-menu ul{columns:1}.imported-content table{display:block;overflow-x:auto}}
 
 .login-placeholder{min-height:180px}.login-placeholder p{color:#666;font-size:13px}
+
+/* Usability refinements: retain the original layout and blue navigation. */
+:root{line-height:1.75}.site{width:calc(100% - 32px)}
+header{flex-wrap:wrap}.brand{flex:1 1 490px}header form{max-width:100%}
+main,aside,.layout{min-width:0}main{overflow-wrap:anywhere}
+nav a{min-height:44px;display:flex;align-items:center;justify-content:center}
+input,select,button{min-height:44px}input,select{font-size:16px}
+select{width:100%;max-width:100%;border:1px solid #bbb;border-radius:4px;background:white;padding:8px 10px;color:#333;font-family:inherit}
+select:focus-visible,.table-scroll:focus-visible{outline:3px solid #e59a20;outline-offset:3px}
+.filter-options{display:flex;align-items:flex-end;gap:12px;margin-top:14px}.filter-options>div{flex:1;min-width:0}.filter-options button{padding-inline:14px;white-space:nowrap}
+.category-links{gap:8px}.category-links a{padding:8px 11px;border:1px solid #d8e4eb;border-radius:4px;min-height:44px;display:flex;align-items:center;background:#fff}
+.publications li{line-height:1.85;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid #edf0f2}.publications li:last-child{border-bottom:0}
+.home-links{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;padding:12px;background:#f6f8fa;border:1px solid #e0e5e9;border-radius:4px}.home-links a{padding:8px 12px;min-height:44px;display:flex;align-items:center;border-radius:4px;background:#fff;border:1px solid #dae4eb}
+.imported-content{line-height:1.85}.page-members .imported-content{font-size:15px}.page-members .imported-content strong{color:#235773}.page-members .imported-content hr{margin:28px 0}.page-members .imported-content a{text-underline-offset:3px;text-decoration:underline}
+.table-scroll{max-width:100%;overflow-x:auto;margin:18px 0;border:1px solid #ddd;border-radius:4px}.imported-content .table-scroll table{display:table;margin:0;min-width:540px}.table-scroll table tr:nth-child(even){background:#f8fafb}
+.course-menu a{display:inline-block;padding:7px 0}.login-placeholder{min-height:0}.login-placeholder p:last-child{margin-bottom:0}
+aside li a{display:inline-block;padding:5px 0}footer a{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:960px){header{display:block}.brand{display:block}header form{margin-top:16px;width:100%}header input{flex:1;width:auto}.layout{grid-template-columns:minmax(0,1fr) 215px;gap:22px}}
+@media(max-width:760px){.site{width:calc(100% - 20px);margin:10px;padding:18px}.layout{grid-template-columns:minmax(0,1fr)}.brand{font-size:24px;line-height:1.35}nav{gap:6px}nav a{flex:1 1 28%;padding:9px 10px;border:1px solid #e0e5e9;font-size:14px}.home-links a{flex:1 1 40%;font-size:13px}.filter{padding:12px}.filter-options{align-items:stretch;flex-direction:column}.filter-options button{width:100%}.category-links a{flex:1 1 40%;font-size:12px}.publications{padding-left:20px}.publications li{font-size:14px}.imported-content .table-scroll table{display:table}.table-scroll::before{content:'Scroll sideways to view the full table →';display:block;font-size:12px;padding:8px;color:#666;position:sticky;left:0;background:#f6f8fa}.course-menu{padding:14px}.course-menu ul{columns:1}aside{border-top:1px solid #ddd;padding-top:20px}h1{font-size:24px}}
+@media print{.home-links,.filter-options{display:none}.site{width:100%}.table-scroll{overflow:visible;border:0}.imported-content .table-scroll table{min-width:0}.table-scroll::before{display:none}}
