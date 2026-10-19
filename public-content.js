@@ -1,0 +1,26 @@
+import { clean, validContent } from './content.js';
+if (document.querySelector('#cloud-home, .page-members .imported-content, #filter')) {
+ try {
+  const { contentRef, getDoc } = await import('./firebase-client.js');
+  const snap = await getDoc(contentRef);
+  if (snap.exists()) {
+   const d = snap.data();
+   if (!validContent(d)) throw Error('Invalid content');
+   const home = document.querySelector('#cloud-home');
+   const members = document.querySelector('.page-members .imported-content');
+   if (home) home.innerHTML = clean(d.home);
+   if (members) members.innerHTML = clean(d.members);
+   if (document.querySelector('#filter')) {
+    d.groups.forEach((g,i)=>{
+     const section = document.querySelector('#category-'+i);
+     section.querySelector('h2').textContent=g.category;
+     const ul=section.querySelector('ul');ul.replaceChildren();
+     for(const html of g.items){const li=document.createElement('li');li.innerHTML=clean(html);ul.append(li);}
+     document.querySelector('#category-filter option[value="category-'+i+'"]').textContent=g.category;
+     document.querySelector('.category-links a[href="#category-'+i+'"]').textContent=g.category;
+    });
+    document.dispatchEvent(new Event('content-updated'));
+   }
+  }
+ } catch(e) { console.warn('Cloud content unavailable; showing repository content.', e.code || e.message); }
+}

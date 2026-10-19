@@ -1,9 +1,9 @@
 const filter = document.querySelector('#filter');
 if (filter) {
-  const entries = [...document.querySelectorAll('.publications li')];
-  const groups = [...document.querySelectorAll('.publication-group')];
   const category = document.querySelector('#category-filter');
   function update() {
+    const entries = [...document.querySelectorAll('.publications li')];
+    const groups = [...document.querySelectorAll('.publication-group')];
     const q = filter.value.trim().toLocaleLowerCase();
     let count = 0;
     for (const group of groups) {
@@ -27,5 +27,6 @@ if (filter) {
   document.querySelector('#clear-filter').addEventListener('click', () => {
     filter.value = ''; category.value = 'all'; update(); filter.focus();
   });
+  document.addEventListener('content-updated', update);
   update();
 }
