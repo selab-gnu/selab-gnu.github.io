@@ -33,4 +33,3 @@ aside li a{display:inline-block;padding:5px 0}footer a{display:inline-flex;align
 @media print{.hero,.manage-link{display:none}.site{box-shadow:none}.brand-mark{background:none;color:#000}.brand-name small{color:#000}}
 
 .hero h2{word-break:keep-all;overflow-wrap:normal}
-

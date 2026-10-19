@@ -26,7 +26,7 @@ print('Built Home and Publications:',sum(len(g['items']) for g in groups),'entri
 sections=json.loads((root/'data/sections.json').read_text(encoding='utf-8'))
 course_links='<div class="course-menu"><h2>Courses</h2><ul>'+''.join('<li><a href="'+p['path']+'">'+p['title']+'</a></li>' for p in sections if p['section']=='Courses' and p['path']!='courses.html')+'</ul></div>'
 for item in sections:
- content=item['html']
+ content=item['html'].replace('\r\n','\n')
  content=re.sub(r'<table\b', '<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><table',content).replace('</table>','</table></div>')
  if item['section']=='Courses':content=course_links+content
  (root/item['path']).write_text(page(item['title'], '<div class="imported-content">'+content+'</div>',item['section']),encoding='utf-8')
