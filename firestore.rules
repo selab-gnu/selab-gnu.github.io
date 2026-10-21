@@ -1,7 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
  match /databases/{database}/documents {
-  function admin() {
+  function bootstrapAdmin() {
    return request.auth != null
     && request.auth.token.email == 'yeonu7787@gmail.com'
     && request.auth.token.email_verified == true
@@ -13,12 +13,17 @@ service cloud.firestore {
     && exists(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower()))
     && get(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower())).data.role == role;
   }
+  function admin() {
+   return bootstrapAdmin() || editorRole('admin');
+  }
   match /editorRoles/{email} {
    allow get: if admin() || (request.auth != null && request.auth.token.email_verified == true && request.auth.token.email.lower() == email);
    allow list, delete: if admin();
    allow create, update: if admin() && request.resource.data.keys().hasAll(['role'])
     && request.resource.data.keys().hasOnly(['role','memberId'])
-    && request.resource.data.role in ['publications','manager','member']
+    && email != 'yeonu7787@gmail.com'
+    && request.resource.data.role in ['admin','member','visitor']
+    && (request.resource.data.role != 'visitor' || !('memberId' in request.resource.data))
     && (request.resource.data.role != 'member' || 'memberId' in request.resource.data)
     && (!('memberId' in request.resource.data) || (request.resource.data.memberId is string
       && exists(/databases/$(database)/documents/memberProfiles/$(request.resource.data.memberId))));
@@ -36,12 +41,12 @@ service cloud.firestore {
   match /siteContent/main {
    allow get: if true;
    allow create: if admin() && valid() && request.resource.data.revision == 1;
-   allow update: if (admin() || editorRole('manager') || (editorRole('publications') && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['groups','revision','updatedAt']))) && valid() && request.resource.data.revision == resource.data.revision + 1
+   allow update: if admin() && valid() && request.resource.data.revision == resource.data.revision + 1
     && (!('memberDirectoryVersion' in resource.data) || request.resource.data.memberDirectoryVersion == 1);
    allow delete, list: if false;
   }
   function ownProfile(id) {
-   return (editorRole('member') || editorRole('publications') || editorRole('manager'))
+   return editorRole('member')
     && get(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower())).data.memberId == id;
   }
   function validProfile() {
@@ -56,11 +61,11 @@ service cloud.firestore {
   }
   match /memberProfiles/{id} {
    allow read: if true;
-   allow create: if (admin() || editorRole('manager')) && validProfile() && request.resource.data.revision == 1;
+   allow create: if admin() && validProfile() && request.resource.data.revision == 1;
    allow update: if validProfile() && request.resource.data.revision == resource.data.revision + 1
-    && (admin() || editorRole('manager') || (ownProfile(id)
+    && (admin() || (ownProfile(id)
       && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bio','revision','updatedAt'])));
-   allow delete: if admin() || editorRole('manager');
+   allow delete: if admin();
   }
  }
 }

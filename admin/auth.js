@@ -6,13 +6,13 @@ import { doc, setDoc, deleteDoc, collection, getDocs } from 'https://www.gstatic
 const auth = getAuth(app);
 let role='visitor', authGeneration=0, ownMemberId='';
 export function getOwnMemberId(){return ownMemberId;}
-export function canEdit(section){if(section==='my-profile')return !!ownMemberId;return role==='owner'||role==='manager'||role==='publications'&&section==='publications';}
-export function isOwner(){return role==='owner';}
+export function canEdit(section){if(section==='my-profile')return (role==='admin'||role==='member')&&!!ownMemberId;return role==='admin'&&['publications','home','members'].includes(section);}
+export function isAdmin(){return role==='admin';}
+export function hasEditorAccess(){return role==='admin'||role==='member';}
 
 const status = document.querySelector('#auth-status');
 const login = document.querySelector('#login');
 const logout = document.querySelector('#logout');
-export function isAdmin(){return ['owner','manager','publications','member'].includes(role);}
 export async function readContent() {
  const snap = await getDoc(contentRef);
  if (!snap.exists()) return null;
@@ -27,7 +27,7 @@ export async function publishContent(data, revision) {
   const snap = await tx.get(contentRef);
   const current = snap.exists() ? snap.data().revision : 0;
   if (current !== revision) throw Error('다른 창에서 자료가 변경되었습니다. 초안을 내보낸 뒤 새로고침해서 다시 편집해주세요.');
-  if(!snap.exists()&&role!=='owner')throw Error('전체 관리자가 먼저 최초 공개 저장을 해야 합니다.');
+  if(!snap.exists()&&!isAdmin())throw Error('전체 관리자가 먼저 최초 공개 저장을 해야 합니다.');
   const previous=snap.exists()?snap.data():data;
   tx.set(contentRef, { version: 1, home: canEdit('home')?data.home:previous.home, members: canEdit('members')&&previous.memberDirectoryVersion!==1?data.members:previous.members, groups: data.groups, ...(previous.memberDirectoryVersion===1?{memberDirectoryVersion:1}:{}), revision: current + 1, updatedAt: serverTimestamp() });
  });
@@ -45,24 +45,25 @@ export function watchAuth(callback) {
   const generation=++authGeneration;role='visitor';ownMemberId='';
   document.querySelector('#workspace').hidden=true;callback(false);
   logout.hidden=!user;login.hidden=!!user;
-  status.textContent=user?'계정 권한을 확인하는 중입니다…':'구글 계정으로 로그인하세요. 승인된 계정만 편집할 수 있습니다.';
+  status.textContent=user?'계정 권한을 확인하는 중입니다…':'방문자는 로그인 없이 공개 자료를 볼 수 있습니다. 관리자·멤버는 Google 계정으로 로그인하세요.';
   if(!user)return;
   try{
    const token=await user.getIdTokenResult();
    if(user.emailVerified&&token.signInProvider==='google.com'){
-    if(user.email===adminEmail)role='owner';
-    else {const snap=await getDoc(doc(contentRef.firestore,'editorRoles',user.email.toLowerCase()));if(generation!==authGeneration)return;role=snap.exists()?snap.data().role:'visitor';ownMemberId=snap.exists()?(snap.data().memberId||''):'';}
+    if(user.email.toLowerCase()===adminEmail.toLowerCase())role='admin';
+    else {const snap=await getDoc(doc(contentRef.firestore,'editorRoles',user.email.toLowerCase()));if(generation!==authGeneration)return;const data=snap.exists()?snap.data():{};role=['admin','member','visitor'].includes(data.role)?data.role:'visitor';ownMemberId=role!=='visitor'?(data.memberId||''):'';}
    }
    if(generation!==authGeneration)return;
-   const allowed=isAdmin();
+   const allowed=hasEditorAccess();
    document.querySelector('#workspace').hidden=!allowed;
-   document.querySelector('#role-management').hidden=!isOwner();
+   document.querySelector('#role-management').hidden=!isAdmin();
+   document.querySelector('#export').hidden=!isAdmin();
    for(const section of ['publications','home','members','my-profile'])document.querySelector('[data-tab="'+section+'"]').hidden=!canEdit(section);
-   status.textContent=allowed?user.email+' · '+({owner:'전체 관리자',manager:'콘텐츠 관리자',publications:'논문 편집자',member:'멤버 (자기소개 편집)'}[role]):'이 계정에는 편집 권한이 없습니다. 관리자에게 권한 등록을 요청해주세요.';
+   status.textContent=allowed?user.email+' · '+({admin:'관리자',member:'멤버 (자기소개만 편집)',visitor:'방문자'}[role]):user.email+' · 방문자: 공개 자료만 열람할 수 있습니다. 자기소개를 수정하려면 관리자에게 멤버 등록을 요청해주세요.';
    callback(allowed);
   }catch(e){role='visitor';status.textContent='권한 확인 실패: '+(e.code||e.message)+'. 관리자에게 문의해주세요.';}
  });
 }
-export async function listRoles(){if(!isOwner())throw Error('전체 관리자만 사용할 수 있습니다.');return (await getDocs(collection(contentRef.firestore,'editorRoles'))).docs.map(d=>({email:d.id,...d.data()}));}
-export async function grantRole(email,value,memberId=''){if(!isOwner())throw Error('전체 관리자만 사용할 수 있습니다.');email=email.trim().toLowerCase();if(email===adminEmail.toLowerCase()||!email.includes('@')||email.includes('/'))throw Error('추가할 편집자의 이메일을 입력해주세요.');if(!['publications','manager','member'].includes(value))throw Error('잘못된 권한입니다.');if(value==='member'&&!memberId)throw Error('자기소개를 수정할 멤버를 연결해주세요.');if(memberId&&!(await getDoc(doc(contentRef.firestore,'memberProfiles',memberId))).exists())throw Error('공개 저장된 멤버를 선택해주세요.');await setDoc(doc(contentRef.firestore,'editorRoles',email),{role:value,...(memberId?{memberId}:{})});}
-export async function revokeRole(email){if(!isOwner())throw Error('전체 관리자만 사용할 수 있습니다.');await deleteDoc(doc(contentRef.firestore,'editorRoles',email));}
+export async function listRoles(){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');return (await getDocs(collection(contentRef.firestore,'editorRoles'))).docs.map(d=>({email:d.id,...d.data()}));}
+export async function grantRole(email,value,memberId=''){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');email=email.trim().toLowerCase();if(email===adminEmail.toLowerCase()||!email.includes('@')||email.includes('/'))throw Error('추가할 편집자의 이메일을 입력해주세요.');if(!['admin','member','visitor'].includes(value))throw Error('잘못된 권한입니다.');if(value==='visitor')memberId='';if(value==='member'&&!memberId)throw Error('자기소개를 수정할 멤버를 연결해주세요.');if(memberId&&!(await getDoc(doc(contentRef.firestore,'memberProfiles',memberId))).exists())throw Error('공개 저장된 멤버를 선택해주세요.');await setDoc(doc(contentRef.firestore,'editorRoles',email),{role:value,...(memberId?{memberId}:{})});}
+export async function revokeRole(email){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');if(email.trim().toLowerCase()===adminEmail.toLowerCase())throw Error('기본 관리자 계정은 해제할 수 없습니다.');await deleteDoc(doc(contentRef.firestore,'editorRoles',email));}

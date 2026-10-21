@@ -9,10 +9,16 @@ export async function readProfile(id) {
   const snap = await getDoc(ref(id));
   return snap.exists() ? {id:snap.id,...snap.data()} : null;
 }
-export async function migrateProfiles(records, revision) {
+export async function migrateProfiles(records, revision, initialContent) {
   await runTransaction(contentRef.firestore, async tx=>{
     const snap = await tx.get(contentRef);
-    if (!snap.exists()) throw Error('먼저 기존 자료를 홈페이지에 공개 저장해주세요.');
+    if (!snap.exists()) {
+      if(revision!==0||!initialContent)throw Error('먼저 전체 관리자가 기존 자료를 공개 저장해주세요.');
+      const {version,home,members,groups}=initialContent;
+      for(const record of records){const {id,...data}=record;tx.set(ref(id),{...data,revision:1,updatedAt:serverTimestamp()});}
+      tx.set(contentRef,{version,home,members,groups,memberDirectoryVersion:1,revision:1,updatedAt:serverTimestamp()});
+      return;
+    }
     if (snap.data().memberDirectoryVersion === 1) throw Error('이미 멤버별 관리로 전환되었습니다. 새로고침해주세요.');
     if (snap.data().revision !== revision) throw Error('공개 자료가 변경되었습니다. 다시 불러온 뒤 전환해주세요.');
     for (const record of records) {
