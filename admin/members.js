@@ -1,5 +1,5 @@
 import { clean } from '../content.js';
-import { memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
+import { compareMembers, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
 import { formatMember } from './member-format.js';
 import { canEdit, getOwnMemberId } from './auth.js';
 import { readProfiles, readProfile, migrateProfiles, saveProfile, deleteProfile } from './member-store.js';
@@ -14,7 +14,7 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
   function fillGroups(select){select.replaceChildren();for(const [key,name] of Object.entries(memberGroups)){const o=document.createElement('option');o.value=key;o.textContent=name;select.append(o);}}
   fillGroups($('#member-edit-group'));fillGroups($('#member-group'));
   function roleOptions(){const select=$('#role-member');const old=select.value;select.replaceChildren(new Option('멤버 연결 안 함',''));for(const record of records.filter(r=>r.revision>0))select.append(new Option(record.name+' · '+memberGroups[record.group],record.id));select.value=old;}
-  function list(){$('#member-summary').textContent=records.length+'명 · 전체 멤버 추가·수정·삭제 가능';const q=$('#member-search').value.toLocaleLowerCase();const box=$('#member-list');box.replaceChildren();for(const record of records.filter(r=>r.name.toLocaleLowerCase().includes(q)).sort((a,b)=>a.order-b.order)){const b=document.createElement('button');b.type='button';b.textContent=record.name+' · '+memberGroups[record.group];b.classList.toggle('selected',selected?.id===record.id);b.onclick=()=>{if(!discard())return;selected=record;$('#member-new-card').hidden=true;show();};box.append(b);}if(!box.children.length)box.textContent='등록된 멤버 또는 검색 결과가 없습니다.';roleOptions();}
+  function list(){$('#member-summary').textContent=records.length+'명 · 전체 멤버 추가·수정·삭제 가능';const q=$('#member-search').value.toLocaleLowerCase();const box=$('#member-list');box.replaceChildren();for(const record of records.filter(r=>r.name.toLocaleLowerCase().includes(q)).sort(compareMembers)){const b=document.createElement('button');b.type='button';b.textContent=record.name+' · '+memberGroups[record.group];b.classList.toggle('selected',selected?.id===record.id);b.onclick=()=>{if(!discard())return;selected=record;$('#member-new-card').hidden=true;show();};box.append(b);}if(!box.children.length)box.textContent='등록된 멤버 또는 검색 결과가 없습니다.';roleOptions();}
   function show(){$('#member-directory .member-layout').hidden=false;const editing=!!selected;$('#member-detail').hidden=!editing;if(editing){$('#member-edit-name').value=selected.name;$('#member-edit-group').value=selected.group;$('#member-edit-body').innerHTML=clean(selected.html);$('#member-edit-bio').value=selected.bio;}list();refreshPreview();}
   function discard(){if((pending||hasNew())&&!confirm('저장하지 않은 멤버 수정을 버릴까요?'))return false;pending=false;$('#member-form').reset();return true;}
   function newPreview(){try{$('#new-member-preview').innerHTML=hasNew()?clean(profileHTML({html:formatMember({...newFields(),bio:''}),bio:newFields().bio})):'이름과 직무·과정을 입력하면 소개를 확인할 수 있습니다.';}catch(e){$('#new-member-preview').textContent=e.message;}}
@@ -55,7 +55,7 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
       button.disabled=true;button.textContent='멤버 등록 중…';form.setAttribute('aria-busy','true');
       try {
         const f=newFields();if(!f.role)throw Error('직무·과정·상태를 입력해주세요.');
-        const record={id:crypto.randomUUID(),name:f.name,html:formatMember({...f,bio:''}).replace(/<hr>/g,''),bio:f.bio,group:$('#member-group').value,order:Math.min(0,...records.map(r=>r.order))-1,revision:0};
+        const record={id:crypto.randomUUID(),name:f.name,html:formatMember({...f,bio:''}).replace(/<hr>/g,''),bio:f.bio,group:$('#member-group').value,order:Math.max(-1,...records.filter(r=>r.group===$('#member-group').value).map(r=>r.order))+1,revision:0};
         if(!ready)await persistInitial([...records,record],record.id);
         else {const saved=await saveProfile(record);records.push(saved);selected=saved;}
         added(record.id);

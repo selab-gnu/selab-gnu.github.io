@@ -14,9 +14,23 @@ export function profileHTML(profile) {
   return clean(profile.html) + (biography ? '<p>' + biography + '</p>' : '');
 }
 
+// Keep category order and current faculty ahead of student profiles.
+export function compareMembers(a, b) {
+  const groups = Object.keys(memberGroups);
+  const category = groups.indexOf(a.group) - groups.indexOf(b.group);
+  if (category) return category;
+  const faculty = profile => {
+    if (profile.group !== 'current') return false;
+    const doc = new DOMParser().parseFromString(clean(profile.html), 'text/html');
+    doc.body.querySelectorAll('strong,b,a').forEach(element => element.remove());
+    return /\b(?:(?:assistant|associate|emeritus|full)\s+)?professor\b|교수/i.test(doc.body.textContent);
+  };
+  return Number(faculty(b)) - Number(faculty(a)) || a.order - b.order || a.id.localeCompare(b.id);
+}
+
 export function renderProfiles(profiles) {
   return Object.entries(memberGroups).map(([group, label]) => {
-    const members = profiles.filter(p => p.group === group).sort((a,b) => a.order-b.order || a.id.localeCompare(b.id));
+    const members = profiles.filter(p => p.group === group).sort(compareMembers);
     return members.length ? '<h2>' + label + '</h2>' + members.map(p => {const card=document.createElement('section');card.id='member-'+p.id;card.className='member-profile';card.innerHTML=profileHTML(p)+'<hr>';return card.outerHTML;}).join('') : '';
   }).join('');
 }

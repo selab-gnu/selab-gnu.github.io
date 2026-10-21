@@ -44,6 +44,9 @@ export function watchAuth(callback) {
  return onAuthStateChanged(auth, async user => {
   const generation=++authGeneration;role='visitor';ownMemberId='';
   document.querySelector('#workspace').hidden=true;callback(false);
+  document.title='연구실 홈페이지 · 로그인';
+  document.querySelector('#account-heading').textContent='로그인';
+  document.querySelector('#login-heading').textContent='관리자·멤버 로그인';
   logout.hidden=!user;login.hidden=!!user;
   status.textContent=user?'계정 권한을 확인하는 중입니다…':'방문자는 로그인 없이 공개 자료를 볼 수 있습니다. 관리자·멤버는 Google 계정으로 로그인하세요.';
   if(!user)return;
@@ -55,6 +58,10 @@ export function watchAuth(callback) {
    }
    if(generation!==authGeneration)return;
    const allowed=hasEditorAccess();
+   const heading=allowed?(isAdmin()?'홈페이지 관리':'내 자기소개 수정'):'로그인 계정';
+   document.title='연구실 홈페이지 · '+heading;
+   document.querySelector('#account-heading').textContent=heading;
+   document.querySelector('#login-heading').textContent=heading;
    document.querySelector('#workspace').hidden=!allowed;
    document.querySelector('#role-management').hidden=!isAdmin();
    document.querySelector('#export').hidden=!isAdmin();

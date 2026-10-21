@@ -56,6 +56,15 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
     assert((await page.locator('.member-registration-status').textContent()).includes(name));
     const target=new URL(page.url()).searchParams.get('added');
     assert(await page.locator('[id="member-'+target+'"]').isVisible());
+    const ordering=await page.evaluate(id=>{
+      const cards=[...document.querySelectorAll('.member-profile')];
+      const records=Object.entries(window.fixture.docs).filter(([key])=>key.startsWith('memberProfiles/')).map(([key,value])=>({id:key.split('/')[1],...value}));
+      const added=records.find(r=>r.id===id);
+      const category=cards.filter(card=>records.find(r=>card.id==='member-'+r.id)?.group===added.group);
+      return {first:cards[0].textContent,last:category.at(-1).id};
+    },target);
+    assert(ordering.first.includes('Seonah Lee'),'Professor remains first');
+    assert.equal(ordering.last,'member-'+target,'New member is last in the selected category');
     await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
     await page.locator('[data-tab="members"]').click();
     await page.locator('#member-list button').filter({hasText:name}).click();
@@ -96,6 +105,15 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.waitForFunction(()=>document.querySelectorAll('#member-list button').length===29);
   const records=await page.evaluate(()=>Object.entries(window.fixture.docs).filter(([key])=>key.startsWith('memberProfiles/')).map(([key,value])=>({id:key.split('/')[1],...value})));
   assert.equal(records.length,29);
+  const sorted=await page.evaluate(async()=>{
+    const {compareMembers}=await import('/member-profiles.js');
+    return [
+      {id:'student',group:'current',html:'<p>Student</p>',order:-20},
+      {id:'professor',group:'current',html:'<p>Professor</p>',order:0},
+      {id:'alumni',group:'graduates',html:'<p>Graduate</p>',order:-100}
+    ].sort(compareMembers).map(r=>r.id);
+  });
+  assert.deepEqual(sorted,['professor','student','alumni']);
   assert.equal(records.filter(r=>r.group==='current').length,13);
   assert.equal(records.filter(r=>r.group==='graduates').length,9);
   assert.equal(records.filter(r=>r.group==='undergraduates').length,7);
