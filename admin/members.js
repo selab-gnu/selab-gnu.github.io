@@ -1,9 +1,10 @@
 import { clean } from '../content.js';
-import { compareMembers, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
+import { compareMembers, isFaculty, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
 import { formatMember } from './member-format.js';
 import { canEdit, getOwnMemberId } from './auth.js';
-import { readProfiles, readProfile, migrateProfiles, saveProfile, deleteProfile } from './member-store.js';
+import { readProfiles, readProfile, migrateProfiles, saveProfile, saveProfileOrder, deleteProfile } from './member-store.js';
 
+let draggedMemberId=null;
 const $=s=>document.querySelector(s);
 const keys=['name','degree','role','department','institution','room','address','email','phone','homepage','topic','bio'];
 export function setupMembers({message,refreshPreview,onMigration,getRevision,onMemberAdded}) {
@@ -14,7 +15,42 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
   function fillGroups(select){select.replaceChildren();for(const [key,name] of Object.entries(memberGroups)){const o=document.createElement('option');o.value=key;o.textContent=name;select.append(o);}}
   fillGroups($('#member-edit-group'));fillGroups($('#member-group'));
   function roleOptions(){const select=$('#role-member');const old=select.value;select.replaceChildren(new Option('멤버 연결 안 함',''));for(const record of records.filter(r=>r.revision>0))select.append(new Option(record.name+' · '+memberGroups[record.group],record.id));select.value=old;}
-  function list(){$('#member-summary').textContent=records.length+'명 · 전체 멤버 추가·수정·삭제 가능';const q=$('#member-search').value.toLocaleLowerCase();const box=$('#member-list');box.replaceChildren();for(const record of records.filter(r=>r.name.toLocaleLowerCase().includes(q)).sort(compareMembers)){const b=document.createElement('button');b.type='button';b.textContent=record.name+' · '+memberGroups[record.group];b.classList.toggle('selected',selected?.id===record.id);b.onclick=()=>{if(!discard())return;selected=record;$('#member-new-card').hidden=true;show();};box.append(b);}if(!box.children.length)box.textContent='등록된 멤버 또는 검색 결과가 없습니다.';roleOptions();}
+  function list(){$('#member-summary').textContent=records.length+'명 · 전체 멤버 추가·수정·삭제 가능';const q=$('#member-search').value.toLocaleLowerCase();const box=$('#member-list');box.replaceChildren();for(const record of records.filter(r=>r.name.toLocaleLowerCase().includes(q)).sort(compareMembers)){const b=document.createElement('button');b.type='button';b.dataset.memberId=record.id;b.draggable=!isFaculty(record);b.title=isFaculty(record)?'교수님은 현재 멤버의 맨 위에 표시됩니다.':'드래그하여 같은 구분 안에서 이동 · Alt + 위/아래 방향키';
+      b.ondragstart=e=>{draggedMemberId=record.id;e.dataTransfer.setData('text/plain',record.id);e.dataTransfer.effectAllowed='move';};
+      b.ondragend=()=>{draggedMemberId=null;box.querySelectorAll('.drop-target').forEach(el=>el.classList.remove('drop-target'));};
+      b.ondragover=e=>{const source=records.find(r=>r.id===draggedMemberId);if(source&&source.group===record.group&&!isFaculty(record)){e.preventDefault();b.classList.add('drop-target');}};
+      b.ondragleave=()=>b.classList.remove('drop-target');
+      b.ondrop=e=>{e.preventDefault();b.classList.remove('drop-target');const id=draggedMemberId;draggedMemberId=null;moveMember(id,record.id);};
+      b.onkeydown=e=>{if(e.altKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();const group=records.filter(r=>r.group===record.group).sort(compareMembers);const target=group[group.findIndex(r=>r.id===record.id)+(e.key==='ArrowUp'?-1:1)];if(target)moveMember(record.id,target.id);}};
+      b.textContent=record.name+' · '+memberGroups[record.group];b.classList.toggle('selected',selected?.id===record.id);b.onclick=()=>{if(!discard())return;selected=record;$('#member-new-card').hidden=true;show();};box.append(b);}if(!box.children.length)box.textContent='등록된 멤버 또는 검색 결과가 없습니다.';roleOptions();}
+  function moveMember(id, targetId) {
+    return perform(async()=>{
+      if(!canEdit('members'))throw Error('관리자만 순서를 변경할 수 있습니다.');
+      if(pending||ownPending||hasNew())throw Error('작성 중인 내용을 먼저 저장한 뒤 순서를 변경해주세요.');
+      if($('#member-search').value.trim())throw Error('검색어를 지운 뒤 전체 목록에서 순서를 변경해주세요.');
+      const source=records.find(r=>r.id===id),target=records.find(r=>r.id===targetId);
+      if(!source||!target||id===targetId)return;
+      if(source.group!==target.group)throw Error('같은 구분 안에서 순서를 변경해주세요. 구분은 멤버 수정에서 변경할 수 있습니다.');
+      if(isFaculty(source)||isFaculty(target))throw Error('교수님은 현재 멤버의 맨 위에 유지됩니다.');
+      const group=records.filter(r=>r.group===source.group).sort(compareMembers);
+      const from=group.findIndex(r=>r.id===id),to=group.findIndex(r=>r.id===targetId);
+      group.splice(from,1);group.splice(to,0,source);
+      const orders=new Map(group.map((record,index)=>[record.id,index]));
+      const next=records.map(record=>orders.has(record.id)?{...record,order:orders.get(record.id)}:record);
+      if(!ready)await persistInitial(next,selected?.id);
+      else {
+        const changed=next.filter(record=>record.order!==records.find(r=>r.id===record.id).order);
+        const saved=await saveProfileOrder(changed);
+        const updates=new Map(saved.map(record=>[record.id,record]));
+        records=records.map(record=>updates.get(record.id)||record);
+        if(selected)selected=records.find(r=>r.id===selected.id);
+        if(own)own=records.find(r=>r.id===own.id)||own;
+        show();
+      }
+      message('멤버 순서를 공개 저장했습니다. 홈페이지에도 같은 순서로 표시됩니다.');
+      $('#member-list [data-member-id="'+id+'"]').focus();
+    });
+  }
   function show(){$('#member-directory .member-layout').hidden=false;const editing=!!selected;$('#member-detail').hidden=!editing;if(editing){$('#member-edit-name').value=selected.name;$('#member-edit-group').value=selected.group;$('#member-edit-body').innerHTML=clean(selected.html);$('#member-edit-bio').value=selected.bio;}list();refreshPreview();}
   function discard(){if((pending||hasNew())&&!confirm('저장하지 않은 멤버 수정을 버릴까요?'))return false;pending=false;$('#member-form').reset();return true;}
   function newPreview(){try{$('#new-member-preview').innerHTML=hasNew()?clean(profileHTML({html:formatMember({...newFields(),bio:''}),bio:newFields().bio})):'이름과 직무·과정을 입력하면 소개를 확인할 수 있습니다.';}catch(e){$('#new-member-preview').textContent=e.message;}}

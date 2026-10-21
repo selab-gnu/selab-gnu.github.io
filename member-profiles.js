@@ -14,18 +14,21 @@ export function profileHTML(profile) {
   return clean(profile.html) + (biography ? '<p>' + biography + '</p>' : '');
 }
 
+export function isFaculty(profile) {
+  if (profile.group !== 'current') return false;
+  const doc = new DOMParser().parseFromString(clean(profile.html), 'text/html');
+  // Ignore the name, but preserve bold role labels used in older profiles.
+  doc.body.querySelector('strong,b')?.remove();
+  doc.body.querySelectorAll('br').forEach(el => el.replaceWith('\n'));
+  return doc.body.textContent.split(/\n/).some(line => /^(?:(?:assistant|associate|emeritus|full|visiting)\s+)*professor\b|^(?:정|부|조|명예|초빙)?교수(?:\s|$)/i.test(line.trim()));
+}
+
 // Keep category order and current faculty ahead of student profiles.
 export function compareMembers(a, b) {
   const groups = Object.keys(memberGroups);
   const category = groups.indexOf(a.group) - groups.indexOf(b.group);
   if (category) return category;
-  const faculty = profile => {
-    if (profile.group !== 'current') return false;
-    const doc = new DOMParser().parseFromString(clean(profile.html), 'text/html');
-    doc.body.querySelectorAll('strong,b,a').forEach(element => element.remove());
-    return /\b(?:(?:assistant|associate|emeritus|full)\s+)?professor\b|교수/i.test(doc.body.textContent);
-  };
-  return Number(faculty(b)) - Number(faculty(a)) || a.order - b.order || a.id.localeCompare(b.id);
+  return Number(isFaculty(b)) - Number(isFaculty(a)) || a.order - b.order || a.id.localeCompare(b.id);
 }
 
 export function renderProfiles(profiles) {

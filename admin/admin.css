@@ -11,3 +11,5 @@ header{border-top-color:#173e66}.primary,button[aria-current]{background:#173e66
 .member-layout{display:grid;grid-template-columns:minmax(200px,.65fr) minmax(0,1.35fr);gap:20px}#member-list{max-height:750px;overflow:auto;background:#fff;border:1px solid #dce3e9;border-radius:8px;padding:6px}#member-list button{display:block;width:100%;text-align:left;margin:0 0 4px;overflow-wrap:anywhere}#member-list .selected{background:#e8f3fa;border-left:3px solid #173e66}#my-profile-content{padding:18px;background:#f3f6f9;overflow-wrap:anywhere}#member-migration-preview{margin-top:18px;overflow-wrap:anywhere}#role-list li{flex-wrap:wrap}#role-list li span{flex:1 1 240px}@media(max-width:900px){.member-layout{grid-template-columns:1fr}#member-list{max-height:240px}}
 
 .member-submit-error{color:#ad3434;font-weight:600;overflow-wrap:anywhere}.member-submit-error:empty{display:none}
+
+#member-list button[draggable="true"]{cursor:grab}#member-list button[draggable="true"]:active{cursor:grabbing}#member-list .drop-target{outline:2px solid #173e66;background:#e8f3fa}

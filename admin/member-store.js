@@ -52,3 +52,18 @@ export async function deleteProfile(record) {
     tx.delete(ref(record.id));
   });
 }
+
+// Read every affected revision before writing, so a conflict cannot partly reorder a group.
+export async function saveProfileOrder(records) {
+  await runTransaction(contentRef.firestore, async tx => {
+    for (const record of records) {
+      const snap = await tx.get(ref(record.id));
+      if (!snap.exists() || snap.data().revision !== record.revision)
+        throw Error('멤버 정보가 다른 창에서 변경되었습니다. 다시 불러온 뒤 순서를 바꿔주세요.');
+    }
+    for (const record of records) tx.update(ref(record.id), {
+      order: record.order, revision: record.revision + 1, updatedAt: serverTimestamp()
+    });
+  });
+  return records.map(record => ({...record, revision: record.revision + 1}));
+}

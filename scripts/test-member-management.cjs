@@ -127,6 +127,27 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
    return normalized(original.body.innerHTML)===normalized(records.map(r=>r.html).join(''));
   },{legacy,records});
   assert(preserved,'All original member text must survive migration');
+  // Reordering persists atomically and the public page uses exactly the same order.
+  const movable=records.filter(r=>r.group==='current').slice(1,3);
+  const memberButton=id=>page.locator('#member-list [data-member-id="'+id+'"]');
+  await page.evaluate(()=>window.fixture.denyWrite=true);
+  const originalOrder=await page.locator('#member-list button').evaluateAll(nodes=>nodes.map(n=>n.dataset.memberId));
+  await memberButton(movable[1].id).dragTo(memberButton(movable[0].id));
+  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('저장 권한'));
+  assert.deepEqual(await page.locator('#member-list button').evaluateAll(nodes=>nodes.map(n=>n.dataset.memberId)),originalOrder);
+  await page.evaluate(()=>window.fixture.denyWrite=false);
+  await memberButton(movable[1].id).dragTo(memberButton(movable[0].id));
+  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('멤버 순서를 공개 저장했습니다'));
+  const reordered=await page.locator('#member-list button').evaluateAll(nodes=>nodes.map(n=>n.dataset.memberId));
+  assert.equal(reordered[0],records[0].id);
+  assert(reordered.indexOf(movable[1].id)<reordered.indexOf(movable[0].id));
+  await page.goto('http://localhost:8129/members.html');
+  await page.locator('.member-profile').first().waitFor();
+  assert.deepEqual(await page.locator('.member-profile').evaluateAll(nodes=>nodes.map(n=>n.id.replace('member-',''))),reordered);
+  await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+  await page.locator('[data-tab="members"]').click();
+  assert.deepEqual(await page.locator('#member-list button').evaluateAll(nodes=>nodes.map(n=>n.dataset.memberId)),reordered);
+  await memberButton(records[0].id).click();
   const before=await page.evaluate(()=>structuredClone(window.fixture.docs));
   await page.locator('#member-edit-bio').fill('연구 소개 첫 줄\n두 번째 줄 <script>alert(1)</script>');
   await page.locator('#member-save').click();
