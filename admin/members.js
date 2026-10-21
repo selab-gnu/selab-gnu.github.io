@@ -6,7 +6,7 @@ import { readProfiles, readProfile, migrateProfiles, saveProfile, deleteProfile 
 
 const $=s=>document.querySelector(s);
 const keys=['name','degree','role','department','institution','room','address','email','phone','homepage','topic','bio'];
-export function setupMembers({message,refreshPreview,onMigration,getRevision}) {
+export function setupMembers({message,refreshPreview,onMigration,getRevision,onMemberAdded}) {
   let records=[], selected=null, own=null, migration=[], ready=false, pending=false, ownPending=false, busy=false, generation=0, sourceContent=null, sourceRevision=0;
   const newFields=()=>Object.fromEntries(keys.map(key=>[key,$('#member-'+key).value.trim()]));
   const hasNew=()=>Object.values(newFields()).some(Boolean);
@@ -31,17 +31,40 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision}) {
   function migrationNotice(){return ready?'':' 기존 소개를 보존하면서 멤버별 관리로 전환합니다.';}
   async function persistInitial(nextRecords,focusId){
     const next=await migrateProfiles(nextRecords,getRevision?.()??sourceRevision,sourceContent);
-    onMigration(next);
-    const content={...sourceContent,memberDirectoryVersion:1};
-    await load(content,next);
-    if(focusId)selected=records.find(r=>r.id===focusId)||records[0]||null;
-    $('#member-new-card').hidden=true;pending=false;show();
+    onMigration(next);sourceRevision=next;sourceContent={...sourceContent,memberDirectoryVersion:1};ready=true;
+    records=nextRecords.map(record=>({...record,revision:1}));
+    selected=records.find(r=>r.id===focusId)||records[0]||null;
+    $('#member-migration').hidden=true;$('#member-new-card').hidden=true;pending=false;$('#member-form').reset();show();
+  }
+  function added(id){
+    pending=false;$('#member-form').reset();$('#member-new-card').hidden=true;$('#member-search').value='';show();
+    $('#member-submit-error').textContent='';message('새 멤버를 공개 저장했습니다.');onMemberAdded?.(id);
   }
   async function perform(action){if(busy)return;busy=true;$('#members').inert=true;$('#my-profile').inert=true;try{await action();}catch(e){message(e.code==='permission-denied'||e.message==='permission-denied'?'저장 권한이 없습니다. 관리자 계정과 최신 Firestore 규칙 게시 여부를 확인해주세요. 작성한 내용은 유지됩니다.':(e.message||e.code));}finally{busy=false;$('#members').inert=false;$('#my-profile').inert=false;}}
   $('#member-search').oninput=list;
-  $('#new-member').onclick=()=>{if(!canEdit('members')||!discard())return;selected=null;$('#member-detail').hidden=true;$('#member-directory .member-layout').hidden=true;$('#member-new-card').hidden=false;list();newPreview();refreshPreview();$('#member-name').focus();};
+  $('#new-member').onclick=()=>{if(!canEdit('members')||!discard())return;selected=null;$('#member-detail').hidden=true;$('#member-directory .member-layout').hidden=true;$('#member-new-card').hidden=false;$('#member-submit-error').textContent='';list();newPreview();refreshPreview();$('#member-name').focus();};
   $('#member-cancel').onclick=()=>{if(!discard())return;$('#member-new-card').hidden=true;selected=records[0]||null;show();};
-  $('#member-form').onsubmit=e=>{e.preventDefault();if(!canEdit('members')||!$('#member-form').reportValidity())return;perform(async()=>{const f=newFields();if(!f.role)throw Error('직무·과정·상태를 입력해주세요.');const record={id:crypto.randomUUID(),name:f.name,html:formatMember({...f,bio:''}).replace(/<hr>/g,''),bio:f.bio,group:$('#member-group').value,order:Math.min(0,...records.map(r=>r.order))-1,revision:0};if(!confirm('새 멤버의 소개를 공개 저장할까요?'+migrationNotice()))return;if(!ready){await persistInitial([...records,record],record.id);message('새 멤버를 공개 저장했습니다.');return;}const saved=await saveProfile(record);records.push(saved);selected=saved;pending=false;$('#member-form').reset();$('#member-new-card').hidden=true;show();message('새 멤버를 공개 저장했습니다.');});};
+  $('#member-form').onsubmit=e=>{
+    e.preventDefault();
+    if(busy)return;
+    const form=$('#member-form'),button=$('#member-submit');
+    $('#member-submit-error').textContent='';
+    if(!canEdit('members')){$('#member-submit-error').textContent='관리자 계정으로 로그인해야 멤버를 추가할 수 있습니다.';return;}
+    if(!form.reportValidity())return;
+    perform(async()=>{
+      button.disabled=true;button.textContent='멤버 등록 중…';form.setAttribute('aria-busy','true');
+      try {
+        const f=newFields();if(!f.role)throw Error('직무·과정·상태를 입력해주세요.');
+        const record={id:crypto.randomUUID(),name:f.name,html:formatMember({...f,bio:''}).replace(/<hr>/g,''),bio:f.bio,group:$('#member-group').value,order:Math.min(0,...records.map(r=>r.order))-1,revision:0};
+        if(!ready)await persistInitial([...records,record],record.id);
+        else {const saved=await saveProfile(record);records.push(saved);selected=saved;}
+        added(record.id);
+      }catch(error){
+        $('#member-submit-error').textContent=error.code==='permission-denied'||error.message==='permission-denied'?'등록하지 못했습니다. 관리자 권한과 Firestore 규칙을 확인해주세요. 입력 내용은 유지됩니다.':'등록하지 못했습니다: '+(error.message||error.code)+' 입력 내용은 유지됩니다.';
+        throw error;
+      }finally{button.disabled=false;button.textContent='멤버 추가하기';form.removeAttribute('aria-busy');}
+    });
+  };
   $('#member-save').onclick=()=>perform(async()=>{if(!selected||!canEdit('members'))return;if(ownPending&&own?.id===selected.id)throw Error('내 자기소개 화면에서 작성 중인 내용을 먼저 저장해주세요.');const record=draft();if(!record.name||!$('#member-edit-body').textContent.trim())throw Error('이름과 기본 소개를 입력해주세요.');if(!confirm(record.name+'의 소개를 공개 저장할까요?'+migrationNotice()))return;if(!ready){await persistInitial(records.map(r=>r.id===record.id?record:r),record.id);message('선택한 멤버를 공개 저장했습니다.');return;}const saved=await saveProfile(record);records=records.map(r=>r.id===saved.id?saved:r);selected=saved;if(own?.id===saved.id){own=saved;$('#my-bio').value=saved.bio;}pending=false;show();message('선택한 멤버를 공개 저장했습니다.');});
   $('#member-delete').onclick=()=>perform(async()=>{if(!selected||!canEdit('members'))return;if(!confirm(selected.name+'을 삭제할까요? 이 멤버에 연결된 자기소개 편집 권한도 사용할 수 없게 됩니다.'+migrationNotice()))return;if(!ready){await persistInitial(records.filter(r=>r.id!==selected.id));message('멤버를 삭제했습니다.');return;}await deleteProfile(selected);records=records.filter(r=>r.id!==selected.id);selected=records[0]||null;pending=false;show();message('멤버를 삭제했습니다. 연결된 계정은 권한 관리에서 해제하거나 다른 멤버로 연결해주세요.');});
   $('#my-bio-save').onclick=()=>perform(async()=>{if(!own||!getOwnMemberId())return;if(pending&&selected?.id===own.id)throw Error('멤버 관리에서 작성 중인 내용을 먼저 저장해주세요.');if(!confirm('내 자기소개를 공개 저장할까요?'))return;own=await saveProfile({...own,bio:$('#my-bio').value},true);records=records.map(r=>r.id===own.id?own:r);if(selected?.id===own.id){selected=own;show();}ownPending=false;message('내 자기소개를 공개 저장했습니다.');});

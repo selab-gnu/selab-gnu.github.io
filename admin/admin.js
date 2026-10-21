@@ -34,7 +34,7 @@ $('#export').onclick=()=>{if(!state)return;sync();const url=URL.createObjectURL(
 $('#reset').onclick=()=>{if(!state||!confirm('저장하지 않은 수정을 버리고 마지막 공개 자료를 다시 불러올까요?'))return;init();};
 document.querySelectorAll('#new-form input,#category').forEach(e=>e.addEventListener('input',()=>{changed();preview();}));
 window.addEventListener('beforeunload',e=>{if(dirty||memberUI?.hasPending()){e.preventDefault();e.returnValue='';}});
-memberUI=setupMembers({message,refreshPreview:preview,getRevision:()=>revision,onMigration:next=>{revision=next;state.memberDirectoryVersion=1;original.memberDirectoryVersion=1;}});
+memberUI=setupMembers({message,refreshPreview:preview,onMemberAdded:id=>location.assign('../members.html?added='+encodeURIComponent(id)+'#'+encodeURIComponent('member-'+id)),getRevision:()=>revision,onMigration:next=>{revision=next;state.memberDirectoryVersion=1;original.memberDirectoryVersion=1;}});
 watchAuth(allowed=>{if(allowed){tab='publications';document.querySelectorAll('.panel').forEach(e=>e.hidden=e.id!=='publications');document.querySelectorAll('[data-tab]').forEach(e=>e.toggleAttribute('aria-current',e.dataset.tab==='publications'));$('#title').textContent='논문 관리';init();}else{loading++;memberUI.clear();state=null;dirty=false;$('#app').hidden=true;$('#save').disabled=true;}});
 
 

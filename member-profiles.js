@@ -17,7 +17,7 @@ export function profileHTML(profile) {
 export function renderProfiles(profiles) {
   return Object.entries(memberGroups).map(([group, label]) => {
     const members = profiles.filter(p => p.group === group).sort((a,b) => a.order-b.order || a.id.localeCompare(b.id));
-    return members.length ? '<h2>' + label + '</h2>' + members.map(p => profileHTML(p) + '<hr>').join('') : '';
+    return members.length ? '<h2>' + label + '</h2>' + members.map(p => {const card=document.createElement('section');card.id='member-'+p.id;card.className='member-profile';card.innerHTML=profileHTML(p)+'<hr>';return card.outerHTML;}).join('') : '';
   }).join('');
 }
 

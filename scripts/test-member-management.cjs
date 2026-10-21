@@ -11,13 +11,13 @@ const snapshot=(ref)=>({id:ref.path.split('/').pop(),exists:()=>!!window.fixture
 export const getDoc=async ref=>snapshot(ref);
 export const getDocs=async ref=>({docs:Object.keys(window.fixture.docs).filter(k=>k.startsWith(ref.path+'/')&&k.split('/').length===2).map(path=>snapshot({path}))});
 export const serverTimestamp=()=>0;
-export const setDoc=async(ref,data)=>{window.fixture.docs[ref.path]=structuredClone(data)};
-export const deleteDoc=async ref=>{delete window.fixture.docs[ref.path]};
+export const setDoc=async(ref,data)=>{window.fixture.docs[ref.path]=structuredClone(data);sessionStorage.setItem('test-member-docs',JSON.stringify(window.fixture.docs))};
+export const deleteDoc=async ref=>{delete window.fixture.docs[ref.path];sessionStorage.setItem('test-member-docs',JSON.stringify(window.fixture.docs))};
 export const runTransaction=async(db,fn)=>{const writes=[];await fn({get:getDoc,set:(r,d)=>writes.push(()=>setDoc(r,d)),update:(r,d)=>writes.push(()=>setDoc(r,{...window.fixture.docs[r.path],...d})),delete:r=>writes.push(()=>deleteDoc(r))});if(window.fixture.denyWrite)throw Error('permission-denied');for(const write of writes)await write()};`;
 const authSDK=`
 export const getAuth=()=>({});export class GoogleAuthProvider{setCustomParameters(){}}
 export const signInWithPopup=async()=>{};export const signOut=async()=>window.fixture.login(null);
-export const onAuthStateChanged=(auth,callback)=>{window.fixture.login=async user=>{window.fixture.user=user;await callback(user)};queueMicrotask(()=>callback(window.fixture.user));return ()=>{}};`;
+export const onAuthStateChanged=(auth,callback)=>{window.fixture.login=async user=>{window.fixture.user=user;sessionStorage.setItem('test-member-user',user?.email||'');await callback(user)};queueMicrotask(()=>callback(window.fixture.user));return ()=>{}};`;
 const client=`export const app={},db={};export const contentRef={firestore:db,path:'siteContent/main'};export {getDoc,runTransaction,serverTimestamp} from '/mock-firestore.js';`;
 
 (async()=>{
@@ -30,8 +30,11 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   const sections=JSON.parse(fs.readFileSync(path.join(root,'data/sections.json'),'utf8'));
   const legacy=sections.find(s=>s.path==='members.html').html;
   await page.addInitScript(({groups,legacy})=>{
+   if(window!==window.top)return;
    const account=email=>({email,emailVerified:true,getIdTokenResult:async()=>({signInProvider:'google.com'})});
    window.fixture={account,docs:{'siteContent/main':{version:1,home:'<p>Home</p>',members:legacy,groups,revision:1,updatedAt:0}},user:account('yeonu7787@gmail.com')};
+    const savedDocs=sessionStorage.getItem('test-member-docs');if(savedDocs)window.fixture.docs=JSON.parse(savedDocs);
+    const savedUser=sessionStorage.getItem('test-member-user');if(savedUser!==null)window.fixture.user=savedUser?account(savedUser):null;
   },{groups,legacy});
   await page.route('**/*',async route=>{
    const url=new URL(route.request().url());let source;
@@ -46,6 +49,17 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
    const contentType=url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8';
    await route.fulfill({contentType,headers:{'Access-Control-Allow-Origin':'*'},body:source});
   });
+  async function submitMember(name){
+    await page.locator('#member-form button[type="submit"]').click();
+    await page.waitForURL(url=>url.pathname==='/members.html'&&url.searchParams.has('added'));
+    await page.locator('.member-registration-status').waitFor();
+    assert((await page.locator('.member-registration-status').textContent()).includes(name));
+    const target=new URL(page.url()).searchParams.get('added');
+    assert(await page.locator('[id="member-'+target+'"]').isVisible());
+    await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+    await page.locator('[data-tab="members"]').click();
+    await page.locator('#member-list button').filter({hasText:name}).click();
+  }
   await page.goto('http://localhost:8129/admin/');
   await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   await page.locator('[data-tab="members"]').click();
@@ -70,10 +84,12 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('작성한 내용은 유지됩니다'));
   assert.equal(await page.locator('#member-name').inputValue(),'First Save Test');
   assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].memberDirectoryVersion),undefined);
+  assert(await page.locator('#member-new-card').isVisible());
+  assert((await page.locator('#member-submit-error').textContent()).includes('입력 내용'));
   await page.evaluate(()=>window.fixture.denyWrite=false);
-  await page.locator('#member-form button[type="submit"]').click();
+  await submitMember('First Save Test');
   await page.waitForFunction(()=>window.fixture.docs['siteContent/main'].memberDirectoryVersion===1);
-  await page.waitForFunction(()=>document.querySelector('#status').textContent==='새 멤버를 공개 저장했습니다.');
+
   assert.equal(await page.locator('#member-list button').count(),30);
   assert.equal(await page.locator('#member-edit-name').inputValue(),'First Save Test');
   await page.locator('#member-delete').click();
@@ -114,11 +130,9 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.locator('#member-role').fill('MS Student');
   await page.locator('#member-group').selectOption('graduates');
   await page.locator('#member-bio').fill('New biography');
-  await page.locator('#member-form button[type="submit"]').click();
-  await page.waitForFunction(()=>document.querySelector('#status').textContent==='새 멤버를 공개 저장했습니다.');
+  await submitMember('Test Member');
   assert.equal(await page.evaluate(()=>Object.values(window.fixture.docs).find(r=>r.name==='Test Member').group),'graduates');
-  // A professor assigned the full-content manager role can manage everybody,
-  // but cannot grant account roles. Ordinary members retain self-only access.
+  // A professor assigned the administrator role has full management access.
   await page.evaluate(async()=>{const auth=await import('/admin/auth.js');await auth.grantRole('professor@example.org','admin');await window.fixture.login(window.fixture.account('professor@example.org'));});
   await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   await page.locator('[data-tab="members"]').click();
@@ -128,8 +142,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.locator('#new-member').click();
   await page.locator('#member-name').fill('Professor Added Member');
   await page.locator('#member-role').fill('MS Student');
-  await page.locator('#member-form button[type="submit"]').click();
-  await page.waitForFunction(()=>document.querySelector('#status').textContent==='새 멤버를 공개 저장했습니다.');
+  await submitMember('Professor Added Member');
   await page.locator('#member-edit-bio').fill('교수님이 수정한 소개');
   await page.locator('#member-save').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent==='선택한 멤버를 공개 저장했습니다.');
@@ -194,8 +207,6 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   console.log('PASS: mobile and desktop page width');
   // The public page must use individual documents after migration, including
   // a biography saved through the self-only editor.
-  const published=await page.evaluate(()=>structuredClone(window.fixture.docs));
-  await page.addInitScript(d=>{window.fixture.docs=d;},published);
   await page.goto('http://localhost:8129/members.html');
   await page.waitForFunction(()=>document.querySelector('.imported-content').textContent.includes('내가 직접 수정한 소개'));
   assert.equal(await page.locator('.imported-content h2').count(),3);
@@ -210,8 +221,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.locator('#new-member').click();
   await page.locator('#member-name').fill('Initial Setup Member');
   await page.locator('#member-role').fill('MS Student');
-  await page.locator('#member-form button[type="submit"]').click();
-  await page.waitForFunction(()=>document.querySelector('#status').textContent==='새 멤버를 공개 저장했습니다.');
+  await submitMember('Initial Setup Member');
   assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].revision),1);
   assert.equal(await page.locator('#member-list button').count(),30);
   console.log('PASS: failed-save draft recovery and first-use administrator bootstrap');

@@ -13,7 +13,15 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, #filte
    if (members) {
      if (d.memberDirectoryVersion===1) {
       const { readProfiles } = await import('./admin/member-store.js');
-      members.innerHTML=renderProfiles(await readProfiles());
+      const profiles=await readProfiles();
+      members.innerHTML=renderProfiles(profiles);
+      const added=new URLSearchParams(location.search).get('added');
+      const profile=profiles.find(record=>record.id===added);
+      if(profile){
+        const card=document.getElementById('member-'+profile.id);
+        const notice=document.createElement('p');notice.className='member-registration-status';notice.setAttribute('role','status');notice.textContent=profile.name+' 멤버가 등록되었습니다.';
+        card.prepend(notice);card.classList.add('member-just-added');card.scrollIntoView({block:'center'});
+      }
      } else members.innerHTML=clean(d.members);
    }
    if (document.querySelector('#filter')) {
@@ -28,5 +36,11 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, #filte
     document.dispatchEvent(new Event('content-updated'));
    }
   }
- } catch(e) { console.warn('Cloud content unavailable; showing repository content.', e.code || e.message); }
+ } catch(e) {
+   console.warn('Cloud content unavailable; showing repository content.', e.code || e.message);
+   if(document.querySelector('.page-members .imported-content')&&new URLSearchParams(location.search).has('added')){
+     const notice=document.createElement('p');notice.setAttribute('role','alert');notice.textContent='최신 멤버 정보를 불러오지 못했습니다. 잠시 후 새로고침해 등록한 소개를 확인해주세요.';
+     document.querySelector('.page-members .imported-content').prepend(notice);
+   }
+ }
 }
