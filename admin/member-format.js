@@ -1,3 +1,4 @@
+import { withMemberPhoto } from './member-photo.js';
 const escape = value => String(value || '').trim().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const lines = value => escape(value).replace(/\r?\n/g, '<br>');
 
@@ -25,5 +26,5 @@ export function formatMember(fields) {
   if (fields.phone?.trim()) rows.push('Phone: ' + escape(fields.phone));
   if (fields.topic?.trim()) rows.push('Research Topic: ' + lines(fields.topic));
   const bio = fields.bio?.trim() ? '<p>' + lines(fields.bio) + '</p>' : '';
-  return '<div><p>' + rows.join('<br>') + '</p>' + bio + '<hr></div>';
+  return withMemberPhoto('<div><p>' + rows.join('<br>') + '</p>' + bio + '<hr></div>',fields.photo||'',fields.name);
 }

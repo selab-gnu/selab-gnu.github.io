@@ -25,7 +25,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
  const browser=await chromium.launch({headless:true,executablePath});
  try {
   const page=await browser.newPage({viewport:{width:1440,height:1100}});
-  const errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('dialog',dialog=>dialog.accept());
+  const errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('dialog',dialog=>dialog.accept().catch(()=>{}));
   const groups=JSON.parse(fs.readFileSync(path.join(root,'data/publications.json'),'utf8'));
   const sections=JSON.parse(fs.readFileSync(path.join(root,'data/sections.json'),'utf8'));
   const legacy=sections.find(s=>s.path==='members.html').html;
@@ -49,13 +49,14 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
    const contentType=url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8';
    await route.fulfill({contentType,headers:{'Access-Control-Allow-Origin':'*'},body:source});
   });
-  async function submitMember(name){
+  async function submitMember(name,expectedPhoto=false){
     await page.locator('#member-form button[type="submit"]').click();
     await page.waitForURL(url=>url.pathname==='/members.html'&&url.searchParams.has('added'));
     await page.locator('.member-registration-status').waitFor();
     assert((await page.locator('.member-registration-status').textContent()).includes(name));
     const target=new URL(page.url()).searchParams.get('added');
     assert(await page.locator('[id="member-'+target+'"]').isVisible());
+    if(expectedPhoto){const photo=page.locator('[id="member-'+target+'"] img');assert.equal(await photo.count(),1);assert((await photo.getAttribute('src')).startsWith('data:image/jpeg;base64,'));assert(await photo.evaluate(img=>img.complete&&img.naturalWidth>0));}
     const ordering=await page.evaluate(id=>{
       const cards=[...document.querySelectorAll('.member-profile')];
       const records=Object.entries(window.fixture.docs).filter(([key])=>key.startsWith('memberProfiles/')).map(([key,value])=>({id:key.split('/')[1],...value}));
@@ -169,7 +170,22 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.locator('#member-role').fill('MS Student');
   await page.locator('#member-group').selectOption('graduates');
   await page.locator('#member-bio').fill('New biography');
-  await submitMember('Test Member');
+  const photo=await page.evaluate(()=>{const canvas=document.createElement('canvas');canvas.width=300;canvas.height=400;const ctx=canvas.getContext('2d');ctx.fillStyle='#336699';ctx.fillRect(0,0,300,400);return canvas.toDataURL('image/png').split(',')[1];});
+  await page.locator('#member-photo-file').setInputFiles({name:'portrait.png',mimeType:'image/png',buffer:Buffer.from(photo,'base64')});
+  await page.waitForFunction(()=>document.querySelector('#member-photo').value.startsWith('data:image/jpeg'));
+  await submitMember('Test Member',true);
+  assert((await page.locator('#member-edit-photo').inputValue()).startsWith('data:image/jpeg'));
+  await page.locator('#member-edit-photo-url').fill('https://example.org/replacement.jpg');
+  await page.locator('#member-edit-photo-url').dispatchEvent('change');
+  await page.locator('#member-save').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent==='선택한 멤버를 공개 저장했습니다.');
+  assert((await page.evaluate(()=>Object.values(window.fixture.docs).find(r=>r.name==='Test Member').html)).includes('https://example.org/replacement.jpg'));
+  await page.locator('#member-edit-photo-remove').click();
+  await page.locator('#member-save').click();
+  await page.waitForFunction(()=>!Object.values(window.fixture.docs).find(r=>r.name==='Test Member').html.includes('<img'));
+  const safe=await page.evaluate(async()=>{const {clean}=await import('/content.js');return clean('<img src="javascript:alert(1)" onerror="alert(2)"><img src="data:image/svg+xml;base64,PHN2Zz4=" ><img src="https://example.org/safe.jpg" onerror="alert(3)" alt="Safe">');});
+  assert(!safe.includes('onerror')&&!safe.includes('javascript:')&&!safe.includes('svg+xml'));
+  assert(safe.includes('https://example.org/safe.jpg'));
   assert.equal(await page.evaluate(()=>Object.values(window.fixture.docs).find(r=>r.name==='Test Member').group),'graduates');
   // A professor assigned the administrator role has full management access.
   await page.evaluate(async()=>{const auth=await import('/admin/auth.js');await auth.grantRole('professor@example.org','admin');await window.fixture.login(window.fixture.account('professor@example.org'));});
@@ -243,7 +259,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   const screenshot=process.env.TEST_SCREENSHOT;
   await page.locator('#member-preview-rendered').getByText('Heetae Cho',{exact:true}).waitFor();
   if(screenshot)await page.screenshot({path:screenshot,fullPage:true});
-  console.log('PASS: mobile and desktop page width');
+  console.log('PASS: optional portrait upload, compression, public display, replacement/removal, safe image URLs; mobile and desktop page width');
   // The public page must use individual documents after migration, including
   // a biography saved through the self-only editor.
   await page.goto('http://localhost:8129/members.html');

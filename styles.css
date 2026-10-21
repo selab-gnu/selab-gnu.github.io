@@ -39,3 +39,5 @@ aside li a{display:inline-block;padding:5px 0}footer a{display:inline-flex;align
 .member-profile{scroll-margin-top:28px}.member-just-added{border:2px solid #69adc4;border-radius:10px;padding:20px}.member-registration-status{background:#edf6f4;color:#235d4b;padding:12px 16px;border-radius:7px;font-weight:600}
 
 .layout{grid-template-columns:minmax(0,1fr)}
+
+.member-profile{display:flow-root}.member-profile img{float:left;width:160px;height:200px;object-fit:contain;margin:0 24px 18px 0;border-radius:8px;background:#f3f6f9}@media(max-width:480px){.member-profile img{float:none;display:block;margin-bottom:18px}}

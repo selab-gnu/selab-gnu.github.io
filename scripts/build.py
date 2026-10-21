@@ -6,7 +6,7 @@ groups=json.loads((root/'data/publications.json').read_text(encoding='utf-8'))
 old='http://selab.gnu.ac.kr/index.php'
 def page(title,body,section=None):
  section=section or title
- nav=''.join(f'<a href="{url}"'+(' aria-current="page"' if label==section else '')+f'>{label}</a>' for label,url in [('Home','index.html'),('Members','members.html'),('Publications','publications.html')])
+ nav=''.join(f'<a href="{url}"'+(' aria-current="page"' if label==section else '')+f'>{label}</a>' for label,url in [('Home','index.html'),('Members','members.html'),('Publications','publications.html'),('News','news.html'),('Gallery','gallery.html')])
  return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Software Evolution and Architecture Lab, Gyeongsang National University"><title>{title} — Software Evolution and Architecture Lab</title><link rel="stylesheet" href="styles.css"></head>
 <body id="top" class="page-{section.lower()}"><a class="skip" href="#main">Skip to content</a><div class="site"><header><a class="brand" href="index.html"><span class="brand-mark">SEA<span>LAB</span></span><span class="brand-name">Software Evolution<br>and Architecture Lab<small>GYEONGSANG NATIONAL UNIVERSITY</small></span></a><form action="search.html" role="search"><label class="sr" for="header-search">Search publications</label><input id="header-search" name="q" type="search" placeholder="논문 검색"><button>Search</button></form><a class="manage-link" href="admin/">로그인 ↗</a></header><nav aria-label="Main navigation">{nav}</nav><div class="layout"><main id="main"><h1>{title}</h1>{body}<div class="breadcrumb">You are here: <a href="index.html">Home</a>{' / '+title if title!='Home' else ''}</div></main></div><footer><span>© Software Evolution and Architecture Lab</span><a href="#top">Back to Top ↑</a></footer></div><script src="site.js" defer></script><script type="module" src="public-content.js"></script></body></html>'''
@@ -38,3 +38,6 @@ search_body='''<p class="search-intro">논문 제목·저자·연도로 연구�
 </div>'''
 (root/'search.html').write_text(page('논문 검색',search_body,'Search').replace('<script type="module" src="public-content.js"></script>','<script type="module" src="search.js"></script>'),encoding='utf-8')
 print('Built publication search')
+
+for title,path,description in [('News','news.html','연구실 소식을 준비 중입니다.'),('Gallery','gallery.html','연구실 사진을 준비 중입니다.')]:
+ (root/path).write_text(page(title,'<p>'+description+'</p>'),encoding='utf-8')

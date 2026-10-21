@@ -13,3 +13,5 @@ header{border-top-color:#173e66}.primary,button[aria-current]{background:#173e66
 .member-submit-error{color:#ad3434;font-weight:600;overflow-wrap:anywhere}.member-submit-error:empty{display:none}
 
 #member-list button[draggable="true"]{cursor:grab}#member-list button[draggable="true"]:active{cursor:grabbing}#member-list .drop-target{outline:2px solid #173e66;background:#e8f3fa}
+
+.member-photo-preview img,#new-member-preview img,#member-preview-rendered img,#my-profile-content img{display:block;width:160px;height:200px;object-fit:contain;border-radius:8px;background:#f3f6f9;margin:12px 0}.member-photo-fields{margin:18px 0;padding:16px;border:1px solid #dce3e9;border-radius:8px}

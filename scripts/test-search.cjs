@@ -19,9 +19,15 @@ const root=path.resolve(__dirname,'..');
    }
    await route.fulfill({contentType:url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8',body});
   });
+  for(const [path,title] of [['news.html','News'],['gallery.html','Gallery']]){
+    await page.goto('http://localhost:8129/'+path);
+    assert.equal(await page.locator('h1').textContent(),title);
+    assert.equal(await page.locator('nav a[aria-current="page"]').textContent(),title);
+    assert((await page.locator('main').textContent()).includes('준비 중'));
+  }
   await page.goto('http://localhost:8129/index.html');
   assert.equal(await page.locator('.hero,aside').count(),0);
-  assert.deepEqual(await page.locator('nav[aria-label="Main navigation"] a').allTextContents(),['Home','Members','Publications']);
+  assert.deepEqual(await page.locator('nav[aria-label="Main navigation"] a').allTextContents(),['Home','Members','Publications','News','Gallery']);
   await page.locator('#header-search').fill('object');await page.locator('header form button').click();
   await page.waitForFunction(()=>document.querySelector('#publication-result-count')?.textContent==='1편');
   assert.equal(await page.locator('#publication-search-list li').count(),1);
@@ -46,6 +52,6 @@ const root=path.resolve(__dirname,'..');
   await page.waitForFunction(()=>document.querySelector('#search-data-status')?.textContent.includes('최신 공개 논문을 확인하지 못해'));
   assert.equal(await page.locator('#publication-search-list li').count(),1);
   assert.deepEqual(errors,[]);
-  console.log('PASS: compact home, three navigation links, publication-only search, result anchors, empty/no-results/XSS, latest cloud paper, offline fallback, mobile/desktop widths');
+  console.log('PASS: compact home, five navigation links, publication-only search, result anchors, empty/no-results/XSS, latest cloud paper, offline fallback, mobile/desktop widths');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
