@@ -14,5 +14,6 @@ export function clean(html) {
 }
 export function validContent(d) {
  return d && d.version === 1 && typeof d.home === 'string' && typeof d.members === 'string' &&
+ (d.memberDirectoryVersion === undefined || d.memberDirectoryVersion === 1) &&
  Array.isArray(d.groups) && d.groups.length === 4 && d.groups.every(g => typeof g.category === 'string' && Array.isArray(g.items) && g.items.every(i => typeof i === 'string'));
 }

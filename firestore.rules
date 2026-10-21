@@ -16,13 +16,18 @@ service cloud.firestore {
   match /editorRoles/{email} {
    allow get: if admin() || (request.auth != null && request.auth.token.email_verified == true && request.auth.token.email.lower() == email);
    allow list, delete: if admin();
-   allow create, update: if admin() && request.resource.data.keys().hasOnly(['role'])
-    && request.resource.data.role in ['publications','manager'];
+   allow create, update: if admin() && request.resource.data.keys().hasAll(['role'])
+    && request.resource.data.keys().hasOnly(['role','memberId'])
+    && request.resource.data.role in ['publications','manager','member']
+    && (request.resource.data.role != 'member' || 'memberId' in request.resource.data)
+    && (!('memberId' in request.resource.data) || (request.resource.data.memberId is string
+      && exists(/databases/$(database)/documents/memberProfiles/$(request.resource.data.memberId))));
   }
   function valid() {
    let d = request.resource.data;
    return d.keys().hasAll(['version','home','members','groups','revision','updatedAt'])
-    && d.keys().hasOnly(['version','home','members','groups','revision','updatedAt'])
+    && d.keys().hasOnly(['version','home','members','groups','revision','updatedAt','memberDirectoryVersion'])
+    && (!('memberDirectoryVersion' in d) || d.memberDirectoryVersion == 1)
     && d.version == 1 && d.home is string && d.home.size() < 200000
     && d.members is string && d.members.size() < 300000
     && d.groups is list && d.groups.size() == 4
@@ -31,8 +36,31 @@ service cloud.firestore {
   match /siteContent/main {
    allow get: if true;
    allow create: if admin() && valid() && request.resource.data.revision == 1;
-   allow update: if (admin() || editorRole('manager') || (editorRole('publications') && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['groups','revision','updatedAt']))) && valid() && request.resource.data.revision == resource.data.revision + 1;
+   allow update: if (admin() || editorRole('manager') || (editorRole('publications') && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['groups','revision','updatedAt']))) && valid() && request.resource.data.revision == resource.data.revision + 1
+    && (!('memberDirectoryVersion' in resource.data) || request.resource.data.memberDirectoryVersion == 1);
    allow delete, list: if false;
+  }
+  function ownProfile(id) {
+   return (editorRole('member') || editorRole('publications') || editorRole('manager'))
+    && get(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower())).data.memberId == id;
+  }
+  function validProfile() {
+   let d = request.resource.data;
+   return d.keys().hasAll(['name','html','bio','group','order','revision','updatedAt'])
+    && d.keys().hasOnly(['name','html','bio','group','order','revision','updatedAt'])
+    && d.name is string && d.name.size() > 0 && d.name.size() <= 300
+    && d.html is string && d.html.size() <= 30000
+    && d.bio is string && d.bio.size() <= 10000
+    && d.group in ['current','graduates','undergraduates']
+    && d.order is int && d.revision is int && d.updatedAt == request.time;
+  }
+  match /memberProfiles/{id} {
+   allow read: if true;
+   allow create: if (admin() || editorRole('manager')) && validProfile() && request.resource.data.revision == 1;
+   allow update: if validProfile() && request.resource.data.revision == resource.data.revision + 1
+    && (admin() || editorRole('manager') || (ownProfile(id)
+      && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bio','revision','updatedAt'])));
+   allow delete: if admin() || editorRole('manager');
   }
  }
 }
