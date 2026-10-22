@@ -36,3 +36,4 @@ nav button[aria-current],nav button[aria-current]:hover{background:var(--lab-nav
 #my-profile-content,.gallery-editor-preview,.member-photo-preview img,#new-member-preview img,#member-preview-rendered img,#my-profile-content img{background:#f7f9fa}
 .gallery-editor-preview{border-color:var(--lab-border);color:var(--lab-muted)}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.document:focus,.editor:focus{outline-color:var(--lab-teal)}
+.paper-area-fields{margin:18px 0;padding:14px 16px;border:1px solid var(--lab-border);border-radius:8px}.paper-area-fields legend{font-size:13px;font-weight:700;color:var(--lab-navy);padding:0 5px}.paper-area-fields>div{display:flex;flex-wrap:wrap;gap:10px 18px}.paper-area-fields label{display:flex;align-items:center;gap:7px;margin:0;min-height:42px;cursor:pointer}.paper-area-fields input{width:18px;height:18px;min-height:18px;margin:0;accent-color:var(--lab-teal)}

@@ -1,3 +1,4 @@
+import {loadPaperTags,paperTags,tagBadges} from './publication-tags.js';
 // Search results link directly to a publication; every paper stays visible.
 function highlightPublication(){
  document.querySelectorAll('.publication-target').forEach(el=>el.classList.remove('publication-target'));
@@ -8,3 +9,15 @@ function highlightPublication(){
 window.addEventListener('hashchange',highlightPublication);
 document.addEventListener('content-updated',highlightPublication);
 highlightPublication();
+
+function renderPaperTags(){
+ for(const item of document.querySelectorAll('.publications li')){
+  item.querySelectorAll('.paper-tags').forEach(badges=>badges.remove());
+  const citation=item.querySelector('.paper-citation');
+  if(citation)item.append(tagBadges(paperTags(citation.innerHTML),true));
+ }
+}
+if(document.querySelector('.publications')){
+ document.addEventListener('content-updated',renderPaperTags);
+ await loadPaperTags();renderPaperTags();
+}

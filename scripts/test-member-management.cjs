@@ -72,6 +72,31 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   }
   await page.goto('http://localhost:8129/admin/');
   await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+  if(process.env.TEST_TAGS_EDITOR_SCREENSHOT)await page.screenshot({path:process.env.TEST_TAGS_EDITOR_SCREENSHOT,fullPage:true});
+  // Tags are editable for existing and new papers, and survive category moves and publication.
+  assert(await page.locator('[name="paper-tag"][value="SE"]').isChecked());
+  assert(await page.locator('[name="paper-tag"][value="AI"]').isChecked());
+  await page.locator('[name="paper-tag"][value="AERO"]').check();
+  await page.locator('#publication-list button').nth(1).click();
+  await page.locator('#publication-list button').first().click();
+  assert(await page.locator('[name="paper-tag"][value="AERO"]').isChecked());
+  await page.locator('#save').click();await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('공개 저장했습니다'));
+  assert((await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups[0].items[0])).includes('data-paper-tags="SE AI AERO"'));
+  await page.locator('#reset').click();await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+  assert(await page.locator('[name="paper-tag"][value="AERO"]').isChecked());
+  await page.locator('[name="paper-tag"][value="AERO"]').uncheck();
+  await page.locator('#save').click();await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('공개 저장했습니다'));
+  await page.locator('#new-publication').click();await page.locator('#paper-title').fill('Tagged Test Paper');
+  await page.locator('#authors').fill('Test Author');await page.locator('#venue').fill('Test Venue');await page.locator('#year').fill('2026');
+  await page.locator('[name="paper-tag"][value="AI"]').check();await page.locator('[name="paper-tag"][value="AERO"]').check();
+  await page.locator('#apply-publication').click();assert(await page.locator('[name="paper-tag"][value="AI"]').isChecked());
+  await page.locator('#category').selectOption('1');await page.locator('#apply-publication').click();
+  await page.locator('#save').click();await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('공개 저장했습니다'));
+  const tagged=await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups[1].items[0]);
+  assert(tagged.includes('Tagged Test Paper')&&tagged.includes('data-paper-tags="AI AERO"'));
+  await page.locator('#delete-publication').click();await page.locator('#save').click();
+  await page.waitForFunction(()=>!window.fixture.docs['siteContent/main'].groups.some(g=>g.items.some(html=>html.includes('Tagged Test Paper'))));
+  assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups.reduce((n,g)=>n+g.items.length,0)),110);
   assert.equal(await page.locator('#export').count(),0);
   assert((await page.locator('#reset').textContent()).includes('수정 취소'));
   await page.locator('[data-tab="news"]').click();
@@ -306,6 +331,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert(await page.locator('#workspace').isHidden());
 
   assert.deepEqual(errors,[]);
+  console.log('PASS: existing/new publication multi-tags, auto-apply on selection, publish/reload and category move preservation');
   console.log('PASS: news/gallery create, edit, delete, date ordering, image compression, public rendering, lightbox, permission gating, failed-save and conflict recovery');
   console.log('PASS: new-member button before migration, first-save migration and delete, 29 original members preserved, individual save, role/member link, add alumni, professor full CRUD, member self-only UI/save, conflict recovery, logout cleanup');
   // Re-enter as administrator for local screenshots (mock backend only).

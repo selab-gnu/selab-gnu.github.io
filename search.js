@@ -1,3 +1,4 @@
+import {loadPaperTags,paperTags,tagBadges,researchAreas,publicationTypes} from './publication-tags.js';
 import { validContent } from './content.js';
 
 const $=selector=>document.querySelector(selector);
@@ -9,16 +10,16 @@ const plain=html=>{
   doc.querySelectorAll('p,div,li,td,th,h1,h2,h3,h4,tr').forEach(el=>el.append(' '));
   return normalize(doc.body.textContent);
 };
-let papers=[],query='',loaded=false;
+let papers=[],query='',area='all',type='all',loaded=false;
 
 function publicationEntries(groups){
   return groups.flatMap((group,gi)=>group.items.map((html,ii)=>{
     const doc=new DOMParser().parseFromString(html,'text/html');
     const title=[...doc.querySelectorAll('a')].sort((a,b)=>b.textContent.trim().length-a.textContent.trim().length)[0]?.textContent;
-    return {title:normalize(title||plain(html)),text:plain(html),category:group.category,anchor:'publication-'+gi+'-'+ii};
+    return {title:normalize(title||plain(html)),text:plain(html),category:group.category,type:publicationTypes[gi],tags:paperTags(html),anchor:'publication-'+gi+'-'+ii};
   }));
 }
-function matching(entries){const needle=query.toLocaleLowerCase();return entries.filter(entry=>(entry.title+' '+entry.text).toLocaleLowerCase().includes(needle));}
+function matching(entries){const needle=query.toLocaleLowerCase();return entries.filter(entry=>(entry.title+' '+entry.text).toLocaleLowerCase().includes(needle)&&(area==='all'||(area==='unclassified'?entry.tags.length===0:entry.tags.includes(area)))&&(type==='all'||entry.type===type));}
 function excerpt(text){const index=text.toLocaleLowerCase().indexOf(query.toLocaleLowerCase());const start=Math.max(0,index-70);return (start?'…':'')+text.slice(start,start+240)+(text.length>start+240?'…':'');}
 function highlighted(element,value){
   const lower=value.toLocaleLowerCase(),needle=query.toLocaleLowerCase();let from=0,index;
@@ -32,23 +33,41 @@ function renderList(id,entries){
     link.href='publications.html#'+entry.anchor;
     highlighted(link,entry.title);heading.append(link);
     meta.className='search-result-kind';meta.textContent=entry.category;
-    summary.className='search-excerpt';highlighted(summary,excerpt(entry.text));li.append(meta,heading,summary);list.append(li);
+    summary.className='search-excerpt';highlighted(summary,excerpt(entry.text));li.append(meta,heading,tagBadges(entry.tags),summary);list.append(li);
   }
 }
 function render(){
-  const searching=!!query;$('#search-results').hidden=!searching;$('#search-hint').hidden=searching;
+  const searching=!!query||area!=='all'||type!=='all';$('#search-results').hidden=!searching;$('#search-hint').hidden=searching;
   if(!searching){$('#search-summary').textContent='논문 제목·저자·연도를 검색합니다.';return;}
   if(!loaded){$('#search-summary').textContent='검색 자료를 불러오는 중입니다…';return;}
   const pub=matching(papers);
-  $('#search-summary').textContent='“'+query+'” 검색 결과: 논문 '+pub.length+'편';
+  $('#search-summary').textContent=(query?'“'+query+'” 검색 결과':'분야·유형별 논문')+': '+pub.length+'편'+(area!=='all'?' · '+(area==='unclassified'?'미분류':area):'')+(type!=='all'?' · '+$('#publication-type-filter').selectedOptions[0].textContent:'');
   $('#publication-result-count').textContent=pub.length+'편';
   $('#publication-no-results').hidden=pub.length!==0;
   renderList('#publication-search-list',pub);
 }
-function setQuery(value,push=false){query=normalize(value);$('#site-query').value=query;$('#header-search').value=query;const url=new URL(location.href);if(query)url.searchParams.set('q',query);else url.searchParams.delete('q');if(push)history.pushState(null,'',url);render();}
-$('#site-search-form').addEventListener('submit',event=>{event.preventDefault();setQuery($('#site-query').value,true);});
-window.addEventListener('popstate',()=>setQuery(new URLSearchParams(location.search).get('q')||''));
-setQuery(new URLSearchParams(location.search).get('q')||'');
+function writeURL(push){
+ const url=new URL(location.href);
+ for(const [key,value] of [['q',query],['tag',area==='all'?'':area],['type',type==='all'?'':type]]){
+  if(value)url.searchParams.set(key,value);else url.searchParams.delete(key);
+ }
+ if(push)history.pushState(null,'',url);
+}
+function applySearch(push=true){
+ query=normalize($('#site-query').value);area=$('#research-filter').value;type=$('#publication-type-filter').value;
+ $('#header-search').value=query;writeURL(push);render();
+}
+function restoreSearch(){
+ const params=new URLSearchParams(location.search);query=normalize(params.get('q')||'');
+ const candidate=params.get('tag');area=Object.hasOwn(researchAreas,candidate)||candidate==='unclassified'?candidate:'all';
+ type=publicationTypes.includes(params.get('type'))?params.get('type'):'all';
+ $('#site-query').value=query;$('#header-search').value=query;$('#research-filter').value=area;$('#publication-type-filter').value=type;render();
+}
+$('#site-search-form').addEventListener('submit',event=>{event.preventDefault();applySearch();});
+$('#research-filter').onchange=()=>applySearch();$('#publication-type-filter').onchange=()=>applySearch();
+$('#reset-search-filters').onclick=()=>{$('#research-filter').value='all';$('#publication-type-filter').value='all';applySearch();};
+window.addEventListener('popstate',restoreSearch);restoreSearch();
+await loadPaperTags();
 
 let repositoryLoaded=false;
 try {

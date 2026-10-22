@@ -19,7 +19,8 @@ export function clean(html) {
     (['width','height'].includes(a.name) && /^[1-9][0-9]{0,2}$/.test(a.value))
    );
    const span = ['td','th'].includes(e.localName) && ['colspan','rowspan'].includes(a.name) && /^[1-9][0-9]?$/.test(a.value);
-   if (!link && !span && !photo) e.removeAttribute(a.name);
+   const paperTags = e.localName === 'span' && a.name === 'data-paper-tags' && /^(?:(?:SE|AI|AERO)(?: (?:SE|AI|AERO))*)?$/.test(a.value);
+   if (!link && !span && !photo && !paperTags) e.removeAttribute(a.name);
   }
  }
  doc.body.querySelectorAll('img:not([src])').forEach(e=>e.remove());

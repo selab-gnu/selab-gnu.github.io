@@ -29,7 +29,7 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
      const section = document.querySelector('#category-'+i);
      section.querySelector('h2').textContent=g.category;
      const ul=section.querySelector('ul');ul.replaceChildren();
-     for(const [j,html] of g.items.entries()){const li=document.createElement('li');li.id='publication-'+i+'-'+j;li.innerHTML=clean(html);ul.append(li);}
+     for(const [j,html] of g.items.entries()){const li=document.createElement('li');li.id='publication-'+i+'-'+j;const citation=document.createElement('div');citation.className='paper-citation';citation.innerHTML=clean(html);li.append(citation);ul.append(li);}
      document.querySelector('.category-links a[href="#category-'+i+'"]').textContent=g.category;
     });
     document.dispatchEvent(new Event('content-updated'));
