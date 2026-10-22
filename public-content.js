@@ -1,6 +1,6 @@
 import { renderProfiles } from './member-profiles.js';
 import { clean, validContent } from './content.js';
-if (document.querySelector('#cloud-home, .page-members .imported-content, #filter')) {
+if (document.querySelector('#cloud-home, .page-members .imported-content, .publication-group')) {
  try {
   const { contentRef, getDoc } = await import('./firebase-client.js');
   const snap = await getDoc(contentRef);
@@ -24,13 +24,12 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, #filte
       }
      } else members.innerHTML=clean(d.members);
    }
-   if (document.querySelector('#filter')) {
+   if (document.querySelector('.publication-group')) {
     d.groups.forEach((g,i)=>{
      const section = document.querySelector('#category-'+i);
      section.querySelector('h2').textContent=g.category;
      const ul=section.querySelector('ul');ul.replaceChildren();
      for(const [j,html] of g.items.entries()){const li=document.createElement('li');li.id='publication-'+i+'-'+j;li.innerHTML=clean(html);ul.append(li);}
-     document.querySelector('#category-filter option[value="category-'+i+'"]').textContent=g.category;
      document.querySelector('.category-links a[href="#category-'+i+'"]').textContent=g.category;
     });
     document.dispatchEvent(new Event('content-updated'));

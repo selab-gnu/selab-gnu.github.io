@@ -11,7 +11,8 @@ const root=path.resolve(__dirname,'..');
   await page.addInitScript(groups=>{window.testGroups=groups;window.cloudFails=false;window.courseFails=false;},groups);
   await page.route('**/*',async route=>{
    const url=new URL(route.request().url());let body;
-   if(url.pathname==='/firebase-client.js')body=`export const contentRef={};export const getDoc=async()=>{if(window.cloudFails)throw Error('offline');return {exists:()=>true,data:()=>({version:1,home:'',members:'',groups:window.testGroups})}};`;
+   if(url.pathname.endsWith('/firebase-firestore.js'))body='export const collection=()=>({});export const getDocs=async()=>({docs:[]});';
+   else if(url.pathname==='/firebase-client.js')body=`export const contentRef={};export const getDoc=async()=>{if(window.cloudFails)throw Error('offline');return {exists:()=>true,data:()=>({version:1,home:'',members:'',groups:window.testGroups})}};`;
    else{
     if(url.pathname==='/data/sections.json'&&await page.evaluate(()=>window.courseFails)){await route.fulfill({status:503,body:''});return;}
     const file=path.join(root,url.pathname==='/'?'index.html':url.pathname);
@@ -23,7 +24,7 @@ const root=path.resolve(__dirname,'..');
     await page.goto('http://localhost:8129/'+path);
     assert.equal(await page.locator('h1').textContent(),title);
     assert.equal(await page.locator('nav a[aria-current="page"]').textContent(),title);
-    assert((await page.locator('main').textContent()).includes('준비 중'));
+    assert.equal(await page.locator('#collection-items').count(),1);
   }
   await page.goto('http://localhost:8129/index.html');
   assert.equal(await page.locator('.hero,aside').count(),0);
@@ -34,7 +35,10 @@ const root=path.resolve(__dirname,'..');
   assert.equal(await page.locator('#course-results,[data-search-scope]').count(),0);
   for(const width of [390,1440]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.locator('#publication-search-list h3 a').click();
-  await page.waitForFunction(()=>document.querySelector('#result')?.textContent==='1 of 110 publications');
+  await page.waitForFunction(()=>document.querySelectorAll('.publications li').length===110);
+  assert.equal(await page.locator('main input[type=search]').count(),0);
+  assert.equal(await page.locator('.publications li[hidden]').count(),0);
+  assert.equal(await page.locator('header input[type=search]').count(),1);
   assert(await page.evaluate(()=>!!document.querySelector(location.hash)));
   await page.goto('http://localhost:8129/search.html?q=ObJeCt');
   await page.waitForFunction(()=>document.querySelector('#publication-result-count')?.textContent==='1편');

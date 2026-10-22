@@ -15,15 +15,15 @@ export function withMemberPhoto(html, source, name) {
   if(result.length>30000)throw Error('사진과 소개가 저장 용량을 초과했습니다. 사진을 줄이거나 소개를 짧게 해주세요.');
   return result;
 }
-async function thumbnail(file){
+export async function thumbnail(file,{width=240,height=300,maxLength=18000}={}){
   if(!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error('JPG, PNG, WebP 사진을 선택해주세요.');
   if(file.size>10*1024*1024)throw Error('10MB 이하의 사진을 선택해주세요.');
   const bitmap=await createImageBitmap(file);
   try{
-    const scale=Math.min(1,240/bitmap.width,300/bitmap.height);
+    const scale=Math.min(1,width/bitmap.width,height/bitmap.height);
     const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
     const context=canvas.getContext('2d');context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(bitmap,0,0,canvas.width,canvas.height);
-    for(const quality of [.85,.7,.55,.4,.25]){const source=canvas.toDataURL('image/jpeg',quality);if(source.length<=18000)return source;}
+    for(const quality of [.85,.7,.55,.4,.25]){const source=canvas.toDataURL('image/jpeg',quality);if(source.length<=maxLength)return source;}
     throw Error('사진을 충분히 줄이지 못했습니다. 더 작은 사진을 선택해주세요.');
   }finally{bitmap.close();}
 }

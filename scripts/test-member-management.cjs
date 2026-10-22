@@ -72,6 +72,66 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   }
   await page.goto('http://localhost:8129/admin/');
   await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+  assert.equal(await page.locator('#export').count(),0);
+  assert((await page.locator('#reset').textContent()).includes('수정 취소'));
+  await page.locator('[data-tab="news"]').click();
+  await page.locator('#news-form').waitFor();
+  await page.locator('#news-title').fill('연구실 세미나 안내');
+  await page.locator('#news-date').fill('2026-10-22');
+  await page.locator('#news-body').fill('연구실 소식 첫 줄\n두 번째 줄 <script>alert(1)</script>');
+  await page.evaluate(()=>window.fixture.denyWrite=true);
+  await page.locator('#news-form button[type="submit"]').click();
+  await page.waitForFunction(()=>document.querySelector('#news-status').textContent.includes('작성한 내용은 유지'));
+  assert.equal(await page.locator('#news-title').inputValue(),'연구실 세미나 안내');
+  await page.evaluate(()=>window.fixture.denyWrite=false);
+  await page.locator('#news-form button[type="submit"]').click();
+  await page.waitForFunction(()=>document.querySelector('#news-status').textContent.includes('공개 저장했습니다'));
+  assert.equal(await page.locator('#news-list button').count(),1);
+  await page.locator('[data-tab="gallery"]').click();
+  await page.locator('#gallery-form').waitFor();
+  const galleryPhoto=await page.evaluate(()=>{const c=document.createElement('canvas');c.width=1400;c.height=1000;const ctx=c.getContext('2d');const gradient=ctx.createLinearGradient(0,0,1400,1000);gradient.addColorStop(0,'#9eb9c5');gradient.addColorStop(1,'#183e60');ctx.fillStyle=gradient;ctx.fillRect(0,0,1400,1000);ctx.fillStyle='#fff';ctx.font='80px sans-serif';ctx.fillText('SEA LAB',470,500);return c.toDataURL('image/png').split(',')[1];});
+  for(const [index,title] of ['연구실 워크숍','함께하는 연구 활동'].entries()){
+    if(index)await page.locator('#gallery-new').click();
+    await page.locator('#gallery-title').fill(title);
+    await page.locator('#gallery-date').fill('2026-10-'+(20+index));
+    await page.locator('#gallery-caption').fill('함께 연구하고 이야기 나눈 시간입니다.');
+    await page.locator('#gallery-file').setInputFiles({name:'workshop.png',mimeType:'image/png',buffer:Buffer.from(galleryPhoto,'base64')});
+    await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent.includes('사진 준비가 끝났습니다'));
+    await page.locator('#gallery-form button[type="submit"]').click();
+    await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent.includes('공개 저장했습니다'));
+  }
+  const galleryDocs=await page.evaluate(()=>Object.values(window.fixture.docs).filter(d=>d.image));
+  assert(galleryDocs.every(d=>d.image.length<=240000));
+  if(process.env.TEST_EDITOR_SCREENSHOT)await page.screenshot({path:process.env.TEST_EDITOR_SCREENSHOT,fullPage:true});
+  await page.goto('http://localhost:8129/gallery.html');
+  await page.locator('.gallery-card').first().waitFor();
+  assert.equal(await page.locator('.gallery-card').count(),2);
+  assert.equal(await page.locator('.gallery-card h2').first().textContent(),'함께하는 연구 활동');
+  assert(await page.locator('.gallery-card img').first().evaluate(img=>img.complete&&img.naturalWidth>0));
+  if(process.env.TEST_GALLERY_SCREENSHOT)await page.screenshot({path:process.env.TEST_GALLERY_SCREENSHOT,fullPage:true});
+  await page.locator('.gallery-open').first().click();
+  assert(await page.locator('#gallery-viewer').isVisible());
+  assert.equal(await page.locator('#viewer-title').textContent(),'함께하는 연구 활동');
+  await page.keyboard.press('Escape');assert(await page.locator('#gallery-viewer').isHidden());
+  for(const width of [390,1440]){await page.setViewportSize({width,height:1100});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
+  await page.goto('http://localhost:8129/news.html');await page.locator('.news-card').waitFor();
+  assert((await page.locator('.news-body').textContent()).includes('<script>alert(1)</script>'));
+  assert.equal(await page.locator('.news-card script').count(),0);
+  await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+  await page.locator('[data-tab="gallery"]').click();await page.locator('#gallery-form').waitFor();
+  await page.locator('#gallery-list button').first().click();
+  await page.locator('#gallery-caption').fill('충돌해도 남아 있어야 하는 설명');
+  await page.evaluate(()=>{for(const [key,d] of Object.entries(window.fixture.docs))if(key.startsWith('galleryItems/'))d.revision++;});
+  await page.locator('#gallery-caption').fill('충돌해도 남아 있어야 하는 설명');
+  await page.locator('#gallery-form button[type="submit"]').click();
+  await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent.includes('다른 창'));
+  assert.equal(await page.locator('#gallery-caption').inputValue(),'충돌해도 남아 있어야 하는 설명');
+  await page.locator('#gallery-reload').click();await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent==='');
+  await page.locator('#gallery-list button').first().click();await page.locator('#gallery-delete').click();
+  await page.waitForFunction(()=>document.querySelectorAll('#gallery-list button').length===1);
+  await page.locator('[data-tab="news"]').click();await page.locator('#news-form').waitFor();
+  await page.locator('#news-list button').first().click();await page.locator('#news-delete').click();
+  await page.waitForFunction(()=>document.querySelectorAll('#news-list button').length===0);
   await page.locator('[data-tab="members"]').click();
   const migration=await page.locator('#member-migration-count').textContent();
   assert(migration.includes('29명'),migration);
@@ -219,6 +279,8 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
    return results;
   });
   assert.deepEqual(denied,[true,true],'Self-only accounts cannot grant roles or publish global content');
+  for(const kind of ['news','gallery'])assert(await page.locator('[data-tab="'+kind+'"]').isHidden());
+  assert(await page.evaluate(async()=>{const {saveEntry}=await import('/admin/collection-store.js');try{await saveEntry('news',{id:'forbidden',title:'Forbidden',date:'2026-10-22',body:'Not allowed',revision:0});return false;}catch{return true;}}),'Members cannot save news or gallery content');
   await page.locator('#my-bio').fill('내가 직접 수정한 소개\n두 번째 줄');
   await page.locator('#my-bio-save').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent==='내 자기소개를 공개 저장했습니다.');
@@ -244,6 +306,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert(await page.locator('#workspace').isHidden());
 
   assert.deepEqual(errors,[]);
+  console.log('PASS: news/gallery create, edit, delete, date ordering, image compression, public rendering, lightbox, permission gating, failed-save and conflict recovery');
   console.log('PASS: new-member button before migration, first-save migration and delete, 29 original members preserved, individual save, role/member link, add alumni, professor full CRUD, member self-only UI/save, conflict recovery, logout cleanup');
   // Re-enter as administrator for local screenshots (mock backend only).
   await page.evaluate(()=>window.fixture.login(window.fixture.account('yeonu7787@gmail.com')));

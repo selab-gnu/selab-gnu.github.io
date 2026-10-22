@@ -29,7 +29,7 @@ function renderList(id,entries){
   const list=$(id);list.replaceChildren();
   for(const entry of entries){
     const li=document.createElement('li'),heading=document.createElement('h3'),link=document.createElement('a'),meta=document.createElement('p'),summary=document.createElement('p');
-    link.href='publications.html?q='+encodeURIComponent(query)+'#'+entry.anchor;
+    link.href='publications.html#'+entry.anchor;
     highlighted(link,entry.title);heading.append(link);
     meta.className='search-result-kind';meta.textContent=entry.category;
     summary.className='search-excerpt';highlighted(summary,excerpt(entry.text));li.append(meta,heading,summary);list.append(li);

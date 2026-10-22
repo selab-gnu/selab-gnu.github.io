@@ -13,11 +13,9 @@ def page(title,body,section=None):
 home='<div id="cloud-home">'+(root/'data/home.html').read_text(encoding='utf-8')+'</div>'
 (root/'index.html').write_text(page('Home',home),encoding='utf-8')
 intro='<p>We only list the publications since 2016. If you want to see the previous ones, please refer to <a href="https://saleese.github.io/">saleese.com</a>.</p>'
-body=intro+'<div class="filter"><label for="filter">Find a publication</label><input id="filter" type="search" placeholder="Title, author, year…"><p id="result" role="status" aria-live="polite">110 publications</p></div>'
-body=body.replace('<p id="result"', '<div class="filter-options"><div><label for="category-filter">Category</label><select id="category-filter"><option value="all">All categories</option>'+''.join(f'<option value="category-{i}">{g["category"]}</option>' for i,g in enumerate(groups))+'</select></div><button id="clear-filter" type="button">Clear filters</button></div><p id="result"')
+body=intro
 body+='<div class="category-links">'+''.join(f'<a href="#category-{i}">{g["category"]}</a>' for i,g in enumerate(groups))+'</div>'
 for i,g in enumerate(groups): body+=f'<section class="publication-group" id="category-{i}"><h2>{g["category"]}</h2><ul class="publications">'+''.join(f'<li id="publication-{i}-{j}">'+x+'</li>' for j,x in enumerate(g['items']))+'</ul></section>'
-body+='<p id="empty" hidden>No publications match your search.</p>'
 (root/'publications.html').write_text(page('Publications',body),encoding='utf-8')
 print('Built Home and Publications:',sum(len(g['items']) for g in groups),'entries')
 
@@ -39,5 +37,7 @@ search_body='''<p class="search-intro">논문 제목·저자·연도로 연구�
 (root/'search.html').write_text(page('논문 검색',search_body,'Search').replace('<script type="module" src="public-content.js"></script>','<script type="module" src="search.js"></script>'),encoding='utf-8')
 print('Built publication search')
 
-for title,path,description in [('News','news.html','연구실 소식을 준비 중입니다.'),('Gallery','gallery.html','연구실 사진을 준비 중입니다.')]:
- (root/path).write_text(page(title,'<p>'+description+'</p>'),encoding='utf-8')
+for title,path,description,kind in [('News','news.html','연구실의 소식과 활동을 전합니다.','news'),('Gallery','gallery.html','함께 연구하고 성장하는 연구실의 순간들입니다.','gallery')]:
+ body='<p class="collection-intro">'+description+'</p><p id="collection-status" role="status">등록된 게시물을 불러오는 중입니다…</p><div id="collection-items" class="'+kind+'-grid"></div>'
+ if kind=='gallery':body+='<dialog id="gallery-viewer" aria-labelledby="viewer-title"><button id="viewer-close" type="button" aria-label="사진 크게 보기 닫기">닫기 ×</button><img id="viewer-image" alt=""><h2 id="viewer-title"></h2><p id="viewer-caption"></p></dialog>'
+ (root/path).write_text(page(title,body).replace('<script type="module" src="public-content.js"></script>','<script type="module" src="collections-public.js"></script>'),encoding='utf-8')

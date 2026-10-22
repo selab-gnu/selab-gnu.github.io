@@ -67,5 +67,33 @@ service cloud.firestore {
       && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bio','revision','updatedAt'])));
    allow delete: if admin();
   }
+  function validPost() {
+   let d = request.resource.data;
+   return d.title is string && d.title.size() > 0 && d.title.size() <= 200
+    && d.date is string && d.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+    && d.revision is int && d.updatedAt == request.time;
+  }
+  match /newsItems/{id} {
+   allow read: if true;
+   allow create, update: if admin() && validPost()
+    && request.resource.data.keys().hasAll(['title','date','body','revision','updatedAt'])
+    && request.resource.data.keys().hasOnly(['title','date','body','revision','updatedAt'])
+    && request.resource.data.body is string && request.resource.data.body.size() > 0 && request.resource.data.body.size() <= 10000
+    && ((!exists(/databases/$(database)/documents/newsItems/$(id)) && request.resource.data.revision == 1)
+      || (exists(/databases/$(database)/documents/newsItems/$(id)) && request.resource.data.revision == resource.data.revision + 1));
+   allow delete: if admin();
+  }
+  match /galleryItems/{id} {
+   allow read: if true;
+   allow create, update: if admin() && validPost()
+    && request.resource.data.keys().hasAll(['title','date','image','caption','revision','updatedAt'])
+    && request.resource.data.keys().hasOnly(['title','date','image','caption','revision','updatedAt'])
+    && request.resource.data.image is string && request.resource.data.image.size() > 0 && request.resource.data.image.size() <= 240000
+    && request.resource.data.image.matches('^(https://.+|data:image/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+)$')
+    && request.resource.data.caption is string && request.resource.data.caption.size() <= 2000
+    && ((!exists(/databases/$(database)/documents/galleryItems/$(id)) && request.resource.data.revision == 1)
+      || (exists(/databases/$(database)/documents/galleryItems/$(id)) && request.resource.data.revision == resource.data.revision + 1));
+   allow delete: if admin();
+  }
  }
 }

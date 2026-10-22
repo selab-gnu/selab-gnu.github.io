@@ -6,7 +6,7 @@ import { doc, setDoc, deleteDoc, collection, getDocs } from 'https://www.gstatic
 const auth = getAuth(app);
 let role='visitor', authGeneration=0, ownMemberId='';
 export function getOwnMemberId(){return ownMemberId;}
-export function canEdit(section){if(section==='my-profile')return (role==='admin'||role==='member')&&!!ownMemberId;return role==='admin'&&['publications','home','members'].includes(section);}
+export function canEdit(section){if(section==='my-profile')return (role==='admin'||role==='member')&&!!ownMemberId;return role==='admin'&&['publications','home','members','news','gallery'].includes(section);}
 export function isAdmin(){return role==='admin';}
 export function hasEditorAccess(){return role==='admin'||role==='member';}
 
@@ -26,7 +26,7 @@ export async function publishContent(data, revision) {
  await runTransaction(contentRef.firestore, async tx => {
   const snap = await tx.get(contentRef);
   const current = snap.exists() ? snap.data().revision : 0;
-  if (current !== revision) throw Error('다른 창에서 자료가 변경되었습니다. 초안을 내보낸 뒤 새로고침해서 다시 편집해주세요.');
+  if (current !== revision) throw Error('다른 창에서 자료가 변경되었습니다. 작성한 내용을 복사해 보관한 뒤 다시 불러와 편집해주세요.');
   if(!snap.exists()&&!isAdmin())throw Error('전체 관리자가 먼저 최초 공개 저장을 해야 합니다.');
   const previous=snap.exists()?snap.data():data;
   tx.set(contentRef, { version: 1, home: canEdit('home')?data.home:previous.home, members: canEdit('members')&&previous.memberDirectoryVersion!==1?data.members:previous.members, groups: data.groups, ...(previous.memberDirectoryVersion===1?{memberDirectoryVersion:1}:{}), revision: current + 1, updatedAt: serverTimestamp() });
@@ -64,8 +64,7 @@ export function watchAuth(callback) {
    document.querySelector('#login-heading').textContent=heading;
    document.querySelector('#workspace').hidden=!allowed;
    document.querySelector('#role-management').hidden=!isAdmin();
-   document.querySelector('#export').hidden=!isAdmin();
-   for(const section of ['publications','home','members','my-profile'])document.querySelector('[data-tab="'+section+'"]').hidden=!canEdit(section);
+   for(const section of ['publications','home','members','news','gallery','my-profile'])document.querySelector('[data-tab="'+section+'"]').hidden=!canEdit(section);
    status.textContent=allowed?user.email+' · '+({admin:'관리자',member:'멤버 (자기소개만 편집)',visitor:'방문자'}[role]):user.email+' · 방문자: 공개 자료만 열람할 수 있습니다. 자기소개를 수정하려면 관리자에게 멤버 등록을 요청해주세요.';
    callback(allowed);
   }catch(e){role='visitor';status.textContent='권한 확인 실패: '+(e.code||e.message)+'. 관리자에게 문의해주세요.';}
