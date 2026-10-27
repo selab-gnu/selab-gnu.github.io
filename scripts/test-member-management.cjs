@@ -17,7 +17,8 @@ export const runTransaction=async(db,fn)=>{const writes=[];await fn({get:getDoc,
 const authSDK=`
 export const getAuth=()=>({});export class GoogleAuthProvider{setCustomParameters(){}}
 export const signInWithPopup=async()=>{};export const signOut=async()=>window.fixture.login(null);
-export const onAuthStateChanged=(auth,callback)=>{window.fixture.login=async user=>{window.fixture.user=user;sessionStorage.setItem('test-member-user',user?.email||'');await callback(user)};queueMicrotask(()=>callback(window.fixture.user));return ()=>{}};`;
+export const signInWithRedirect=async()=>{};export const getRedirectResult=async()=>null;
+export const onAuthStateChanged=(auth,callback)=>{const listeners=window.fixture.authListeners??=[];listeners.push(callback);window.fixture.login=async user=>{window.fixture.user=user;sessionStorage.setItem('test-member-user',user?.email||'');await Promise.all(listeners.map(listener=>listener(user)))};queueMicrotask(()=>callback(window.fixture.user));return ()=>{const index=listeners.indexOf(callback);if(index>=0)listeners.splice(index,1)}};`;
 const client=`export const app={},db={};export const contentRef={firestore:db,path:'siteContent/main'};export {getDoc,runTransaction,serverTimestamp} from '/mock-firestore.js';`;
 
 (async()=>{
