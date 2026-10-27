@@ -1,3 +1,4 @@
+import {loadPaperTags,sortPublicationGroups} from './publication-tags.js';
 const categoryNames=['International Journals','International Conference','Domestic Journals','Domestic Conferences'];
 let loading;
 const text=html=>new DOMParser().parseFromString(html,'text/html').body.textContent;
@@ -8,7 +9,7 @@ export function loadPublicationImports(){
   return loading??=(async()=>{
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
     try{
-      const response=await fetch(new URL('./data/publication-imports.json',import.meta.url),{signal:controller.signal});
+      const [response]=await Promise.all([fetch(new URL('./data/publication-imports.json',import.meta.url),{signal:controller.signal}),loadPaperTags()]);
       if(!response.ok)throw Error('논문 추가 목록을 불러오지 못했습니다. 다시 시도해주세요.');
       const data=await response.json();
       if(data.version!==1||!Array.isArray(data.batches)||!data.batches.every(batch=>
@@ -39,5 +40,7 @@ export function mergePublicationImports(groups,manifest){
       group.publicationImports=[...(group.publicationImports||[]),batch.id];acknowledged++;
     }
   }
-  return {groups:merged,added,pending:acknowledged>0};
+  const ordered=sortPublicationGroups(merged);
+  const reordered=ordered.some((group,i)=>group.items.some((html,j)=>html!==merged[i].items[j]));
+  return {groups:ordered,added,pending:acknowledged>0||reordered,reordered};
 }

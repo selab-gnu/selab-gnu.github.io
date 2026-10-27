@@ -1,13 +1,16 @@
 import { contentRef, getDoc, runTransaction, serverTimestamp } from '../firebase-client.js';
 import { doc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
+import {loadMemberEmails,supplementMemberEmails} from '../member-emails.js';
 
 const ref = id => doc(contentRef.firestore, 'memberProfiles', id);
 export async function readProfiles() {
-  return (await getDocs(collection(contentRef.firestore, 'memberProfiles'))).docs.map(d=>({id:d.id,...d.data()}));
+  const profiles=(await getDocs(collection(contentRef.firestore, 'memberProfiles'))).docs.map(d=>({id:d.id,...d.data()}));
+  return supplementMemberEmails(profiles,await loadMemberEmails());
 }
 export async function readProfile(id) {
   const snap = await getDoc(ref(id));
-  return snap.exists() ? {id:snap.id,...snap.data()} : null;
+  if(!snap.exists())return null;
+  return supplementMemberEmails([{id:snap.id,...snap.data()}],await loadMemberEmails())[0];
 }
 export async function migrateProfiles(records, revision, initialContent) {
   await runTransaction(contentRef.firestore, async tx=>{

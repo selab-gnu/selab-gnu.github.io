@@ -22,7 +22,11 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
         const notice=document.createElement('p');notice.className='member-registration-status';notice.setAttribute('role','status');notice.textContent=profile.name+' 멤버가 등록되었습니다.';
         card.prepend(notice);card.classList.add('member-just-added');card.scrollIntoView({block:'center'});
       }
-     } else members.innerHTML=clean(d.members);
+     } else {
+       const {loadMemberEmails,supplementMemberEmails}=await import('./member-emails.js');
+       const {splitLegacyMembers}=await import('./member-profiles.js');
+       members.innerHTML=renderProfiles(supplementMemberEmails(splitLegacyMembers(d.members),await loadMemberEmails()));
+     }
    }
    if (document.querySelector('.publication-group')) {
     const {loadPublicationImports,mergePublicationImports}=await import('./publication-imports.js');

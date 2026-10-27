@@ -1,8 +1,9 @@
 """Build static pages using Python 3 standard library: python scripts/build.py."""
 from pathlib import Path
 import json,re
+from publication_metadata import date_index,sort_groups
 root=Path(__file__).resolve().parents[1]
-groups=json.loads((root/'data/publications.json').read_text(encoding='utf-8'))
+groups=sort_groups(json.loads((root/'data/publications.json').read_text(encoding='utf-8')),date_index(root))
 old='http://selab.gnu.ac.kr/index.php'
 def page(title,body,section=None):
  section=section or title

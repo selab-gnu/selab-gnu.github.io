@@ -27,6 +27,7 @@ const root=path.resolve(__dirname,'..');
   await page.goto('http://localhost:8129/publications.html');
   await page.waitForFunction(()=>document.querySelectorAll('.publications .paper-tags').length===139);
   const checks=await page.evaluate(async({old,groups,manifest})=>{
+   const {publicationDate,sortPublicationGroups}=await import('/publication-tags.js');
    const {mergePublicationImports}=await import('/publication-imports.js');
    const before=JSON.stringify(old),first=mergePublicationImports(old,manifest),second=mergePublicationImports(first.groups,manifest);
    const deleted=structuredClone(first.groups),item=manifest.batches[0].entries[0];
@@ -37,8 +38,14 @@ const root=path.resolve(__dirname,'..');
    const afterEdit=mergePublicationImports(modified,manifest);
    const already=structuredClone(old);already.find(g=>g.category===item.category).items.push(item.html);
    const duplicate=mergePublicationImports(already,manifest);
-   return {first,second,unchanged:before===JSON.stringify(old),afterDelete,afterEdit,duplicate,expected:groups};
+   const sortedReverse=sortPublicationGroups(groups.map(group=>({...group,items:[...group.items].reverse()})));
+   const dateOrders=sortedReverse.map(group=>group.items.map(html=>publicationDate(html)));
+   const awardPaper=groups[0].items.find(html=>html.includes('FANET Routing'));
+   const missingYearPapers=groups[2].items.filter(html=>{const text=new DOMParser().parseFromString(html,'text/html').body.textContent.replace(/\s+/g,' ').toLowerCase();return text.includes('a code recommendation method using rnn')||text.includes('a spreadsheet application');});
+   return {dateOrders,awardDate:publicationDate(awardPaper),inferredDates:missingYearPapers.map(html=>publicationDate(html)),first,second,unchanged:before===JSON.stringify(old),afterDelete,afterEdit,duplicate,expected:groups};
   },{old,groups,manifest});
+  assert.equal(checks.awardDate,'2023');assert.deepEqual(checks.inferredDates,['2018','2018']);
+  for(const order of checks.dateOrders){const keys=order.map(date=>date.split('-').map(Number).concat([0,0]).slice(0,3).map(n=>String(n).padStart(4,'0')).join(''));assert(keys.every((key,i)=>i===0||keys[i-1]>=key),'Newest-first publication dates');}
   assert.equal(checks.first.added,29);assert(checks.first.pending);assert(checks.unchanged);
   assert.deepEqual(checks.first.groups,groups,'Repository and old-cloud merge must produce identical citation order');
   assert.equal(checks.second.added,0);assert.equal(checks.second.pending,false);
