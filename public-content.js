@@ -25,7 +25,9 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
      } else members.innerHTML=clean(d.members);
    }
    if (document.querySelector('.publication-group')) {
-    d.groups.forEach((g,i)=>{
+    const {loadPublicationImports,mergePublicationImports}=await import('./publication-imports.js');
+    const combined=mergePublicationImports(d.groups,await loadPublicationImports());
+    combined.groups.forEach((g,i)=>{
      const section = document.querySelector('#category-'+i);
      section.querySelector('h2').textContent=g.category;
      const ul=section.querySelector('ul');ul.replaceChildren();

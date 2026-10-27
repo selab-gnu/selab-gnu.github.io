@@ -1,0 +1,521 @@
+{
+  "source": "https://saleese.github.io/publications/",
+  "checkedAt": "2026-10-27",
+  "sourceEntries": 138,
+  "added": 29,
+  "total": 139,
+  "addedByCategory": {
+    "International Journals": 8,
+    "International Conference": 8,
+    "Domestic Journals": 3,
+    "Domestic Conferences": 10
+  },
+  "totalByCategory": {
+    "International Journals": 29,
+    "International Conference": 32,
+    "Domestic Journals": 22,
+    "Domestic Conferences": 56
+  },
+  "entries": [
+    {
+      "sourceId": "lee2015viewhistories",
+      "title": "The Impact of View Histories on Edit Recommendations",
+      "authors": "Seonah Lee , Sungwon Kang, Sunghun Kim, and Matt Staats",
+      "year": 2015,
+      "sourceCategory": "Top-tier Journals",
+      "venue": "IEEE Transactions on Software Engineering , 2015",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [
+        "https://doi.org/10.1109/tse.2014.2362138"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#lee2015viewhistories",
+      "link": "https://doi.org/10.1109/tse.2014.2362138",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee , Sungwon Kang, Sunghun Kim, and Matt Staats. &ldquo;<a href=\"https://doi.org/10.1109/tse.2014.2362138\">The Impact of View Histories on Edit Recommendations</a>&rdquo;. <em>IEEE Transactions on Software Engineering , 2015</em>.</span>"
+    },
+    {
+      "sourceId": "bashir2022resource",
+      "title": "Resource allocation through logistic regression and multicriteria decision making method in IoT fog computing",
+      "authors": "Hayat Bashir, Seonah Lee , and Kyong Hoon Kim",
+      "year": 2022,
+      "sourceCategory": "International Journals",
+      "venue": "Transactions on Emerging Telecommunications Technologies , 2022",
+      "tags": [
+        "AI"
+      ],
+      "links": [
+        "https://doi.org/10.1002/ett.3824"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#bashir2022resource",
+      "link": "https://doi.org/10.1002/ett.3824",
+      "html": "<span data-paper-tags=\"AI\">Hayat Bashir, Seonah Lee , and Kyong Hoon Kim. &ldquo;<a href=\"https://doi.org/10.1002/ett.3824\">Resource allocation through logistic regression and multicriteria decision making method in IoT fog computing</a>&rdquo;. <em>Transactions on Emerging Telecommunications Technologies , 2022</em>.</span>"
+    },
+    {
+      "sourceId": "seo2022finegrained",
+      "title": "A fine-grained secure service provisioning platform for hypervisor systems",
+      "authors": "Junho Seo, Seonah Lee , Ki-Il Kim, and Kyong Hoon Kim",
+      "year": 2022,
+      "sourceCategory": "International Journals",
+      "venue": "Electronics , 2022",
+      "tags": [
+        "AERO"
+      ],
+      "links": [
+        "https://doi.org/10.3390/electronics11101606"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#seo2022finegrained",
+      "link": "https://doi.org/10.3390/electronics11101606",
+      "html": "<span data-paper-tags=\"AERO\">Junho Seo, Seonah Lee , Ki-Il Kim, and Kyong Hoon Kim. &ldquo;<a href=\"https://doi.org/10.3390/electronics11101606\">A fine-grained secure service provisioning platform for hypervisor systems</a>&rdquo;. <em>Electronics , 2022</em>.</span>"
+    },
+    {
+      "sourceId": "ali2020reducing",
+      "title": "Reducing dynamic power consumption in mixed-critical real-time systems",
+      "authors": "Ijaz Ali, Yong-Il Jo, Seonah Lee , Wan Yeon Lee, and Kyong Hoon Kim",
+      "year": 2020,
+      "sourceCategory": "International Journals",
+      "venue": "Applied Sciences , 2020",
+      "tags": [
+        "SE"
+      ],
+      "links": [
+        "https://doi.org/10.3390/app10207256"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#ali2020reducing",
+      "link": "https://doi.org/10.3390/app10207256",
+      "html": "<span data-paper-tags=\"SE\">Ijaz Ali, Yong-Il Jo, Seonah Lee , Wan Yeon Lee, and Kyong Hoon Kim. &ldquo;<a href=\"https://doi.org/10.3390/app10207256\">Reducing dynamic power consumption in mixed-critical real-time systems</a>&rdquo;. <em>Applied Sciences , 2020</em>.</span>"
+    },
+    {
+      "sourceId": "lee2013clustering",
+      "title": "Clustering Navigation Sequences to Create Contexts for Guiding Code Navigation",
+      "authors": "Seonah Lee and Sungwon Kang",
+      "year": 2013,
+      "sourceCategory": "International Journals",
+      "venue": "Journal of Systems and Software , Aug 2013",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [
+        "https://doi.org/10.1016/j.jss.2013.03.103"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#lee2013clustering",
+      "link": "https://doi.org/10.1016/j.jss.2013.03.103",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee and Sungwon Kang. &ldquo;<a href=\"https://doi.org/10.1016/j.jss.2013.03.103\">Clustering Navigation Sequences to Create Contexts for Guiding Code Navigation</a>&rdquo;. <em>Journal of Systems and Software , Aug 2013</em>.</span>"
+    },
+    {
+      "sourceId": "lee2012guiding",
+      "title": "A Study on Guiding Programmers’ Code Navigation with a Graphical Code Recommender",
+      "authors": "Seonah Lee and Sungwon Kang",
+      "year": 2012,
+      "sourceCategory": "International Journals",
+      "venue": "Studies in Computational Intelligence , 2012",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [
+        "https://doi.org/10.1007/978-3-642-23202-2_5"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#lee2012guiding",
+      "link": "https://doi.org/10.1007/978-3-642-23202-2_5",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee and Sungwon Kang. &ldquo;<a href=\"https://doi.org/10.1007/978-3-642-23202-2_5\">A Study on Guiding Programmers’ Code Navigation with a Graphical Code Recommender</a>&rdquo;. <em>Studies in Computational Intelligence , 2012</em>.</span>"
+    },
+    {
+      "sourceId": "kang2009framework",
+      "title": "A Framework for Tool-based Software Architecture Reconstruction",
+      "authors": "Sungwon Kang, Seonah Lee , and Dan Hyung Lee",
+      "year": 2009,
+      "sourceCategory": "International Journals",
+      "venue": "International Journal of Software Engineering and Knowledge Engineering , 2009",
+      "tags": [
+        "SE"
+      ],
+      "links": [
+        "https://doi.org/10.1142/s0218194009004167"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#kang2009framework",
+      "link": "https://doi.org/10.1142/s0218194009004167",
+      "html": "<span data-paper-tags=\"SE\">Sungwon Kang, Seonah Lee , and Dan Hyung Lee. &ldquo;<a href=\"https://doi.org/10.1142/s0218194009004167\">A Framework for Tool-based Software Architecture Reconstruction</a>&rdquo;. <em>International Journal of Software Engineering and Knowledge Engineering , 2009</em>.</span>"
+    },
+    {
+      "sourceId": "lee2002transition",
+      "title": "Transition Management of Software Process Improvement",
+      "authors": "Seonah Lee and Byoungju Choi",
+      "year": 2002,
+      "sourceCategory": "International Journals",
+      "venue": "Lecture Notes in Computer Science , 2002",
+      "tags": [
+        "SE"
+      ],
+      "links": [
+        "https://doi.org/10.1007/3-540-36209-6_5"
+      ],
+      "category": "International Journals",
+      "source": "https://saleese.github.io/publications/#lee2002transition",
+      "link": "https://doi.org/10.1007/3-540-36209-6_5",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee and Byoungju Choi. &ldquo;<a href=\"https://doi.org/10.1007/3-540-36209-6_5\">Transition Management of Software Process Improvement</a>&rdquo;. <em>Lecture Notes in Computer Science , 2002</em>.</span>"
+    },
+    {
+      "sourceId": "yoo2026traceability",
+      "title": "Graph Database-based Measurement of Traceability Coverage in Open-Source Projects",
+      "authors": "Jihyun Yoo, Seonah Lee , and Heetae Cho",
+      "year": 2026,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In The 26th IEEE International Conference on Software Quality, Reliability, and Security , 2026",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#yoo2026traceability",
+      "link": "https://saleese.github.io/publications/#yoo2026traceability",
+      "html": "<span data-paper-tags=\"SE\">Jihyun Yoo, Seonah Lee , and Heetae Cho. &ldquo;<a href=\"https://saleese.github.io/publications/#yoo2026traceability\">Graph Database-based Measurement of Traceability Coverage in Open-Source Projects</a>&rdquo;. <em>In The 26th IEEE International Conference on Software Quality, Reliability, and Security , 2026</em>.</span>"
+    },
+    {
+      "sourceId": "lee2013mining",
+      "title": "Mining Contexts for Recommending Source Locations to Explore",
+      "authors": "Seonah Lee and Sungwon Kang",
+      "year": 2013,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In Korea-Japan Joint Workshop on ICT , 2013",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2013mining",
+      "link": "https://saleese.github.io/publications/#lee2013mining",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee and Sungwon Kang. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2013mining\">Mining Contexts for Recommending Source Locations to Explore</a>&rdquo;. <em>In Korea-Japan Joint Workshop on ICT , 2013</em>.</span>"
+    },
+    {
+      "sourceId": "lee2013icse",
+      "title": "A Graphical Recommender for Assisting Code Exploration",
+      "authors": "Seonah Lee , Sungwon Kang, and Matt Staats",
+      "year": 2013,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In 35th IEEE International Conference on Software Engineering (ICSE), Formal Demonstrations , 2013",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [
+        "https://doi.org/10.1109/icse.2013.6606706"
+      ],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2013icse",
+      "link": "https://doi.org/10.1109/icse.2013.6606706",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee , Sungwon Kang, and Matt Staats. &ldquo;<a href=\"https://doi.org/10.1109/icse.2013.6606706\">A Graphical Recommender for Assisting Code Exploration</a>&rdquo;. <em>In 35th IEEE International Conference on Software Engineering (ICSE), Formal Demonstrations , 2013</em>.</span>"
+    },
+    {
+      "sourceId": "lee2011icsm",
+      "title": "Clustering and Recommending Collections of Code Relevant to Tasks",
+      "authors": "Seonah Lee and Sungwon Kang",
+      "year": 2011,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In 27th IEEE International Conference on Software Maintenance (ICSM), ERA Track , 2011",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [
+        "https://doi.org/10.1109/icsm.2011.6080826"
+      ],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2011icsm",
+      "link": "https://doi.org/10.1109/icsm.2011.6080826",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee and Sungwon Kang. &ldquo;<a href=\"https://doi.org/10.1109/icsm.2011.6080826\">Clustering and Recommending Collections of Code Relevant to Tasks</a>&rdquo;. <em>In 27th IEEE International Conference on Software Maintenance (ICSM), ERA Track , 2011</em>.</span>"
+    },
+    {
+      "sourceId": "lee2008diagramming",
+      "title": "How Can Diagramming Tools Help Support Programming Activities?",
+      "authors": "Seonah Lee , Gail C. Murphy, Thomas Fritz, and Meghan Allen",
+      "year": 2008,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In IEEE Symposium on Visual Languages and Human-Centric Computing (VL/HCC) , 2008",
+      "tags": [
+        "SE"
+      ],
+      "links": [
+        "https://doi.org/10.1109/vlhcc.2008.4639095"
+      ],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2008diagramming",
+      "link": "https://doi.org/10.1109/vlhcc.2008.4639095",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee , Gail C. Murphy, Thomas Fritz, and Meghan Allen. &ldquo;<a href=\"https://doi.org/10.1109/vlhcc.2008.4639095\">How Can Diagramming Tools Help Support Programming Activities?</a>&rdquo;. <em>In IEEE Symposium on Visual Languages and Human-Centric Computing (VL/HCC) , 2008</em>.</span>"
+    },
+    {
+      "sourceId": "lee2006verifying",
+      "title": "Verifying a Software Architecture Reconstruction Framework with a Case Study",
+      "authors": "Seonah Lee and Sungwon Kang",
+      "year": 2006,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In International Conference on Software Engineering and Knowledge Engineering (SEKE) , 2006",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2006verifying",
+      "link": "https://saleese.github.io/publications/#lee2006verifying",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee and Sungwon Kang. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2006verifying\">Verifying a Software Architecture Reconstruction Framework with a Case Study</a>&rdquo;. <em>In International Conference on Software Engineering and Knowledge Engineering (SEKE) , 2006</em>.</span>"
+    },
+    {
+      "sourceId": "lee2004saat",
+      "title": "SAAT: Reverse Engineering for Performance Analysis",
+      "authors": "Seonah Lee , Seungmo Cho, and Sungkwan Heo",
+      "year": 2004,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In The Second International Workshop on Dynamic Analysis , 2004",
+      "tags": [
+        "SE"
+      ],
+      "links": [
+        "https://doi.org/10.1049/ic:20040298"
+      ],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2004saat",
+      "link": "https://doi.org/10.1049/ic:20040298",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee , Seungmo Cho, and Sungkwan Heo. &ldquo;<a href=\"https://doi.org/10.1049/ic:20040298\">SAAT: Reverse Engineering for Performance Analysis</a>&rdquo;. <em>In The Second International Workshop on Dynamic Analysis , 2004</em>.</span>"
+    },
+    {
+      "sourceId": "lee2000developers",
+      "title": "Developer’s View on the Software Quality Model based on the ISO/IEC 9126",
+      "authors": "Seonah Lee , Sookyung Kim, and Byoungju Choi",
+      "year": 2000,
+      "sourceCategory": "International Conferences and Workshops",
+      "venue": "In The World Congress for Software Quality (WCSQ) , 2000",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "International Conference",
+      "source": "https://saleese.github.io/publications/#lee2000developers",
+      "link": "https://saleese.github.io/publications/#lee2000developers",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee , Sookyung Kim, and Byoungju Choi. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2000developers\">Developer’s View on the Software Quality Model based on the ISO/IEC 9126</a>&rdquo;. <em>In The World Congress for Software Quality (WCSQ) , 2000</em>.</span>"
+    },
+    {
+      "sourceId": "lee2013datamining",
+      "title": "Data-mining based Recommendation Systems for Software Evolution Tasks",
+      "authors": "Seonah Lee and Sungwon Kang",
+      "year": 2013,
+      "sourceCategory": "Domestic Journals",
+      "venue": "Communications of The Korea Information Science Society , 2013",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [
+        "https://koreascience.kr/article/JAKO201306464395246.pdf"
+      ],
+      "category": "Domestic Journals",
+      "source": "https://saleese.github.io/publications/#lee2013datamining",
+      "link": "https://saleese.github.io/publications/#lee2013datamining",
+      "html": "<span data-paper-tags=\"SE AI\">Seonah Lee and Sungwon Kang. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2013datamining\">Data-mining based Recommendation Systems for Software Evolution Tasks</a>&rdquo;. <em>Communications of The Korea Information Science Society , 2013</em>.</span>"
+    },
+    {
+      "sourceId": "lee2000metrics",
+      "title": "Establishment of the Software Quality Metrics for a Software Development Process",
+      "authors": "Seonah Lee and Byoungju Choi",
+      "year": 2000,
+      "sourceCategory": "Domestic Journals",
+      "venue": "Journal of KISS: Software and Applications , 2000",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Journals",
+      "source": "https://saleese.github.io/publications/#lee2000metrics",
+      "link": "https://saleese.github.io/publications/#lee2000metrics",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee and Byoungju Choi. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2000metrics\">Establishment of the Software Quality Metrics for a Software Development Process</a>&rdquo;. <em>Journal of KISS: Software and Applications , 2000</em>.</span>"
+    },
+    {
+      "sourceId": "lee1999hsqm",
+      "title": "Hierarchical Software Quality Model (H-SQM) of Developer’s View",
+      "authors": "Seonah Lee and Byoungju Choi",
+      "year": 1999,
+      "sourceCategory": "Domestic Journals",
+      "venue": "Journal of KISS(B): Software and Applications , 1999",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Journals",
+      "source": "https://saleese.github.io/publications/#lee1999hsqm",
+      "link": "https://saleese.github.io/publications/#lee1999hsqm",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee and Byoungju Choi. &ldquo;<a href=\"https://saleese.github.io/publications/#lee1999hsqm\">Hierarchical Software Quality Model (H-SQM) of Developer’s View</a>&rdquo;. <em>Journal of KISS(B): Software and Applications , 1999</em>.</span>"
+    },
+    {
+      "sourceId": "lee2023smartfarm",
+      "title": "안드로이드 앱과 구글 Firebase를 활용한 IoT 스마트팜 제어",
+      "authors": "이태상, 김동환, 손명원, 하준영, and 이선아",
+      "year": 2023,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In Korea Computer Congress (KCC) , 2023",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#lee2023smartfarm",
+      "link": "https://saleese.github.io/publications/#lee2023smartfarm",
+      "html": "<span data-paper-tags=\"SE\">이태상, 김동환, 손명원, 하준영, and 이선아. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2023smartfarm\">안드로이드 앱과 구글 Firebase를 활용한 IoT 스마트팜 제어</a>&rdquo;. <em>In Korea Computer Congress (KCC) , 2023</em>.</span>"
+    },
+    {
+      "sourceId": "jeon2021map",
+      "title": "표적 정보를 포함하는 2차원 지도 생성 시스템",
+      "authors": "전병륜, 김강산, 김송섭, 박보근, 전동환, 이선아, and 이성진",
+      "year": 2021,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 한국기계가공학회 춘추계학술대회 , 2021",
+      "tags": [
+        "AERO"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#jeon2021map",
+      "link": "https://saleese.github.io/publications/#jeon2021map",
+      "html": "<span data-paper-tags=\"AERO\">전병륜, 김강산, 김송섭, 박보근, 전동환, 이선아, and 이성진. &ldquo;<a href=\"https://saleese.github.io/publications/#jeon2021map\">표적 정보를 포함하는 2차원 지도 생성 시스템</a>&rdquo;. <em>In 한국기계가공학회 춘추계학술대회 , 2021</em>.</span>"
+    },
+    {
+      "sourceId": "kim2019pagerankkips",
+      "title": "A PageRank-based Bug Report Summarization Technique using Bug Report Relationships",
+      "authors": "Beomjun Kim, Sungwon Kang, and Seonah Lee",
+      "year": 2019,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In KIPS 2019 Fall Conference , 2019",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#kim2019pagerankkips",
+      "link": "https://saleese.github.io/publications/#kim2019pagerankkips",
+      "html": "<span data-paper-tags=\"SE AI\">Beomjun Kim, Sungwon Kang, and Seonah Lee. &ldquo;<a href=\"https://saleese.github.io/publications/#kim2019pagerankkips\">A PageRank-based Bug Report Summarization Technique using Bug Report Relationships</a>&rdquo;. <em>In KIPS 2019 Fall Conference , 2019</em>.</span>"
+    },
+    {
+      "sourceId": "lee2019rnn",
+      "title": "Code Change Recommendation based on Recurrent Neural Networks",
+      "authors": "Jaejun Lee, Sungwon Kang, and Seonah Lee",
+      "year": 2019,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 21st Korea Conference on Software Engineering (KCSE) , 2019",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#lee2019rnn",
+      "link": "https://saleese.github.io/publications/#lee2019rnn",
+      "html": "<span data-paper-tags=\"SE AI\">Jaejun Lee, Sungwon Kang, and Seonah Lee. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2019rnn\">Code Change Recommendation based on Recurrent Neural Networks</a>&rdquo;. <em>In 21st Korea Conference on Software Engineering (KCSE) , 2019</em>.</span>"
+    },
+    {
+      "sourceId": "kim2017ngram",
+      "title": "Code Change Recommendation System based on the N-gram Model",
+      "authors": "Taehyun Kim, Sungwon Kang, Seonah Lee , and Chansup Keum",
+      "year": 2017,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 19th Korea Conference on Software Engineering (KCSE) , 2017",
+      "tags": [
+        "SE",
+        "AI"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#kim2017ngram",
+      "link": "https://saleese.github.io/publications/#kim2017ngram",
+      "html": "<span data-paper-tags=\"SE AI\">Taehyun Kim, Sungwon Kang, Seonah Lee , and Chansup Keum. &ldquo;<a href=\"https://saleese.github.io/publications/#kim2017ngram\">Code Change Recommendation System based on the N-gram Model</a>&rdquo;. <em>In 19th Korea Conference on Software Engineering (KCSE) , 2017</em>.</span>"
+    },
+    {
+      "sourceId": "lee2015refactoring",
+      "title": "A Refactoring Process for Improving the Portability of Embedded Software Modules",
+      "authors": "Kyoungjong Lee, Sungwon Kang, and Seonah Lee",
+      "year": 2015,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 17th Korea Conference on Software Engineering (KCSE) , 2015",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#lee2015refactoring",
+      "link": "https://saleese.github.io/publications/#lee2015refactoring",
+      "html": "<span data-paper-tags=\"SE\">Kyoungjong Lee, Sungwon Kang, and Seonah Lee. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2015refactoring\">A Refactoring Process for Improving the Portability of Embedded Software Modules</a>&rdquo;. <em>In 17th Korea Conference on Software Engineering (KCSE) , 2015</em>.</span>"
+    },
+    {
+      "sourceId": "han2014ownership",
+      "title": "A Case Study on the Level of Code Quality according to File Ownership",
+      "authors": "SeungBum Han, Seonah Lee , and Sungwon Kang",
+      "year": 2014,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 16th Korea Conference on Software Engineering (KCSE) , 2014",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#han2014ownership",
+      "link": "https://saleese.github.io/publications/#han2014ownership",
+      "html": "<span data-paper-tags=\"SE\">SeungBum Han, Seonah Lee , and Sungwon Kang. &ldquo;<a href=\"https://saleese.github.io/publications/#han2014ownership\">A Case Study on the Level of Code Quality according to File Ownership</a>&rdquo;. <em>In 16th Korea Conference on Software Engineering (KCSE) , 2014</em>.</span>"
+    },
+    {
+      "sourceId": "lee2003upnp",
+      "title": "Software Architecture Analysis for Performance Analysis: UPnP Case Study",
+      "authors": "Seonah Lee , Byounwan Lee, and Guiyoung Lee",
+      "year": 2003,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 5th Korea Conference on Software Engineering (KCSE) , 2003",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#lee2003upnp",
+      "link": "https://saleese.github.io/publications/#lee2003upnp",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee , Byounwan Lee, and Guiyoung Lee. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2003upnp\">Software Architecture Analysis for Performance Analysis: UPnP Case Study</a>&rdquo;. <em>In 5th Korea Conference on Software Engineering (KCSE) , 2003</em>.</span>"
+    },
+    {
+      "sourceId": "choi2002requirement",
+      "title": "The Case Study of Software Requirement Management",
+      "authors": "Jeongeun Choi, Soonkew Choi, and Seonah Lee",
+      "year": 2002,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 29th KISS Spring Conference , 2002",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#choi2002requirement",
+      "link": "https://saleese.github.io/publications/#choi2002requirement",
+      "html": "<span data-paper-tags=\"SE\">Jeongeun Choi, Soonkew Choi, and Seonah Lee. &ldquo;<a href=\"https://saleese.github.io/publications/#choi2002requirement\">The Case Study of Software Requirement Management</a>&rdquo;. <em>In 29th KISS Spring Conference , 2002</em>.</span>"
+    },
+    {
+      "sourceId": "lee2001incremental",
+      "title": "Incremental Process Deployment Strategy for Software Process Improvement",
+      "authors": "Seonah Lee , Soonkew Choi, and Jeongeun Choi",
+      "year": 2001,
+      "sourceCategory": "Domestic Conferences",
+      "venue": "In 28th KISS Fall Conference , 2001",
+      "tags": [
+        "SE"
+      ],
+      "links": [],
+      "category": "Domestic Conferences",
+      "source": "https://saleese.github.io/publications/#lee2001incremental",
+      "link": "https://saleese.github.io/publications/#lee2001incremental",
+      "html": "<span data-paper-tags=\"SE\">Seonah Lee , Soonkew Choi, and Jeongeun Choi. &ldquo;<a href=\"https://saleese.github.io/publications/#lee2001incremental\">Incremental Process Deployment Strategy for Software Process Improvement</a>&rdquo;. <em>In 28th KISS Fall Conference , 2001</em>.</span>"
+    }
+  ]
+}

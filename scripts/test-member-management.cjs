@@ -73,6 +73,15 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.goto('http://localhost:8129/admin/');
   await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   if(process.env.TEST_TAGS_EDITOR_SCREENSHOT)await page.screenshot({path:process.env.TEST_TAGS_EDITOR_SCREENSHOT,fullPage:true});
+  // A real pre-import cloud document is merged in the editor but not written without Publish.
+  const batch=JSON.parse(fs.readFileSync(path.join(root,'data/publication-imports.json'),'utf8'));
+  const importedHTML=new Set(batch.batches.flatMap(b=>b.entries.map(entry=>entry.html)));
+  const oldCloudGroups=groups.map(({publicationImports,...group})=>({...group,items:group.items.filter(html=>!importedHTML.has(html))}));
+  await page.evaluate(old=>window.fixture.docs['siteContent/main'].groups=old,oldCloudGroups);
+  await page.locator('#reset').click();
+  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('29개 항목을 추가 반영'));
+  assert.equal(await page.locator('#pub-count').textContent(),'139');
+  assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups.reduce((n,g)=>n+g.items.length,0)),110);
   // Tags are editable for existing and new papers, and survive category moves and publication.
   assert(await page.locator('[name="paper-tag"][value="SE"]').isChecked());
   assert(await page.locator('[name="paper-tag"][value="AI"]').isChecked());
@@ -82,6 +91,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert(await page.locator('[name="paper-tag"][value="AERO"]').isChecked());
   await page.locator('#save').click();await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('공개 저장했습니다'));
   assert((await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups[0].items[0])).includes('data-paper-tags="SE AI AERO"'));
+  assert(await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups.every(g=>g.publicationImports.includes('saleese-2026-10-27'))));
   await page.locator('#reset').click();await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   assert(await page.locator('[name="paper-tag"][value="AERO"]').isChecked());
   await page.locator('[name="paper-tag"][value="AERO"]').uncheck();
@@ -96,7 +106,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert(tagged.includes('Tagged Test Paper')&&tagged.includes('data-paper-tags="AI AERO"'));
   await page.locator('#delete-publication').click();await page.locator('#save').click();
   await page.waitForFunction(()=>!window.fixture.docs['siteContent/main'].groups.some(g=>g.items.some(html=>html.includes('Tagged Test Paper'))));
-  assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups.reduce((n,g)=>n+g.items.length,0)),110);
+  assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups.reduce((n,g)=>n+g.items.length,0)),groups.reduce((n,g)=>n+g.items.length,0));
   assert.equal(await page.locator('#export').count(),0);
   assert((await page.locator('#reset').textContent()).includes('수정 취소'));
   await page.locator('[data-tab="news"]').click();

@@ -1,3 +1,4 @@
+import {loadPublicationImports,mergePublicationImports} from './publication-imports.js';
 import {loadPaperTags,paperTags,tagBadges,researchAreas,publicationTypes} from './publication-tags.js';
 import { validContent } from './content.js';
 
@@ -84,7 +85,8 @@ try {
   let snap;try{snap=await Promise.race([readCloud(),timeout]);}finally{clearTimeout(timer);}
   if(snap.exists()){
     const content=snap.data();if(!validContent(content))throw Error('Invalid content');
-    papers=publicationEntries(content.groups);render();
+    const combined=mergePublicationImports(content.groups,await loadPublicationImports());
+    papers=publicationEntries(combined.groups);render();
     $('#search-data-status').textContent='공개 저장된 최신 논문 텍스트를 검색합니다. PDF·첨부파일 내부는 검색하지 않습니다.';
   }
 }catch{
