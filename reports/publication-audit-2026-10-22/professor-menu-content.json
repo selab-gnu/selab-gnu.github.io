@@ -1,0 +1,765 @@
+{
+  "courses": {
+    "text": "SE Software Engineering Software Development / Engineering — 2016–Present, Undergrad. We are going to learn how to develop a software system, including software processes, methods and tools. Object-oriented Programming — 2016–Present, Undergrad. We are going to learn the Java programming language, its object-oriented concept, and the GUI programming. Software Architecture Design — 2014–2021, Undergrad. / Grad. / Industrial Lecture We will review the concept of software architecture and practice software architecture design. Special Topics in Software Engineering & Evolution — 2018–2021, Grad. We will look at the latest research trends and tools necessary for software evolution. Cloud Native Architecture — 2022, Grad. We are going to review the cloud native architecture, including the implementation of serverless applications. AI Artificial Intelligence Artificial Intelligence / The Fourth Industry and Artificial Intelligence — 2021–2023, 2025, Cultural Studies, Undergrad. / Grad. We will review the overall concepts and histories of AI systems and AI developments. Natural Language Processing — 2021, 2025, Grad. We will cover the introductory topics of natural language processing and contemporary developments. Text Mining — 2022–Present, Undergrad. We are going to learn machine learning techniques for analyzing text data. AERO Aerospace Engineering Aerospace Software Standards and Testing — 2020–Present, Undergrad. / Grad. We are going to review DO-178C as Aerospace Software Standards and learn the basics of software testing. CS Computer Science Data Structure and Algorithm — 2020–2021, Undergrad. / Grad. Students will learn the basic concepts of data structures and algorithms, including advanced ones. Discrete Mathematics — 2016, Undergrad. We will study discrete mathematics, including logics, sets, functions, trees, graphs, proofs, etc. Introduction to Programming — 2016–2017, Undergrad. We are going to learn two languages in this course, Python and C.",
+    "links": [],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "15470",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "x-origin-cache": "HIT",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-3c6e\"",
+      "expires": "Thu, 22 Oct 2026 01:46:01 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "3000:349962:3A56E:40079:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Date": "Thu, 22 Oct 2026 01:36:01 GMT",
+      "Via": "1.1 varnish",
+      "Age": "0",
+      "X-Served-By": "cache-icn1450059-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632961.400271,VS0,VE221",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "77b88b306b22219ec5bc86c83258901df4eb2cab"
+    }
+  },
+  "services": {
+    "text": "Committee, Chair and Keynote Speaker IEEE/ACM International Conference on Software Engineering, Program Committee in Software Engineering Education and Training Track, 2023–2027 COMPSAC 2026 Symposium on Software Engineering Technologies and Applications (SETA), 2026 IEEE International Conference on Software Analysis, Evolution and Reengineering, Research Track, 2026 Program Co-chair at Industry Showcase Track, 40th IEEE/ACM International Conference on Automated Software Engineering, ASE 2025 The ACM International Conference on the Foundations of Software Engineering (FSE), Program Committee within the FSE Software Engineering Education Track, 2025 Asia-Pacific Software Engineering Conference, Program Committee in Research Track, 2016, 2022–2025 Keynote speaker at the 2nd International Conference on Software Engineering and Information Technology (ICOSEIT) 2024 Asia-Pacific Software Engineering Conference, Co-chair in Education Track, 2023 International Workshop on Intelligent Software Engineering, Workshop Chair, 2022–2023 IEEE/ACM International Conference on Program Comprehension, Tool Demonstration in Program Committee, 2021 IEEE/ACM International Conference on Program Comprehension, Tool Demonstration Co-Chair in Organizing Committee, Program Co-Chair in the Tool Demonstration Track, 2020 IEEE/ACM International Conference on Software Engineering, Program Committee in Education and Training Track and Program Committee in Practice Track, 2020 European Conference on Software Architecture, Program Committee in Women in Software Engineering Panel, 2019 GNU-NJUST Joint Symposium on Science and Technology, Organizing Committee, 2017–2018 Reviewer and Editor Information and Software Technology, 2025–2026 IEEE Transactions on Software Engineering, Reviewer, 2025 IEEE Transactions on Reliability, Reviewer, 2019–2025 IEEE Access, 2025–2026 Electronics, MDPI, Guest Editor, 2022–2024 Empirical Software Engineering: An International Journal, Reviewer, 2017–2018, 2024 Journal of Computer Science and Technology, Reviewer, 2019, 2022 Science of Computer Programming, Reviewer, 2018–2021 Journal of Systems and Software, Reviewer, 2012–2013, 2017 International Journal of Software Engineering and Knowledge Engineering, Reviewer, 2017 IEEE/ACM International Conference on Program Comprehension, Reviewer, 2013 IEEE International Conference on Software Maintenance, Reviewer, 2012 International Workshop on Recommendation Systems for Software Engineering, Reviewer, 2012 International Conference on Information Systems, Reviewer, 2012 International Conference on Software Engineering Research, Management and Applications, Reviewer, 2011 IEEE/ACM International Conference on Software Engineering, New Ideas and Emerging Results Track, Reviewer, 2010 교외 활동 한국연구재단 책임전문위원, 2025.11.24–현재 (2027.10.31 종료 예정) 국방기술품질원, 국방AI 표준화 워킹그룹, 2025.07.14–현재 경상남도 과학기술진흥협의회, 2021–현재 (2027.03.03 종료 예정) 진주시 소프트웨어사업 과업심의위원회, 2025.05.01–현재 (2027.04.30 종료 예정) 국토안전자문위원회 정보통계분과 위원, 2024.01–2025.12 현대자동차 기능안전 자문위원으로 특강 및 강의 진행, 교육과정 개발 자문, 연료전지 분야 아키텍처 개선 분야 자문, 2021–2024 삼성전자 Associate Architecture 양성 과정으로 아키텍처 설계 과정 강의 진행, 2019–2023 삼성SDS 클라우드 네이티브 아키텍트 양성과정의 아키텍처 부분 강의 진행, 2022 클라우드 상호운용성 TTA 인증심의위원으로 상호운영성 테스팅 기준 및 결과 심의, 2020–2023 경상남도 용역심의평가위원으로 심의 참여, 2018–2024.09.19 ISO 소프트웨어 표준 (JTC/SC7) 전문위원으로 소프트웨어 아키텍처 및 회복성 표준 심의, 2018–현재 한국SW기술진흥협회, SW역량 및 품질 간담회 참여 및 발표, 피드백 반영 활동, 2017–현재 한국정보과학회 소프트웨어공학소사이어티 (총무, 부회장 및 이사, 학술대회 조직 및 학술위원), 2016–현재 한국정보과학회 (정보과학회지 편집위원, 학술대회 부위원장, 논문 검토 등), 2017–2022 소프트웨어와 사회 온라인 잡지, 원고 기고와 봄호 기고자 초빙, 2020–현재 기타, 국방기술품질원 (2022), 세라믹연구소 (2022), 한국연구재단 BK (2019), 한국정보통신기술협회 (2019), 한국저작권위원회 (2019) 등의 심사 및 지리산고등학교 등 고등학생 대상 프로그래밍 특강 교내 활동 BK21플러스 4 사업 “경상남도 산업진흥화를 AI융합인재교육연구단”의 단장, 2020–현재 대학원 혁신위원, 2020–현재 LINC3.0 검토위원 (대학 연구역량강화), 2020–2024 항공우주및소프트웨어공학부장 2회 AI융합공학과 학과장, 2021–현재 데이터사이언스 융합전공 참여교수, 2019–현재 기술경영학과(MOT) 참여교수, 2019–현재 지역혁신플랫폼사업단 교육과정 운영위원으로 지역대학 협업에 기여, 2020 위촉입학사정관으로 입학 사정에 기여, 2017–2020 항공기우주시스템연구소 미래기반연구센터장, 2022–2023 공학혁신센터 산학협력사업부장, 2018–2020 항공기부품기술연구소 운영위원, 2017–2019 교내 공과대학 발전위원회 위원, 2017–2018 경상국립대 여교수회 사무국장, 2018 대학특성화(CK)사업 운영위원, 2016–2017",
+    "links": [],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "19221",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-4b15\"",
+      "expires": "Thu, 22 Oct 2026 01:46:01 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "12E8:525F4:38373:3DE4D:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:01 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450037-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632961.397589,VS0,VE212",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "7917d4c44ab1c8fdc9855d516e5c2ea760066710"
+    }
+  },
+  "projects": {
+    "text": "항공기용 수소연료전지 전력제어장치(AIPMU) — 중소벤처기업부 / 중소기업기술정보진흥원, 2026.06–2028.03 SW 안전 요구사항 분석, 개발, 관리를 위한 S.S Llama 개발 — 한국연구재단 중견연구, 2025.09–2028.08 STL-STP 매칭 DB 기반 AI활용 설계 자동화 및 제조공장 연계 솔루션 개발 — 민관공동투자 기술개발(R&D), 중소벤처기업부 / 중소기업기술정보진흥원, 2026.04–2026.12 AI를 활용한 치공구 구조설계 자동화 — 협업 과제, 중소벤처기업부, 2025.06–2025.12 지역혁신 계약랩 (항공우주 소프트웨어 전문인력 양성) — 지역혁신클러스터육성사업, 경남테크노파크, 2023.01–2025.12 유-무인 복합체계에서의 상호운용성을 위한 고안전 지능형 SW 기술 개발 — GADIST, 2024.09–2025.08 안전한 소프트웨어 변경을 위한 추적성의 문맥적 가시화 연구 — 한국연구재단, 2021.09–2025.02 생성형 AI를 활용한 테스트케이스 및 API 설계 문서 자동 생성 프로그램 개발 — LINC 3.0 산학협력과제, 2024.04–2024.12 자율형 유·무인 복합체계에 대한 시나리오 기반 개념 검증용 시뮬레이터 개발 — 울산경남지역혁신플랫폼 스마트제조ICT, 연구책임자, 2024.05–2025.01 유·무인 복합체계 상호운용성 분야 감항인증 방안 연구 — 국방기술품질원, 2024.05–2024.10 항공기 소프트웨어 안전 요구사항 분석 및 추적성 관리 도구 개발 — LINC 3.0 산학협력과제, 2023.05–2023.12 Flying Ad-hoc Network(FANET) 기반 PAV 커뮤니케이션 기술 개발 — 울산경남지역혁신플랫폼 스마트제조ICT, 연구책임자, 2021.11–2023.03 미래형자율비행체(OPPAV)의 안전성을 위한 핵심SW기술개발 — 울산경남지역혁신플랫폼 스마트제조ICT, 연구책임자, 2020.12–2021.04 소프트웨어 진화에서의 요구사항 추적성의 자동 갱신 기법 연구 — 한국연구재단, 연구책임자, 2018.11–2021.10 무인항공기 SW플랫폼 연구사업팀 — 한국연구재단, 사업단장, 2020.03–2020.08 경남 항공우주산업 융성 기본계획 (2021-2030) — 경남테크노파크, 연구참여, 2019.09–2020.04 소프트웨어의 API 사용 자동갱신 추천 기법 — 한국연구재단, 연구책임자, 2015.11–2015.04 동작 데이터 기반 서비스 추천 모델 정확도 향상 연구 — 한국전자통신연구원(ETRI), 연구참여, 2015.04–2015.11 소프트웨어 진화 작업을 위한 코드 탐색을 지원하는 추천 기반 다이어그래밍 도구 — KAIST, ETRI, 2015.01–2015.12 개발자를 위한 문맥적 코드 지식 공유 시스템 연구 — 한국연구재단, 연구책임자, 2013.11–2014.10 소프트웨어의 효율적인 진화를 위한 아키텍처 기반의 자동화된 버전 관리 기법 연구 — 연구참여, 2013.11–2016.02 개발자의 효율적인 코드 탐색을 지원하는 문맥적 코드 추천 기술 연구 — 한국연구재단, 연구참여, 2013.09–2014.08 체계적인 소프트웨어 플랫폼 공학기술 연구 — 한국연구재단, 연구참여, 2014.05–2014.12 개발자 생산성 향상을 위한 문맥 코드 목록 추천 시스템 — 연구원특화 예비기술창업자육성사업, 창업진흥원, 연구책임자, 2013.05–2014.05 개발자 생산성 향상을 위한 문맥 코드 목록 추천 시스템 — 창의도전형 SW R&D, 연구책임자, 2012.04–2012.12 모델-주도적 진화를 위한 소프트웨어 아키텍처 재구축 연구 — 한국연구재단, 연구참여, 2010.09–2013.08 모바일하버 통합시스템 설계기술개발 및 축소모델 성능검증 — 한국연구재단, 연구참여, 2010.04–2011.04 프로그래머 인터랙션 히스토리 마이닝 — University of British Columbia, 연구참여, 2008.04–2009.12 테스트 명세 언어를 구현 언어로 전환하는 도구 개발 — 한국정보통신기술협회(TTA), 2004.09–2005.08 마르미II 객체지향 개발 방법론 — 한국전자통신연구원(ETRI), 연구참여, 1997.03–1998.10",
+    "links": [],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "17909",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-45f5\"",
+      "expires": "Thu, 22 Oct 2026 01:46:01 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "83D8:59ADE:3A5F1:40118:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:01 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450088-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632961.382948,VS0,VE219",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "cdcb7c8bcd690f2eb19971a115737f447a1f26ff"
+    }
+  },
+  "research": {
+    "text": "Conference Deadlines SE Deadlines — live countdowns for software engineering venues Conference rankings — CORE Journal rankings — ISI SE Journals The tables below are a snapshot, not a live feed. Check the tracker above before relying on any date. Each one runs in submission-month order, so the leftmost date tells you when in the year a venue calls for papers. Software Engineering Conference Submission Dates and venue FSE 2026 Feb 25, 2026 Jul 5–9, 2026 · Montreal ICSME 2026 Mar 6, 2026 (abstract Feb 27) Sep 14–18, 2026 · Benevento, Italy ASE 2026 Mar 26, 2026 Oct 12–16, 2026 · Munich QRS 2026 Apr 15, 2026 (abstract Apr 8) Jul 22–25, 2026 · Florence ICSE 2027 Jun 30, 2026 (abstract Jun 23) Apr 25 – May 1, 2027 · Dublin ICST 2025 Oct 2, 2024 (abstract Sep 25) Mar 31 – Apr 4, 2025 · Naples MSR 2027 Oct 23, 2026 (abstract Oct 20) Apr 26–27, 2027 · Dublin, co-located with ICSE ICPC 2026 Nov 2025 (usual pattern) Apr 12–18, 2026 · Rio de Janeiro, co-located with ICSE Artificial Intelligence Machine learning and natural language processing. Conference Submission Dates and venue COLING 2025 Jan 2025 (first round) Jan 19–24, 2025 · Abu Dhabi IJCAI 2026 Jan 19, 2026 (abstract Jan 12) Aug 15–21, 2026 · Bremen ICML 2026 Jan 28, 2026 (abstract Jan 24) Jul 6–12, 2026 · Seoul NeurIPS 2026 May 6, 2026 (abstract May 4) from Dec 6, 2026 · Sydney AAAI 2026 Jul 25, 2025 (abstract) Jan 20–27, 2026 · Singapore EMNLP 2026 Aug 2, 2026 (ARR commitment) Oct 24–29, 2026 · Budapest ICLR 2026 Sep 19, 2025 (abstract) May 1–5, 2026 · Brazil ACL 2026 rolling (ARR) Jul 2–7, 2026 · San Diego Drones and Aerospace Conference Submission Dates and venue ICUAS 2025 Feb 9, 2025 May 14–17, 2025 · Charlotte, NC IROS 2025 Mar 2, 2025 Oct 19–25, 2025 · Hangzhou DASC 2026 May 2, 2026 (abstract Feb 7) Sep 15–17, 2026 · Orlando, FL ICRA 2026 Sep 2025 (usual pattern) Jun 1–5, 2026 · Vienna AIAA SciTech 2026 Dec 2, 2025 (manuscript) Jan 12–16, 2026 · Orlando, FL Software Repository Mining Mining of Massive Datasets Introduction to Information Retrieval GitHub Java Corpus PROMISE Repository — now hosted as tera-PROMISE Software Engineering Architecture of Open Source Applications Literateprogramming.com Researchers Chris Parnin Walid Maalej ( blog ) Thomas Zimmermann Christian Bird Michele Lanza Martin Robillard ( class ) S.C. Cheung Andrian Marcus Christoph Treude Tao Xie Martin Monperrus Kwangkeun Yi ( SNEC — Semantic-based Non-Essential Change Detection) Yuanyuan Zhou Groups Software Analytics (Microsoft) SEGAL Spider Lab — University of California, Irvine Presentations/Lectures Useful Software Engineering Research — Lionel Briand, ICSM 2011 Keynote Empirical Research Methods in Software Engineering Psychology 101 Psychology Classics Laws Conway’s Law",
+    "links": [
+      {
+        "text": "SE Deadlines",
+        "href": "https://se-deadlines.github.io/"
+      },
+      {
+        "text": "CORE",
+        "href": "https://portal.core.edu.au/conf-ranks/"
+      },
+      {
+        "text": "ISI SE Journals",
+        "href": "https://www.cse.chalmers.se/~feldt/advice/se_venues/index.html"
+      },
+      {
+        "text": "Mining of Massive Datasets",
+        "href": "http://infolab.stanford.edu/~ullman/mmds.html"
+      },
+      {
+        "text": "Introduction to Information Retrieval",
+        "href": "https://nlp.stanford.edu/IR-book/"
+      },
+      {
+        "text": "GitHub Java Corpus",
+        "href": "https://groups.inf.ed.ac.uk/cup/javaGithub/"
+      },
+      {
+        "text": "PROMISE Repository",
+        "href": "https://openscience.us/repo/"
+      },
+      {
+        "text": "Architecture of Open Source Applications",
+        "href": "https://aosabook.org/en/index.html"
+      },
+      {
+        "text": "Literateprogramming.com",
+        "href": "http://literateprogramming.com/"
+      },
+      {
+        "text": "Chris Parnin",
+        "href": "https://chrisparnin.me/"
+      },
+      {
+        "text": "Walid Maalej",
+        "href": "https://maalejw.github.io/"
+      },
+      {
+        "text": "blog",
+        "href": "http://walidmaalejsblog.blogspot.com/2011/07/dr-walid-maalej.html"
+      },
+      {
+        "text": "Thomas Zimmermann",
+        "href": "https://thomas-zimmermann.com/"
+      },
+      {
+        "text": "Christian Bird",
+        "href": "https://cabird.com/"
+      },
+      {
+        "text": "Michele Lanza",
+        "href": "https://www.inf.usi.ch/faculty/lanza/publications.html"
+      },
+      {
+        "text": "Martin Robillard",
+        "href": "https://www.cs.mcgill.ca/~martin/papers.html"
+      },
+      {
+        "text": "class",
+        "href": "https://www.cs.mcgill.ca/~martin/teaching/comp762-winter-2012/"
+      },
+      {
+        "text": "S.C. Cheung",
+        "href": "https://cse.hkust.edu.hk/~scc/"
+      },
+      {
+        "text": "Andrian Marcus",
+        "href": "https://www.andrianmarcus.net/"
+      },
+      {
+        "text": "Christoph Treude",
+        "href": "https://ctreude.ca/publications/"
+      },
+      {
+        "text": "Tao Xie",
+        "href": "https://taoxiease.github.io/"
+      },
+      {
+        "text": "Martin Monperrus",
+        "href": "https://www.monperrus.net/martin/publications"
+      },
+      {
+        "text": "Kwangkeun Yi",
+        "href": "https://ropas.snu.ac.kr/~kwang/"
+      },
+      {
+        "text": "SNEC",
+        "href": "http://ropas.snu.ac.kr/snec/"
+      },
+      {
+        "text": "Yuanyuan Zhou",
+        "href": "https://cseweb.ucsd.edu/~yyzhou/index.html"
+      },
+      {
+        "text": "Software Analytics (Microsoft)",
+        "href": "https://www.microsoft.com/en-us/research/group/software-analytics/"
+      },
+      {
+        "text": "SEGAL",
+        "href": "https://github.com/The-SEGAL-Group"
+      },
+      {
+        "text": "Spider Lab",
+        "href": "https://spideruci.org/"
+      },
+      {
+        "text": "Useful Software Engineering Research",
+        "href": "https://www.slideshare.net/slideshow/lionel-briand-icsm-2011-keynote/9500102"
+      },
+      {
+        "text": "Empirical Research Methods in Software Engineering",
+        "href": "http://www.cs.toronto.edu/~sme/CSC2130/"
+      },
+      {
+        "text": "Psychology 101",
+        "href": "https://allpsych.com/psychology101/"
+      },
+      {
+        "text": "Psychology Classics",
+        "href": "http://psychclassics.yorku.ca/Ebbinghaus/index.htm"
+      },
+      {
+        "text": "Conway’s Law",
+        "href": "https://en.wikipedia.org/wiki/Conway%27s_law"
+      }
+    ],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "21244",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-52fc\"",
+      "expires": "Thu, 22 Oct 2026 01:46:01 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "394C:59ADE:3A5FD:40122:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:01 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450042-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632962.660135,VS0,VE215",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "b884ab34f6a5682496a2210822eb4b5801d4d9e8"
+    }
+  },
+  "programming": {
+    "text": "Lab Repositories Public code from the selab-gnu organization, newest first. The year is the related paper’s publication year where the README states one; otherwise it is the year of the repository’s most recent public activity, marked with an asterisk. Year Repository What it does 2025 AutoAPI-DocByLLM Detects and updates outdated API documentation with an LLM 2025 Architecture Reconstructs execution architecture views from source code using connector mapping rules 2025* MulDIC Classifies GitHub issues from text, images and code snippets with a multimodal model 2025* rl-basics Worked examples for learning the fundamentals of reinforcement learning 2024 Bug-Summaries Generates informative bug summaries by combining several software artifacts 2024 SD_SPL Reuses test cases across a software product line by code similarity and coverage 2023 duplicate_bug_report Summarises a bug from its duplicate reports 2022 I2M Links issue reports to the features described in a user manual 2022 Bug-Report-Summarization Summarises bug reports using sentence significance factors 2021 issue-label-study Empirical study of issue labelling and multi-label use in open-source GitHub projects Program Analysis Tools Soot Polyglot — Polyglot Extensible Compiler Framework for Java ANTLR — ANother Tool for Language Recognition PPA — Partial Program Analysis for Java Natural Language Processing Tools LanguageTool Apache OpenNLP Tools for a Project Maven Gradle JDiff AsciidoctorJ — Java bindings for Asciidoctor Redmine Programming Codecademy Code.org Ruby on Rails Getting Started with Rails Ruby (Korean) Scala (Korean) Programming Interview Cracking the Coding Interview LeetCode Glassdoor Top 10 Microsoft Interview Questions — Gayle Laakmann McDowell Online Lectures edX Coursera Udacity MITx on edX Stanford Online More… Others KLDP Coding Horror",
+    "links": [
+      {
+        "text": "selab-gnu",
+        "href": "https://github.com/selab-gnu"
+      },
+      {
+        "text": "AutoAPI-DocByLLM",
+        "href": "https://github.com/selab-gnu/AutoAPI-DocByLLM"
+      },
+      {
+        "text": "Architecture",
+        "href": "https://github.com/selab-gnu/Architecture"
+      },
+      {
+        "text": "MulDIC",
+        "href": "https://github.com/selab-gnu/MulDIC"
+      },
+      {
+        "text": "rl-basics",
+        "href": "https://github.com/selab-gnu/rl-basics"
+      },
+      {
+        "text": "Bug-Summaries",
+        "href": "https://github.com/selab-gnu/Bug-Summaries"
+      },
+      {
+        "text": "SD_SPL",
+        "href": "https://github.com/selab-gnu/SD_SPL"
+      },
+      {
+        "text": "duplicate_bug_report",
+        "href": "https://github.com/selab-gnu/duplicate_bug_report"
+      },
+      {
+        "text": "I2M",
+        "href": "https://github.com/selab-gnu/I2M"
+      },
+      {
+        "text": "Bug-Report-Summarization",
+        "href": "https://github.com/selab-gnu/Bug-Report-Summarization"
+      },
+      {
+        "text": "issue-label-study",
+        "href": "https://github.com/selab-gnu/issue-label-study"
+      },
+      {
+        "text": "Soot",
+        "href": "https://soot-oss.github.io/soot/"
+      },
+      {
+        "text": "Polyglot",
+        "href": "https://github.com/polyglot-compiler/polyglot"
+      },
+      {
+        "text": "ANTLR",
+        "href": "https://www.antlr.org/"
+      },
+      {
+        "text": "PPA",
+        "href": "https://www.sable.mcgill.ca/ppa/"
+      },
+      {
+        "text": "LanguageTool",
+        "href": "https://languagetool.org/"
+      },
+      {
+        "text": "Apache OpenNLP",
+        "href": "https://opennlp.apache.org/"
+      },
+      {
+        "text": "Maven",
+        "href": "https://maven.apache.org/"
+      },
+      {
+        "text": "Gradle",
+        "href": "https://gradle.org/"
+      },
+      {
+        "text": "JDiff",
+        "href": "https://javadiff.sourceforge.net/"
+      },
+      {
+        "text": "AsciidoctorJ",
+        "href": "https://github.com/asciidoctor/asciidoctorj"
+      },
+      {
+        "text": "Redmine",
+        "href": "https://www.redmine.org/projects/redmine"
+      },
+      {
+        "text": "Codecademy",
+        "href": "https://www.codecademy.com/"
+      },
+      {
+        "text": "Code.org",
+        "href": "https://code.org/"
+      },
+      {
+        "text": "Ruby on Rails",
+        "href": "https://rubyonrails.org/"
+      },
+      {
+        "text": "Getting Started with Rails",
+        "href": "https://guides.rubyonrails.org/getting_started.html"
+      },
+      {
+        "text": "Ruby (Korean)",
+        "href": "https://www.ruby-lang.org/ko/libraries/"
+      },
+      {
+        "text": "Scala (Korean)",
+        "href": "http://twitter.github.io/scala_school/ko/index.html"
+      },
+      {
+        "text": "Cracking the Coding Interview",
+        "href": "https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/"
+      },
+      {
+        "text": "LeetCode",
+        "href": "https://leetcode.com/"
+      },
+      {
+        "text": "Glassdoor",
+        "href": "https://www.glassdoor.com/"
+      },
+      {
+        "text": "Top 10 Microsoft Interview Questions",
+        "href": "https://www.gayle.com/blog/2008/10/22/top-10-best-microsoft-interview/"
+      },
+      {
+        "text": "edX",
+        "href": "https://www.edx.org/"
+      },
+      {
+        "text": "Coursera",
+        "href": "https://www.coursera.org/"
+      },
+      {
+        "text": "Udacity",
+        "href": "https://www.udacity.com/"
+      },
+      {
+        "text": "MITx on edX",
+        "href": "https://www.edx.org/school/mitx"
+      },
+      {
+        "text": "Stanford Online",
+        "href": "https://online.stanford.edu/explore"
+      },
+      {
+        "text": "More…",
+        "href": "https://kldp.org/node/129959"
+      },
+      {
+        "text": "KLDP",
+        "href": "https://kldp.org/"
+      },
+      {
+        "text": "Coding Horror",
+        "href": "https://blog.codinghorror.com/"
+      }
+    ],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "20119",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-4e97\"",
+      "expires": "Thu, 22 Oct 2026 01:46:01 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "C232:1173F5:397D7:3F2DE:6AD96880",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:01 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450063-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632962.730191,VS0,VE208",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "66b69a111985e2fc157961498ea7d081294ef243"
+    }
+  },
+  "writing": {
+    "text": "Writing a Paper A thesis proposal is a contract How to write a thesis proposal Tips for Writing Technical Papers How to Write a Report The Structure, Format, Content, and Style of a Journal-Style Scientific Paper (PDF) Writing Each Section How to Write an Abstract How to Write Background What is Background in a Research Paper? How to write the background of your study How to Write Related Work How to Write Related Work How to Write Related Work (PDF, archived) How to Write a Literature Review How to Propose an Approach Pseudocode Standard LaTeX/Algorithms How to Design Experiments Methodology Matters (PDF) Experimental Design Experimental Design (Social Research Methods) Design of Experiment User Studies How to Write Results One-way ANOVA (archived) Statistics in APA Styles Statistics for HCI Research Diary Methods How to Write Discussion Fourteen Steps to Writing an Effective Discussion Section (PDF) Writing Discussion in a Social Paper How to Write Threats to Validity Conclusion validity Internal validity Construct validity External validity How to Write Conclusion Conclusions Strategies for Writing a Conclusion (archived) How to Write an Effective Conclusion Writing a Conclusion Reading a Paper How to read a paper How to Read an Engineering Research Paper Writing Others Writing a Recommendation Letter (PDF) Writing a Rebuttal Writing Rebuttals Drawing Figures gnuplot Korean Advice 처음 논문쓰는 학생들을 위한 논문 작성법 논문 쓰기 영어 못해도 논문 잘 읽는 법",
+    "links": [
+      {
+        "text": "A thesis proposal is a contract",
+        "href": "http://matt.might.net/articles/advice-for-phd-thesis-proposals/"
+      },
+      {
+        "text": "How to write a thesis proposal",
+        "href": "http://www.ldeo.columbia.edu/~martins/sen_res/how_to_thesis_proposal.html"
+      },
+      {
+        "text": "Tips for Writing Technical Papers",
+        "href": "http://infolab.stanford.edu/~widom/paper-writing.html"
+      },
+      {
+        "text": "How to Write a Report",
+        "href": "http://www.cse.iitk.ac.in/users/braman/students/good-report.html"
+      },
+      {
+        "text": "The Structure, Format, Content, and Style of a Journal-Style Scientific Paper",
+        "href": "https://www.bates.edu/biology/files/2010/06/How-to-Write-Guide-v10-2014.pdf"
+      },
+      {
+        "text": "How to Write an Abstract",
+        "href": "http://www.ece.cmu.edu/~koopman/essays/abstract.html"
+      },
+      {
+        "text": "What is Background in a Research Paper?",
+        "href": "https://www.enago.com/academy/what-is-background-in-a-research-paper/"
+      },
+      {
+        "text": "How to write the background of your study",
+        "href": "https://www.editage.com/insights/how-to-write-the-background-of-your-study"
+      },
+      {
+        "text": "How to Write Related Work",
+        "href": "http://guidetogradschoolsurvival.wordpress.com/2011/04/08/how-to-write-related-work/"
+      },
+      {
+        "text": "How to Write Related Work",
+        "href": "https://web.archive.org/web/20120417102702/http://www.cc.gatech.edu/~traynor/f08/slides/lecture11-relwork.pdf"
+      },
+      {
+        "text": "How to Write a Literature Review",
+        "href": "https://writingcenter.unc.edu/tips-and-tools/literature-reviews/"
+      },
+      {
+        "text": "Pseudocode Standard",
+        "href": "http://users.csc.calpoly.edu/~jdalbey/SWE/pdl_std.html"
+      },
+      {
+        "text": "LaTeX/Algorithms",
+        "href": "http://en.wikibooks.org/wiki/LaTeX/Algorithms"
+      },
+      {
+        "text": "Methodology Matters",
+        "href": "https://hci.stanford.edu/courses/cs376/2014/readings/mcgrath_methodology_matters.pdf"
+      },
+      {
+        "text": "Experimental Design",
+        "href": "http://liutaiomottola.com/myth/expdesig.html"
+      },
+      {
+        "text": "Experimental Design (Social Research Methods)",
+        "href": "http://www.socialresearchmethods.net/kb/desexper.php"
+      },
+      {
+        "text": "Design of Experiment",
+        "href": "http://www.experiment-resources.com/design-of-experiment.html"
+      },
+      {
+        "text": "User Studies",
+        "href": "http://usabilitybok.org/user-research-methods"
+      },
+      {
+        "text": "One-way ANOVA",
+        "href": "https://web.archive.org/web/20060904081234/http://vault.hanover.edu/~altermattw/methods/stats/anova/one-way2b.html"
+      },
+      {
+        "text": "Statistics in APA Styles",
+        "href": "http://statistics-help-for-students.com/"
+      },
+      {
+        "text": "Statistics for HCI Research",
+        "href": "http://yatani.jp/HCIstats/HomePage"
+      },
+      {
+        "text": "Diary Methods",
+        "href": "http://www.columbia.edu/~nb2229/docs/Iida,%20Shrout,%20Laurenceau%20&%20Bolger%20%282012%29.pdf"
+      },
+      {
+        "text": "Fourteen Steps to Writing an Effective Discussion Section",
+        "href": "https://www.vetmeduni.ac.at/fileadmin/v/parasitologie/Downloads_Dissertationen_Diplomarbeiten/Leitf%C3%A4den_San_Francisco_Edit/discussion.pdf"
+      },
+      {
+        "text": "Writing Discussion in a Social Paper",
+        "href": "https://libguides.usc.edu/writingguide/discussion"
+      },
+      {
+        "text": "Conclusion validity",
+        "href": "http://www.socialresearchmethods.net/kb/concval.php"
+      },
+      {
+        "text": "Internal validity",
+        "href": "http://www.socialresearchmethods.net/kb/intval.php"
+      },
+      {
+        "text": "Construct validity",
+        "href": "http://www.socialresearchmethods.net/kb/constval.php"
+      },
+      {
+        "text": "External validity",
+        "href": "http://www.socialresearchmethods.net/kb/external.php"
+      },
+      {
+        "text": "Conclusions",
+        "href": "http://writingcenter.unc.edu/handouts/conclusions/"
+      },
+      {
+        "text": "Strategies for Writing a Conclusion",
+        "href": "https://web.archive.org/web/19980219083117/http://leo.stcloudstate.edu/acadwrite/conclude.html"
+      },
+      {
+        "text": "How to Write an Effective Conclusion",
+        "href": "https://history.ucla.edu/introductions-conclusions/"
+      },
+      {
+        "text": "Writing a Conclusion",
+        "href": "https://libguides.usc.edu/writingguide/conclusion"
+      },
+      {
+        "text": "How to read a paper",
+        "href": "https://dl.acm.org/doi/10.1145/1273445.1273458"
+      },
+      {
+        "text": "How to Read an Engineering Research Paper",
+        "href": "http://cseweb.ucsd.edu/~wgg/CSE210/howtoread.html"
+      },
+      {
+        "text": "Writing a Recommendation Letter",
+        "href": "https://www.hhmi.org/sites/default/files/Educational%20Materials/Lab%20Management/letter.pdf"
+      },
+      {
+        "text": "Writing a Rebuttal",
+        "href": "https://andreas-zeller.info/2012/10/01/patterns-for-writing-good-rebuttals.html"
+      },
+      {
+        "text": "Writing Rebuttals",
+        "href": "https://niklaselmqvist.medium.com/writing-rebuttals-7f6949eddf6e"
+      },
+      {
+        "text": "gnuplot",
+        "href": "http://www.gnuplot.info/"
+      },
+      {
+        "text": "처음 논문쓰는 학생들을 위한 논문 작성법",
+        "href": "http://sbmoon.tistory.com/241"
+      },
+      {
+        "text": "논문 쓰기",
+        "href": "http://lifove.tistory.com/69"
+      },
+      {
+        "text": "영어 못해도 논문 잘 읽는 법",
+        "href": "http://gradschoolstory.net/terry/readingpapers/"
+      }
+    ],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "20358",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-4f86\"",
+      "expires": "Thu, 22 Oct 2026 01:46:01 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "FB46:38E2C1:38F61:3EA54:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:01 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450033-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632962.702161,VS0,VE209",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "ba8cab9c6d1da9b5cc49af9296922403ee24c31a"
+    }
+  },
+  "blog": {
+    "text": "blog | Seonah Lee :root { --max-content-width: 930px; } initTheme(); Seonah Lee Toggle navigation introduction publications courses services projects research programming writing blog (current) ctrl k notes on software engineering, AI, and drone systems AI Testing the research-area label on blog posts A test post that checks the AI badge renders beside a post title on the blog index. 2 min read · August 10, 2026 2026 · test · notes © Copyright 2026 Seonah Lee. Powered by Jekyll with al-folio theme. Hosted by GitHub Pages . window.alFolio = { compatBootstrap: false }; addBackToTop(); // get the ninja-keys element const ninja = document.querySelector('ninja-keys'); // add the home and posts menu items ninja.data = [{ id: \"nav-introduction\", title: \"introduction\", section: \"Navigation\", handler: () => { window.location.href = \"/\"; }, },{id: \"nav-publications\", title: \"publications\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/publications/\"; }, },{id: \"nav-courses\", title: \"courses\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/courses/\"; }, },{id: \"nav-services\", title: \"services\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/services/\"; }, },{id: \"nav-projects\", title: \"projects\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/projects/\"; }, },{id: \"nav-research\", title: \"research\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/research/\"; }, },{id: \"nav-programming\", title: \"programming\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/programming/\"; }, },{id: \"nav-writing\", title: \"writing\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/writing/\"; }, },{id: \"nav-blog\", title: \"blog\", description: \"\", section: \"Navigation\", handler: () => { window.location.href = \"/blog/\"; }, },{id: \"post-testing-the-research-area-label-on-blog-posts\", title: \"Testing the research-area label on blog posts\", description: \"A test post that checks the AI badge renders beside a post title on the blog index.\", section: \"Posts\", handler: () => { window.location.href = \"/blog/2026/area-label-test/\"; }, },{id: \"news-we-won-the-drone-best-award\", title: 'We won the drone best award!', description: \"\", section: \"News\",},{id: \"news-we-are-organizing-the-ise-workshop-associated-with-icst-2026-please-check-it-out\", title: 'We are organizing the ISE workshop, associated with ICST 2026. Please, check it...', description: \"\", section: \"News\",},{ id: 'social-email', title: 'email', section: 'Socials', handler: () => { window.open(\"mailto:%73%61%6C%65%65%73%65@%67%6E%75.%61%63.%6B%72\", \"_blank\"); }, },{ id: 'social-scholar', title: 'Google Scholar', section: 'Socials', handler: () => { window.open(\"https://scholar.google.com/citations?user=4bEToL8AAAAJ\", \"_blank\"); }, },{ id: 'social-dblp', title: 'DBLP', section: 'Socials', handler: () => { window.open(\"https://dblp.org/pid/l/SeonahLee.html\", \"_blank\"); }, },{ id: 'social-orcid', title: 'ORCID', section: 'Socials', handler: () => { window.open(\"https://orcid.org/0000-0002-2004-2924\", \"_blank\"); }, },{ id: 'social-github', title: 'GitHub', section: 'Socials', handler: () => { window.open(\"https://github.com/saleese\", \"_blank\"); }, },{ id: 'social-rss', title: 'RSS Feed', section: 'Socials', handler: () => { window.open(\"/feed.xml\", \"_blank\"); }, },{ id: 'light-theme', title: 'Change theme to light', description: 'Change the theme of the site to Light', section: 'Theme', handler: () => { setThemeSetting(\"light\"); }, }, { id: 'dark-theme', title: 'Change theme to dark', description: 'Change the theme of the site to Dark', section: 'Theme', handler: () => { setThemeSetting(\"dark\"); }, }, { id: 'system-theme', title: 'Use system default theme', description: 'Change the theme of the site to System Default', section: 'Theme', handler: () => { setThemeSetting(\"system\"); }, },];",
+    "links": [
+      {
+        "text": "Seonah Lee",
+        "href": "/"
+      },
+      {
+        "text": "introduction",
+        "href": "/"
+      },
+      {
+        "text": "publications",
+        "href": "/publications/"
+      },
+      {
+        "text": "courses",
+        "href": "/courses/"
+      },
+      {
+        "text": "services",
+        "href": "/services/"
+      },
+      {
+        "text": "projects",
+        "href": "/projects/"
+      },
+      {
+        "text": "research",
+        "href": "/research/"
+      },
+      {
+        "text": "programming",
+        "href": "/programming/"
+      },
+      {
+        "text": "writing",
+        "href": "/writing/"
+      },
+      {
+        "text": "blog (current)",
+        "href": "/blog/"
+      },
+      {
+        "text": "Testing the research-area label on blog posts",
+        "href": "/blog/2026/area-label-test/"
+      },
+      {
+        "text": "2026",
+        "href": "/blog/2026"
+      },
+      {
+        "text": "test",
+        "href": "/blog/tag/test"
+      },
+      {
+        "text": "notes",
+        "href": "/blog/category/notes"
+      },
+      {
+        "text": "Jekyll",
+        "href": "https://jekyllrb.com/"
+      },
+      {
+        "text": "al-folio",
+        "href": "https://github.com/alshedivat/al-folio"
+      },
+      {
+        "text": "GitHub Pages",
+        "href": "https://pages.github.com/"
+      }
+    ],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "13402",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-345a\"",
+      "expires": "Thu, 22 Oct 2026 01:46:02 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "5BBC:2EFB86:38CA5:3E7D3:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:02 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450027-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632962.937553,VS0,VE220",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "7c0d371bff2b0e2b143741f2bec74f345eb65f26"
+    }
+  },
+  "news": {
+    "text": "Jan 15, 2026 We are organizing the ISE workshop , associated with ICST 2026. Please, check it out! Nov 20, 2025 We won the drone best award !",
+    "links": [
+      {
+        "text": "the ISE workshop",
+        "href": "https://conf.researchr.org/home/ise-2026"
+      },
+      {
+        "text": "the drone best award",
+        "href": "https://www.mdpi.com/about/announcements/13147"
+      }
+    ],
+    "headers": {
+      "Connection": "close",
+      "Content-Length": "13340",
+      "Server": "GitHub.com",
+      "Content-Type": "text/html; charset=utf-8",
+      "x-origin-cache": "HIT",
+      "Last-Modified": "Wed, 19 Aug 2026 05:23:29 GMT",
+      "Access-Control-Allow-Origin": "*",
+      "ETag": "\"6a853dd1-341c\"",
+      "expires": "Thu, 22 Oct 2026 01:46:02 GMT",
+      "Cache-Control": "max-age=600",
+      "x-proxy-cache": "MISS",
+      "X-GitHub-Request-Id": "A82E:59ADE:3A604:40129:6AD96881",
+      "x-github-edge-region": "koreacentral",
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Date": "Thu, 22 Oct 2026 01:36:02 GMT",
+      "Via": "1.1 varnish",
+      "X-Served-By": "cache-icn1450085-ICN",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1792632962.994697,VS0,VE211",
+      "Vary": "Accept-Encoding",
+      "X-Fastly-Request-ID": "c377995f64616b5dab6980dbc079b56c7364dd81"
+    }
+  }
+}

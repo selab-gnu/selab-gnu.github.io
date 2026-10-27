@@ -1,0 +1,140 @@
+﻿title,year,category,professor_site,legacy_lab,current_local,current_Firebase,status,matching_evidence
+Automatic Detection and Update Suggestion for Outdated API Names in Documentation,2021,Top-tier Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+An MCP Tool for Bug Localization by Leveraging Modification Frequencies of Similar Bug Reports,2026,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Multimodal Deep Learning Model for Cross-Project Issue Classification,2025,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Data-Efficient Reinforcement Learning Framework for Autonomous Flight Based on Real-World Flight Data,2025,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Reconstruction of an Execution Architecture View by Identifying Mapping Rules for Connectors,2025,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Multidocument Summarization Technique for Informative Bug Summaries,2024,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Comparison of Pretrained Models for Classifying Issue Reports,2024,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Automated code-based test case reuse for software product line testing,2024,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+"A Multimodal Deep Learning Model Using Text, Image, and Code Data for Improving Issue Classification Tasks",2023,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Comparison of Summarization Methods for Duplicate Software Bug Reports,2023,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Systematic Literature Review of Issue-Based Requirement Traceability,2023,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+FANET Routing Protocol Analysis for Multi-UAV-Based Reconnaissance Mobility Models,2023,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Classifying issue reports according to feature descriptions in a user manual based on a deep learning model,2022,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Deep Learning-Based Bug Report Summarization Using Sentence Significance Factors,2022,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Code Edit Recommendation Using a Recurrent Neural Network,2021,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+An Empirical Study on Using Multi-Labels for Issues in GitHub,2021,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Development of Multi-Quadrotor Simulator Based on Real-Time Hypervisor Systems,2021,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Overlap avoidance of mobility models for multi-UAVs reconnaissance,2020,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Weighted PageRank-Based Bug Report Summarization Method Using Bug Report Relationships,2019,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+EMSA: Extensibility Metric for Software Architecture,2018,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+What Situational Information Would Help Developers When Using a Graphical Code Recommender?,2016,International Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+AeroGuardian: From UAS Sighting Reports to Simulation-Validated Safety Intelligence,2026,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Dynamic Obstacle Collision Avoidance in Urban Manned-Unmanned Teaming: A Velocity Obstacle and Control Barrier Function Approach,2026,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+An Early-Warning System for Vision-Based Real-Time Collision Avoidance under Diverse Conditions,2026,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Early Warning of Performance Degradation in Object Detection Models via Explainable AI,2026,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Explainable AI for Issue Classification: A Multi-class Study with LIME and SHAP,2025,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Can LLMs Update API Documentation?,2025,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+An Aviation Manned-Unmanned Teaming Simulation in Urban Environments to Compare Autonomous Flight Formations,2025,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+An Integrated Metric for Modularity in a Microservice System,2025,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Study on Applying Large Language Models to Issue Classification,2025,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Automated code-based test case reuse for software product line testing,2024,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Combination of Classification and Summarization Techniques for Bug Report Summarization,2023,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Measuring Modularity in JavaScript-Based Microservices from Software Architectural Perspectives,2023,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Duplicate Bug Report Detection by Using Sentence Embedding and Faiss,2023,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+An Empirical Study on the Performance of Individual Issue Label Prediction,2023,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Duplicate Bug Report Summarization,2022,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Java2Pseudo: Java to Pseudo Code Translator,2022,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A survey of collision avoidance systems for autonomous unmanned aerial vehicle,2022,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Issue report classification using multimodal deep learning,2022,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Classifying Issue into Custom Labels in GitBot,2022,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Bug Report Summarization using Believability Score and Text Ranking,2021,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Automatic Detection and Update Suggestion for Outdated API Names in Documentation,2019,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Agile Requirement Traceability Matrix,2018,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Reconstruction of Execution Architecture View Using Dependency Relationships and Execution Trace,2018,International Conferences and Workshops,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Time Series Modeling for AI-based Forecasting of Chromium Plating Tank Concentration,2026,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Study on 3D Shape Recognition using Artificial Intelligence (II),2026,Domestic Journals,yes,yes,yes,yes,shared,"한/영 제목 대응; 저자·2026년·학술지·54(2),217–225 일치; 영문 제목 on 유무 차이"
+A Case Study on the Practical Application of a Tailoring Methodology for the Technical Process Group in ISO/IEC/IEEE 15288:2015,2025,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+"Safety Requirement Elicitation for Small Aircraft Collision Avoidance Software using STPA, FTA and FMEA",2024,Domestic Journals,yes,yes,yes,yes,shared,"한/영 제목 대응; 저자·2024년·Journal of KIISE 51(8),706–717 및 DOI 등록정보 일치"
+A Study on 3D Shape Recognition using Artificial Intelligence,2024,Domestic Journals,yes,yes,yes,yes,shared,"한/영 제목 대응; 저자·2024년·한국항공우주학회지 52(5),423–429 및 DOI 등록정보 일치"
+A Study on Mission Software Reliability Test Methods of International Joint Development Project for KT-1 Military Aircraft Software,2023,Domestic Journals,yes,yes,yes,yes,shared,"한/영 제목 대응; 배병덕·이선아,2023년,항공우주시스템공학회지17(6),KT-1 미션 소프트웨어 시험 주제 일치"
+소형 UAV의 장애물 충돌 회피를 위한 YOLO 및 IR 센서 기반 장애물 크기 추정 방법,2023,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+항공기 시스템의 치명적인 공통 요인을 식별하기 위한 고장-안전 요구분석 절차 제안,2022,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+소프트웨어 추적성 수립/갱신을 위한 머신러닝 기법에 대한 문헌 연구,2021,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+깃허브 이슈 관리 시스템을 위한 다중 레이블 분류 봇,2021,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+요구사항 추적성 관점에서 항공기 탑재 소프트웨어 시험 사례 실패 분석,2020,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+순환 신경망을 활용한 코드 변경 추천 시스템의 학습 시간 단축 방법,2020,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Literature Survey of the Application of Word Embedding and Machine Learning Techniques for User Feedback Classification,2020,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Technique for Updating Method Calls by Utilizing Software Change Rules,2019,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Code Recommendation Method Using RNN Based on Interaction History,2018,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Class Diagramming Tool for Visualizing the Latest Revision of Software Change History,2018,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Spreadsheet Application that Enables to Flexibly Change Mappings in Requirement Traceability Matrix,2018,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Feedback-RFC Model to Individualize Heartbeat Standards,2017,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Modeling Traceability between Software Product Line Requirements and Architecture,2015,Domestic Journals,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+적대적 공동 진화와 제어 장벽 함수를 결합한 다중 무인기 공중전 강화학습,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Package Hallucination Detection and Classification,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+자율비행 소프트웨어의 객체 탐지에서 반사실적 설명 기반 실패 경계 탐색,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+LAH MUM-T 정찰 및 탐지 시나리오에서의 다중 자율 무인기 안전 알림에 관한 HMI 설계,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+충돌 위험 인식을 위한 Grad-CAM과 LLM 결합 설명 시스템,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+치공구 설계를 위한 RAG-MCP 기반 멀티 에이전트 FreeCAD 오토코딩 시스템,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+프로젝트 구조 요약을 통한 대규모 언어 모델의 구조적 한계 보완 가능성에 대한 실험적 연구,2026,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+실시간 드론 충돌 위험 예측을 위한 LIME 기법 적용,2025,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Neo4j 기반 소프트웨어 추적성 질의 시스템 개발 및 정량적 평가,2025,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+드론 충돌 회피에 대한 초기 안전성 분석 기법에서의 GPT-4o 활용 연구,2025,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+추적성 데이터베이스 구축을 통한 추적성 질의 연구,2025,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+LLM을 활용한 C++ 테스트 케이스 생성을 위한 프롬프트 구성 연구,2025,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+스테레오 카메라 및 객체인식 모델의 융합을 기반으로 한 3D 환경에서의 동적 장애물 회피 방법,2024,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+오픈소스 프로젝트에서의 추적성 자동 생성에 관한 실증적 연구,2024,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+깃허브 이슈 보고서 특징에 따른 중복된 버그 보고서 탐지 구현,2024,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+YOLOv5를 활용한 쓰러짐 감지 및 알람 시스템,2024,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+"STPA, FTA 및 FMEA 분석 기법을 연계한 소형 항공기 충돌 회피 소프트웨어 안전 요구사항 도출",2024,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+이슈 보고서 분류를 위한 멀티모달 딥러닝 모델,2023,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+사전 훈련된 모델을 활용한 버그 보고서 요약,2022,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+BERT 모델을 이용한 사용자 매뉴얼의 피처 설명에 따른 이슈 보고서 분류,2022,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+깃허브 이슈 보고서 관리를 위해 RoBERTa Fine-Tuning을 이용한 다중 레이블 분류 기법과 성능 비교,2022,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+수업 질문 자동응답을 위해 KoBert를 이용한 챗봇과 Doc2Vec을 이용한 챗봇과의 성능비교,2022,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+이슈 보고서의 레이블 개수 예측,2021,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+소프트웨어 요구사항 추적성에 대한 문헌 검토,2021,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+드론 운용 실험을 위한 3D 시뮬레이터의 특성 비교,2021,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+수업 질의 자동응답을 위해 Doc2Vec 모델을 이용한 자연어처리 챗봇,2021,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+이슈 관리를 위한 다중 레이블 분류 봇,2021,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+TF-IDF 기반 유사도 측정 기법을 이용한 KAI 산업체 요구 사항 매핑 테스트케이스 추천 시스템,2021,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Reducing the Learning Time of Code Change Recommendation System Using Recurrent Neural Network,2020,Domestic Conferences,yes,yes,yes,yes,shared,"한/영 제목 대응; 배병일·강성원·이선아,KCSE2020,학습시간 단축 주제 일치"
+Comparison of Machine Learning Techniques for Traceability Establishment between Issue Reports and User Manuals,2020,Domestic Conferences,yes,yes,yes,yes,shared,"한/영 제목 대응; 조희태·박도제·이선아,KCSE2020,이슈/매뉴얼 추적성 비교 일치"
+Scenario-based Test Cases for the Verification of an Automatic Flight Control Computer,2020,Domestic Conferences,yes,yes,yes,yes,shared,"한/영 제목 대응; 김재만·이선아,KCSE2020,자동비행조종컴퓨터 검증 시나리오 일치"
+Sign Language Translation Project based on AI and SE,2020,Domestic Conferences,yes,yes,yes,yes,shared,"한/영 제목 대응; 이유렬·김은진·이혁진·이선아,KCSE2020,수화번역 프로젝트 일치"
+Summarization of Duplicated Issue Reports,2019,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Comparison of Pressure Sensors for Failure of Aircraft Propeller,2019,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Issue Classification using RNN,2019,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Prototyping for Development of Educational Autonomous Vehicle,2018,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Literature Survey on Fault Diagnosis,2018,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Analyzing Updates of Test Cases according to Code Changes,2018,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Identifying of the Software Evolution Phase Using Metrics,2018,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Code Change Recommendation System using Artificial Neural Network,2018,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Issue Classification according to Requirements,2018,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Spreadsheet Application that Enables to Flexibly Change Mappings in Requirement Traceability Matrix,2018,Domestic Conferences,yes,yes,yes,yes,shared,"영문 관사 A/An 차이; 정세린·이선아,KCSE2018,요구사항추적성 스프레드시트 일치"
+Visualizing a Class Diagram from the Recent Revision of Software Change History,2017,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Literature Survey and Empirical Investigation on Mining API Changes,2017,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+A Light-weight Requirement Traceability Matrix for Reflecting Traceability Mapping Changes,2017,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+Investigation on the Difficulties of Managing Traceability in the Evolution of Software Requirements,2017,Domestic Conferences,yes,yes,yes,yes,shared,동일 분류 안에서 제목 정규화/인용문 내 제목/논문 링크 일치
+The Impact of View Histories on Edit Recommendations,2015,Top-tier Journals,yes,no,no,no,missing-current,
+Resource allocation through logistic regression and multicriteria decision making method in IoT fog computing,2022,International Journals,yes,no,no,no,missing-current,
+A fine-grained secure service provisioning platform for hypervisor systems,2022,International Journals,yes,no,no,no,missing-current,
+Reducing dynamic power consumption in mixed-critical real-time systems,2020,International Journals,yes,no,no,no,missing-current,
+Clustering Navigation Sequences to Create Contexts for Guiding Code Navigation,2013,International Journals,yes,no,no,no,missing-current,
+A Study on Guiding Programmers’ Code Navigation with a Graphical Code Recommender,2012,International Journals,yes,no,no,no,missing-current,
+A Framework for Tool-based Software Architecture Reconstruction,2009,International Journals,yes,no,no,no,missing-current,
+Transition Management of Software Process Improvement,2002,International Journals,yes,no,no,no,missing-current,
+Graph Database-based Measurement of Traceability Coverage in Open-Source Projects,2026,International Conferences and Workshops,yes,no,no,no,missing-current,
+Mining Contexts for Recommending Source Locations to Explore,2013,International Conferences and Workshops,yes,no,no,no,missing-current,
+A Graphical Recommender for Assisting Code Exploration,2013,International Conferences and Workshops,yes,no,no,no,missing-current,
+Clustering and Recommending Collections of Code Relevant to Tasks,2011,International Conferences and Workshops,yes,no,no,no,missing-current,
+How Can Diagramming Tools Help Support Programming Activities?,2008,International Conferences and Workshops,yes,no,no,no,missing-current,
+Verifying a Software Architecture Reconstruction Framework with a Case Study,2006,International Conferences and Workshops,yes,no,no,no,missing-current,
+SAAT: Reverse Engineering for Performance Analysis,2004,International Conferences and Workshops,yes,no,no,no,missing-current,
+Developer’s View on the Software Quality Model based on the ISO/IEC 9126,2000,International Conferences and Workshops,yes,no,no,no,missing-current,
+Data-mining based Recommendation Systems for Software Evolution Tasks,2013,Domestic Journals,yes,no,no,no,missing-current,
+Establishment of the Software Quality Metrics for a Software Development Process,2000,Domestic Journals,yes,no,no,no,missing-current,
+Hierarchical Software Quality Model (H-SQM) of Developer’s View,1999,Domestic Journals,yes,no,no,no,missing-current,
+안드로이드 앱과 구글 Firebase를 활용한 IoT 스마트팜 제어,2023,Domestic Conferences,yes,no,no,no,missing-current,
+표적 정보를 포함하는 2차원 지도 생성 시스템,2021,Domestic Conferences,yes,no,no,no,missing-current,
+A PageRank-based Bug Report Summarization Technique using Bug Report Relationships,2019,Domestic Conferences,yes,no,no,no,missing-current,
+Code Change Recommendation based on Recurrent Neural Networks,2019,Domestic Conferences,yes,no,no,no,missing-current,
+Code Change Recommendation System based on the N-gram Model,2017,Domestic Conferences,yes,no,no,no,missing-current,
+A Refactoring Process for Improving the Portability of Embedded Software Modules,2015,Domestic Conferences,yes,no,no,no,missing-current,
+A Case Study on the Level of Code Quality according to File Ownership,2014,Domestic Conferences,yes,no,no,no,missing-current,
+Software Architecture Analysis for Performance Analysis: UPnP Case Study,2003,Domestic Conferences,yes,no,no,no,missing-current,
+The Case Study of Software Requirement Management,2002,Domestic Conferences,yes,no,no,no,missing-current,
+Incremental Process Deployment Strategy for Software Process Improvement,2001,Domestic Conferences,yes,no,no,no,missing-current,
+Toward more accurate label recommendation for GitHub Issue Reports,2022,International Conference,no,yes,yes,yes,current-only,

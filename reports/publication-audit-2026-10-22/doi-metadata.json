@@ -1,0 +1,394 @@
+{
+  "10.5139/jksas.2026.54.2.217": {
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "10.5626/jok.2024.51.8.706": {
+    "DOI": "10.5626/jok.2024.51.8.706",
+    "title": [
+      "Safety Requirement Elicitation for Small Aircraft Collision Avoidance Software using STPA, FTA and FMEA"
+    ],
+    "container-title": [
+      "Journal of KIISE"
+    ],
+    "volume": "51",
+    "issue": "8",
+    "page": "706-717",
+    "article-number": null,
+    "author": [
+      {
+        "given": "Jongwon",
+        "family": "Lee",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Uicheon",
+        "family": "Lee",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Taehwan",
+        "family": "Kim",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Seonah",
+        "family": "Lee",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2024,
+          8,
+          31
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2024,
+          8,
+          31
+        ]
+      ]
+    },
+    "published-online": null,
+    "link": [
+      {
+        "URL": "https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11909407",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  },
+  "10.5139/jksas.2024.52.5.423": {
+    "DOI": "10.5139/jksas.2024.52.5.423",
+    "title": [
+      "A Study 3D Shape Recognition Using Artificial Intelligence"
+    ],
+    "container-title": [
+      "Journal of the Korean Society for Aeronautical &amp; Space Sciences"
+    ],
+    "volume": "52",
+    "issue": "5",
+    "page": "423-429",
+    "article-number": null,
+    "author": [
+      {
+        "given": "Hyo-Bum",
+        "family": "Park",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Sun-Ah",
+        "family": "Lee",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2024,
+          5,
+          31
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2024,
+          5,
+          31
+        ]
+      ]
+    },
+    "published-online": null,
+    "link": [
+      {
+        "URL": "https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11762926",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  },
+  "10.20910/JASE.2023.17.6.108": {
+    "error": "HTTP Error 404: Not Found"
+  },
+  "10.1002/ett.3824": {
+    "DOI": "10.1002/ett.3824",
+    "title": [
+      "Resource allocation through logistic regression and multicriteria decision making method in IoT fog computing"
+    ],
+    "container-title": [
+      "Transactions on Emerging Telecommunications Technologies"
+    ],
+    "volume": "33",
+    "issue": "2",
+    "page": null,
+    "article-number": "e3824",
+    "author": [
+      {
+        "ORCID": "https://orcid.org/0000-0003-3448-9804",
+        "authenticated-orcid": false,
+        "given": "Hayat",
+        "family": "Bashir",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Department of Informatics Gyeongsang National University  Jinju South Korea"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Seonah",
+        "family": "Lee",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Informatics Gyeongsang National University  Jinju South Korea"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      },
+      {
+        "given": "Kyong Hoon",
+        "family": "Kim",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Informatics Gyeongsang National University  Jinju South Korea"
+          }
+        ],
+        "role": [
+          {
+            "vocabulary": "crossref",
+            "role": "author"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2019,
+          12,
+          19
+        ]
+      ]
+    },
+    "published-print": {
+      "date-parts": [
+        [
+          2022,
+          2
+        ]
+      ]
+    },
+    "published-online": {
+      "date-parts": [
+        [
+          2019,
+          12,
+          19
+        ]
+      ]
+    },
+    "link": [
+      {
+        "URL": "https://api.wiley.com/onlinelibrary/tdm/v1/articles/10.1002%2Fett.3824",
+        "content-type": "application/pdf",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/ett.3824",
+        "content-type": "application/pdf",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://onlinelibrary.wiley.com/doi/full-xml/10.1002/ett.3824",
+        "content-type": "application/xml",
+        "content-version": "vor",
+        "intended-application": "text-mining"
+      },
+      {
+        "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/ett.3824",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  },
+  "10.3390/electronics11101606": {
+    "DOI": "10.3390/electronics11101606",
+    "title": [
+      "A Fine-Grained Secure Service Provisioning Platform for Hypervisor Systems"
+    ],
+    "container-title": [
+      "Electronics"
+    ],
+    "volume": "11",
+    "issue": "10",
+    "page": "1606",
+    "article-number": null,
+    "author": [
+      {
+        "given": "Junho",
+        "family": "Seo",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Department of Informatics, Gyeongsang National University, Jinju 52828, Korea"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-2004-2924",
+        "authenticated-orcid": false,
+        "given": "Seonah",
+        "family": "Lee",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of AI Convergence Engineering (Graduate) and Aerospace and Software Engineering (Undergraduate), Gyeongsang National University, Jinju 52828, Korea"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "ORCID": "https://orcid.org/0000-0002-8366-3533",
+        "authenticated-orcid": false,
+        "given": "Ki-Il",
+        "family": "Kim",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Computer Science and Engineering, Chungnam National University, Daejeon 34134, Korea"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Kyong Hoon",
+        "family": "Kim",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "School of Computer Science and Engineering, Kyungpook National University, Daegu 41566, Korea"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "published": {
+      "date-parts": [
+        [
+          2022,
+          5,
+          18
+        ]
+      ]
+    },
+    "published-print": null,
+    "published-online": {
+      "date-parts": [
+        [
+          2022,
+          5,
+          18
+        ]
+      ]
+    },
+    "link": [
+      {
+        "URL": "https://www.mdpi.com/2079-9292/11/10/1606/pdf",
+        "content-type": "unspecified",
+        "content-version": "vor",
+        "intended-application": "similarity-checking"
+      }
+    ]
+  },
+  "10.3390/app10207256": {
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+}

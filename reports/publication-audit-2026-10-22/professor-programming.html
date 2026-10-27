@@ -1,0 +1,175 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> programming | Seonah Lee </title> <meta name="author" content="Seonah Lee"> <meta name="description" content="Professor of Software Engineering at Gyeongsang National University, leading the Software Evolution and Architecture Lab. "> <meta name="keywords" content="software engineering, software evolution, requirement traceability, software architecture, program comprehension, intelligent software engineering, drone systems, Gyeongsang National University"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%9B%A9%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://saleese.github.io/programming/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Seonah</span> Lee </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">introduction </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/courses/">courses </a> </li> <li class="nav-item "> <a class="nav-link" href="/services/">services </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">research </a> </li> <li class="nav-item active"> <a class="nav-link" href="/programming/">programming <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/writing/">writing </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <style type="text/css">
+    .post-header { display: none; }
+/* Same as the research page: the theme's 12px cell padding and 24px line
+   height give each row 49px, which is more air than a one-line entry needs. */
+.post table th, .post table td { padding: 0.28rem 0.75rem; line-height: 1.4; }
+.post table th:first-child, .post table td:first-child { padding-left: 0; }
+
+  </style> <div class="post"> <header class="post-header"> <h1 class="post-title">programming</h1> <p class="post-description"></p> </header> <article> <h2 id="lab-repositories">Lab Repositories</h2> <p>Public code from the <a href="https://github.com/selab-gnu" rel="external nofollow noopener" target="_blank">selab-gnu</a> organization, newest first. The year is the related paper’s publication year where the README states one; otherwise it is the year of the repository’s most recent public activity, marked with an asterisk.</p> <table> <thead> <tr> <th>Year</th> <th>Repository</th> <th>What it does</th> </tr> </thead> <tbody> <tr> <td>2025</td> <td><a href="https://github.com/selab-gnu/AutoAPI-DocByLLM" rel="external nofollow noopener" target="_blank">AutoAPI-DocByLLM</a></td> <td>Detects and updates outdated API documentation with an LLM</td> </tr> <tr> <td>2025</td> <td><a href="https://github.com/selab-gnu/Architecture" rel="external nofollow noopener" target="_blank">Architecture</a></td> <td>Reconstructs execution architecture views from source code using connector mapping rules</td> </tr> <tr> <td>2025*</td> <td><a href="https://github.com/selab-gnu/MulDIC" rel="external nofollow noopener" target="_blank">MulDIC</a></td> <td>Classifies GitHub issues from text, images and code snippets with a multimodal model</td> </tr> <tr> <td>2025*</td> <td><a href="https://github.com/selab-gnu/rl-basics" rel="external nofollow noopener" target="_blank">rl-basics</a></td> <td>Worked examples for learning the fundamentals of reinforcement learning</td> </tr> <tr> <td>2024</td> <td><a href="https://github.com/selab-gnu/Bug-Summaries" rel="external nofollow noopener" target="_blank">Bug-Summaries</a></td> <td>Generates informative bug summaries by combining several software artifacts</td> </tr> <tr> <td>2024</td> <td><a href="https://github.com/selab-gnu/SD_SPL" rel="external nofollow noopener" target="_blank">SD_SPL</a></td> <td>Reuses test cases across a software product line by code similarity and coverage</td> </tr> <tr> <td>2023</td> <td><a href="https://github.com/selab-gnu/duplicate_bug_report" rel="external nofollow noopener" target="_blank">duplicate_bug_report</a></td> <td>Summarises a bug from its duplicate reports</td> </tr> <tr> <td>2022</td> <td><a href="https://github.com/selab-gnu/I2M" rel="external nofollow noopener" target="_blank">I2M</a></td> <td>Links issue reports to the features described in a user manual</td> </tr> <tr> <td>2022</td> <td><a href="https://github.com/selab-gnu/Bug-Report-Summarization" rel="external nofollow noopener" target="_blank">Bug-Report-Summarization</a></td> <td>Summarises bug reports using sentence significance factors</td> </tr> <tr> <td>2021</td> <td><a href="https://github.com/selab-gnu/issue-label-study" rel="external nofollow noopener" target="_blank">issue-label-study</a></td> <td>Empirical study of issue labelling and multi-label use in open-source GitHub projects</td> </tr> </tbody> </table> <h2 id="program-analysis-tools">Program Analysis Tools</h2> <ul> <li><a href="https://soot-oss.github.io/soot/" rel="external nofollow noopener" target="_blank">Soot</a></li> <li> <a href="https://github.com/polyglot-compiler/polyglot" rel="external nofollow noopener" target="_blank">Polyglot</a> — Polyglot Extensible Compiler Framework for Java</li> <li> <a href="https://www.antlr.org/" rel="external nofollow noopener" target="_blank">ANTLR</a> — ANother Tool for Language Recognition</li> <li> <a href="https://www.sable.mcgill.ca/ppa/" rel="external nofollow noopener" target="_blank">PPA</a> — Partial Program Analysis for Java</li> </ul> <h2 id="natural-language-processing-tools">Natural Language Processing Tools</h2> <ul> <li><a href="https://languagetool.org/" rel="external nofollow noopener" target="_blank">LanguageTool</a></li> <li><a href="https://opennlp.apache.org/" rel="external nofollow noopener" target="_blank">Apache OpenNLP</a></li> </ul> <h2 id="tools-for-a-project">Tools for a Project</h2> <ul> <li><a href="https://maven.apache.org/" rel="external nofollow noopener" target="_blank">Maven</a></li> <li><a href="https://gradle.org/" rel="external nofollow noopener" target="_blank">Gradle</a></li> <li><a href="https://javadiff.sourceforge.net/" rel="external nofollow noopener" target="_blank">JDiff</a></li> <li> <a href="https://github.com/asciidoctor/asciidoctorj" rel="external nofollow noopener" target="_blank">AsciidoctorJ</a> — Java bindings for Asciidoctor</li> <li><a href="https://www.redmine.org/projects/redmine" rel="external nofollow noopener" target="_blank">Redmine</a></li> </ul> <h2 id="programming">Programming</h2> <ul> <li><a href="https://www.codecademy.com/" rel="external nofollow noopener" target="_blank">Codecademy</a></li> <li><a href="https://code.org/" rel="external nofollow noopener" target="_blank">Code.org</a></li> <li> <a href="https://rubyonrails.org/" rel="external nofollow noopener" target="_blank">Ruby on Rails</a> <ul> <li><a href="https://guides.rubyonrails.org/getting_started.html" rel="external nofollow noopener" target="_blank">Getting Started with Rails</a></li> <li><a href="https://www.ruby-lang.org/ko/libraries/" rel="external nofollow noopener" target="_blank">Ruby (Korean)</a></li> </ul> </li> <li><a href="http://twitter.github.io/scala_school/ko/index.html" rel="external nofollow noopener" target="_blank">Scala (Korean)</a></li> </ul> <h2 id="programming-interview">Programming Interview</h2> <ul> <li><a href="https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/" rel="external nofollow noopener" target="_blank">Cracking the Coding Interview</a></li> <li><a href="https://leetcode.com/" rel="external nofollow noopener" target="_blank">LeetCode</a></li> <li><a href="https://www.glassdoor.com/" rel="external nofollow noopener" target="_blank">Glassdoor</a></li> <li> <a href="https://www.gayle.com/blog/2008/10/22/top-10-best-microsoft-interview/" rel="external nofollow noopener" target="_blank">Top 10 Microsoft Interview Questions</a> — Gayle Laakmann McDowell</li> </ul> <h2 id="online-lectures">Online Lectures</h2> <ul> <li><a href="https://www.edx.org/" rel="external nofollow noopener" target="_blank">edX</a></li> <li><a href="https://www.coursera.org/" rel="external nofollow noopener" target="_blank">Coursera</a></li> <li><a href="https://www.udacity.com/" rel="external nofollow noopener" target="_blank">Udacity</a></li> <li><a href="https://www.edx.org/school/mitx" rel="external nofollow noopener" target="_blank">MITx on edX</a></li> <li><a href="https://online.stanford.edu/explore" rel="external nofollow noopener" target="_blank">Stanford Online</a></li> <li><a href="https://kldp.org/node/129959" rel="external nofollow noopener" target="_blank">More…</a></li> </ul> <h2 id="others">Others</h2> <ul> <li><a href="https://kldp.org/" rel="external nofollow noopener" target="_blank">KLDP</a></li> <li><a href="https://blog.codinghorror.com/" rel="external nofollow noopener" target="_blank">Coding Horror</a></li> </ul> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Seonah Lee. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-introduction",
+    title: "introduction",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-courses",
+          title: "courses",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/courses/";
+          },
+        },{id: "nav-services",
+          title: "services",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/services/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-research",
+          title: "research",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-programming",
+          title: "programming",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/programming/";
+          },
+        },{id: "nav-writing",
+          title: "writing",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/writing/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-testing-the-research-area-label-on-blog-posts",
+        
+          title: "Testing the research-area label on blog posts",
+        
+        description: "A test post that checks the AI badge renders beside a post title on the blog index.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/area-label-test/";
+          
+        },
+      },{id: "news-we-won-the-drone-best-award",
+          title: 'We won the drone best award!',
+          description: "",
+          section: "News",},{id: "news-we-are-organizing-the-ise-workshop-associated-with-icst-2026-please-check-it-out",
+          title: 'We are organizing the ISE workshop, associated with ICST 2026. Please, check it...',
+          description: "",
+          section: "News",},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%73%61%6C%65%65%73%65@%67%6E%75.%61%63.%6B%72", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=4bEToL8AAAAJ", "_blank");
+        },
+      },{
+        id: 'social-dblp',
+        title: 'DBLP',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://dblp.org/pid/l/SeonahLee.html", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0000-0002-2004-2924", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/saleese", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
