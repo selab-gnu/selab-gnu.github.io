@@ -1,4 +1,4 @@
-"""Public copy distilled from the supplied Open Lab deck; no deck binary is published."""
+"""Public copy and download links for the supplied Open Lab deck."""
 from html import escape
 from urllib.parse import quote
 
@@ -24,6 +24,7 @@ def research_page(data):
     body+='<nav class="research-section-nav" aria-label="Research page sections">'+''.join(
         f'<a href="#{anchor}" data-i18n="{key}">{fallback}</a>' for anchor,key,fallback in [
             ('areas','researchOverview','Research areas'),('projects','featuredProjects','Featured research'),('journey','researchJourney','Research journey'),('awards','awardsTitle','Awards'),('life','labLife','Lab life'),('careers','careerPaths','Career paths'),('join','joinTitle','Join the lab')])+'</nav>'
+    body+='<section id="openlab-material" class="openlab-material" aria-labelledby="openlab-material-title"><img src="assets/documents/2026-openlab-cover.jpg" width="960" height="540" alt="2026 Open Lab presentation cover" loading="lazy"><div>'+dual('h2',label('2026 오픈랩 발표자료','2026 Open Lab presentation')).replace('<h2>','<h2 id="openlab-material-title">')+dual('p',label('교수님 소개부터 연구 주제, 연구실 생활과 진출 사례까지 발표자료 전체를 확인하세요.','Explore the full presentation covering the professor, research, lab life and alumni pathways.'))+dual('p',label('한국어 자료 · 37쪽 · PDF 약 2.8MB / 원본 PPT 약 83MB','Korean presentation · 37 pages · PDF 2.8 MB / original PPT 83 MB'),'material-meta')+'<div class="material-actions"><a href="assets/documents/2026-openlab.pdf" target="_blank" rel="noopener">'+dual('span',label('PDF 바로 보기 ↗','View PDF ↗'))+'</a><a href="assets/documents/2026-openlab.pptx" download="SEA-Lab-2026-OpenLab.pptx">'+dual('span',label('원본 PPT 다운로드','Download original PPT'))+'</a></div></div></section>'
     body+='<section id="areas" class="openlab-section"><h2 data-i18n="researchOverview">Research areas</h2>'+research_cards(data)+'</section>'
     body+='<section id="projects" class="openlab-section"><h2 data-i18n="featuredProjects">Featured research</h2><p data-i18n="projectsIntro">Selected studies introduced in the 2026 Open Lab presentation.</p><div class="project-grid">'
     for project in data['projects']:
