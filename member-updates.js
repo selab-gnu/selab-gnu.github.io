@@ -17,6 +17,8 @@ const suppliedPhotos=[
 // It upgrades the old topic once; later administrator edits are preserved.
 export function supplementMemberUpdates(profiles){return profiles.map(profile=>{
  let updated=profile;
+ // Owner-confirmed former doctoral members belong in the graduate alumni list.
+ if(profile.group==='current'&&/^(?:taehwan\s+kim|kim\s+taehwan|김태환|hyug\s+jang|jang\s+hyug|장혁)$/i.test(profile.name.replace(/\s+/g,' ').trim()))updated={...profile,group:'graduates',order:Math.max(0,...profiles.filter(p=>p.group==='graduates').map(p=>p.order||0))+1+profile.order};
  const supplied=suppliedPhotos.find(photo=>photo.name.test(profile.name.replace(/\s+/g,' ').trim()));
  if(supplied){
   const doc=new DOMParser().parseFromString(clean(profile.html),'text/html');
