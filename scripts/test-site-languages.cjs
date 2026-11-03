@@ -25,8 +25,9 @@ const removed='a893f9cf-5023-4546-90b4-47822e884917';
   const visible=await page.locator('main').innerText();assert(!/[가-힣]/.test(visible),file+' contains untranslated Korean: '+visible.match(/.{0,35}[가-힣].{0,50}/g));
   if(file==='index.html'){assert(visible.includes('We study software evolution'));await screenshot('home-en');}
   if(file==='members.html'){
-   assert.equal(await page.locator('.member-alumnus').count(),16);assert.equal(await page.locator('.member-alumnus img,.member-alumnus .member-portrait,.member-alumnus details').count(),0);
-   assert.equal(await page.locator('.member-portrait').count(),13);assert.equal(await page.locator('[data-member-name="Yeonu Lee"]').count(),0);
+   assert.equal(await page.locator('.member-alumnus').count(),18);assert.equal(await page.locator('.member-alumnus img,.member-alumnus .member-portrait,.member-alumnus details').count(),0);
+   for(const name of ['Taehwan Kim','Hyug Jang']){const previous=page.locator('[data-member-name="'+name+'"]');assert.equal(await previous.count(),1);assert(await previous.evaluate(el=>el.parentElement.classList.contains('alumni-list')));assert.equal(await previous.locator('img,.member-portrait').count(),0);}
+   assert.equal(await page.locator('.member-portrait').count(),11);assert.equal(await page.locator('[data-member-name="Yeonu Lee"]').count(),0);
    assert.equal(await page.locator('[data-member-name="det virak"] h3').innerText(),'Det Virak');
    assert.equal(await page.locator('[data-member-name="Patel Kajal"] h3').innerText(),'Kajal Patel');
    assert(!/[가-힣]/.test(await page.locator('[data-member-name="Uicheon Lee"]').innerText()));
@@ -45,6 +46,6 @@ const removed='a893f9cf-5023-4546-90b4-47822e884917';
  const memberLink=page.locator('nav[aria-label="Main navigation"] a').filter({hasText:'멤버'});assert.equal(new URL(await memberLink.getAttribute('href'),'http://localhost:8137').searchParams.get('lang'),'ko');await memberLink.click();assert.equal(new URL(page.url()).searchParams.get('lang'),'ko');
  await page.locator('[data-language=en]').click();await page.reload();await page.locator('.language-switch').waitFor();assert.equal(await page.locator('html').getAttribute('lang'),'en');
  for(const width of [390,768,1440]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
- assert.deepEqual(errors,[]);console.log('PASS: shareable EN/KO versions across public pages, translated member topics/details/alumni, correct name casing, 16 compact alumni without photos, requested profile exclusion, admin-only deferred cleanup, language navigation/reload and responsive layout.');
+ assert.deepEqual(errors,[]);console.log('PASS: shareable EN/KO versions across public pages, translated member topics/details/alumni, correct name casing, 16 alumni and 2 previous members without photos, requested profile exclusion, admin-only deferred cleanup, language navigation/reload and responsive layout.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

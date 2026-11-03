@@ -42,8 +42,9 @@ export function memberCategory(profile){
  return {level};
 }
 function memberRank(profile){return ['phd','ms','undergrad','other'].indexOf(memberCategory(profile).level);}
+export function isFormerMember(profile){return /^(?:taehwan\s+kim|kim\s+taehwan|김태환|hyug\s+jang|jang\s+hyug|장혁)$/i.test(profile.name.replace(/\s+/g,' ').trim());}
 function memberCard(profile){
- const compact=profile.group!=='current';
+ const compact=profile.group!=='current'||isFormerMember(profile);
  const card=document.createElement('section');card.id='member-'+profile.id;card.dataset.memberName=profile.name;card.className='member-profile'+(isFaculty(profile)?' member-faculty':'')+(compact?' member-alumnus':'');
  const content=document.createElement('div');content.className='member-copy';content.innerHTML=profileHTML(profile);content.querySelectorAll('hr').forEach(el=>el.remove());
  const walker=document.createTreeWalker(content,NodeFilter.SHOW_TEXT);let textNode;while(textNode=walker.nextNode())textNode.textContent=textNode.textContent.replace(/(?:part|full)[ -]?time\s*/ig,'').replace(/Enrollment:\s*/g,'');
@@ -74,10 +75,11 @@ function memberCard(profile){
 export function renderProfiles(profiles) {
  profiles=supplementMemberUpdates(visibleMembers(profiles));
  const sections=[];
- const section=(key,items,sub=false)=>{if(!items.length)return;const heading=localized(document.createElement(sub?'h3':'h2'),key);heading.className='member-group-heading';const grid=document.createElement('div');grid.className=key.startsWith('alumni')?'alumni-list':'member-grid';grid.innerHTML=items.sort(compareMembers).map(memberCard).join('');sections.push(heading.outerHTML+grid.outerHTML);};
+ const section=(key,items,sub=false)=>{if(!items.length)return;const heading=localized(document.createElement(sub?'h3':'h2'),key);heading.className='member-group-heading';const grid=document.createElement('div');grid.className=key.startsWith('alumni')||key==='formerMembers'?'alumni-list':'member-grid';grid.innerHTML=items.sort(compareMembers).map(memberCard).join('');sections.push(heading.outerHTML+grid.outerHTML);};
  section('faculty',profiles.filter(isFaculty));
- const rows=profiles.filter(p=>p.group==='current'&&!isFaculty(p));
+ const rows=profiles.filter(p=>p.group==='current'&&!isFaculty(p)&&!isFormerMember(p));
  for(const level of ['phd','ms','undergrad','other'])section(level,rows.filter(p=>memberCategory(p).level===level));
+ section('formerMembers',profiles.filter(isFormerMember));
  section('alumniGraduate',profiles.filter(p=>p.group==='graduates'));section('alumniUndergrad',profiles.filter(p=>p.group==='undergraduates'));
  return sections.join('');
 }
