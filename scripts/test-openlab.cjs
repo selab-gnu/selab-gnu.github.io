@@ -52,6 +52,7 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
  await page.goto('http://localhost:8137/research.html');await page.waitForFunction(()=>document.querySelector('html').lang==='ko');
  assert.equal(await page.locator('main>h1').textContent(),'연구실 소개');
  assert.equal(await page.locator('.research-area-card').count(),3);assert.equal(await page.locator('.research-project').count(),8);assert.equal(await page.locator('.research-timeline li').count(),11);assert.equal(await page.locator('.award-year li').count(),17);
+ assert.equal(data.careerOutcomes.length,21);assert.equal(await page.locator('.career-outcome').count(),21);assert.equal(await page.locator('.career-year').count(),6);assert((await page.locator('#careers').innerText()).includes('무크타르 사말'));await page.locator('#careers').scrollIntoViewIfNeeded();await screenshot('career-pathways');
  assert.equal(data.awards.length,17);assert.equal(await page.locator('.award-year h3').first().textContent(),'2026');assert.equal(await page.locator('.award-year h3').last().textContent(),'2017');
  assert((await page.locator('#awards').textContent()).includes('일반부 대상'));
  await screenshot('research');await page.locator('#awards').evaluate(el=>el.scrollIntoView({block:'start'}));await screenshot('awards');

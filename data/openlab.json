@@ -513,6 +513,291 @@
     "Appia Engineering",
     "엔테크서비스·NTS",
     "엔스퀘어",
-    "University of Manchester (PhD)"
-  ]
+    "University of Manchester (PhD)",
+    "컷백",
+    "젠티",
+    "슈어소프트웨어"
+  ],
+  "careerOutcomes": [
+    {
+      "period": "2026",
+      "name": {
+        "ko": "유지현",
+        "en": "Jihyun Yu"
+      },
+      "destination": {
+        "ko": "모아소프트",
+        "en": "MOASOFT"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2026",
+      "name": {
+        "ko": "조희태",
+        "en": "Heetae Cho"
+      },
+      "destination": {
+        "ko": "엔스퀘어",
+        "en": "NSQUARE"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2026",
+      "name": {
+        "ko": "김태환",
+        "en": "Taehwan Kim"
+      },
+      "destination": {
+        "ko": "엔스퀘어",
+        "en": "NSQUARE"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2025",
+      "name": {
+        "ko": "윤정빈",
+        "en": "Jeongbin Yoon"
+      },
+      "destination": {
+        "ko": "LIG넥스원",
+        "en": "LIG Nex1"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2025",
+      "name": {
+        "ko": "이준호",
+        "en": "Junho Lee"
+      },
+      "destination": {
+        "ko": "LIG넥스원",
+        "en": "LIG Nex1"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2025",
+      "name": {
+        "ko": "곽창원",
+        "en": "Changwon Gwak"
+      },
+      "destination": {
+        "ko": "현대로템",
+        "en": "Hyundai Rotem"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2025",
+      "name": {
+        "ko": "권기범",
+        "en": "Kibeom Kwon"
+      },
+      "destination": {
+        "ko": "컷백",
+        "en": "Cutback"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2025",
+      "name": {
+        "ko": "이선호",
+        "en": "Sunho Lee"
+      },
+      "destination": {
+        "ko": "젠티",
+        "en": "JENTI"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2025",
+      "name": {
+        "ko": "이정원",
+        "en": "Jeongwon Lee"
+      },
+      "destination": {
+        "ko": "모아소프트",
+        "en": "MOASOFT"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2024",
+      "name": {
+        "ko": "최우혁",
+        "en": "Woohyeok Choi"
+      },
+      "destination": {
+        "ko": "모아소프트",
+        "en": "MOASOFT"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2024",
+      "name": {
+        "ko": "이종원",
+        "en": "Jongwon Lee"
+      },
+      "destination": {
+        "ko": "포스코 기술연구원",
+        "en": "POSCO Technical Research Laboratories"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2024",
+      "name": {
+        "ko": "무크타르 사말",
+        "en": "Mukhtar Samal"
+      },
+      "destination": {
+        "ko": "맨체스터대학교 박사과정",
+        "en": "University of Manchester · PhD program"
+      },
+      "type": "phd",
+      "slide": 30
+    },
+    {
+      "period": "2023",
+      "name": {
+        "ko": "최의진",
+        "en": "Euijin Choi"
+      },
+      "destination": {
+        "ko": "KAI",
+        "en": "KAI"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2022",
+      "name": {
+        "ko": "박도제",
+        "en": "Doje Park"
+      },
+      "destination": {
+        "ko": "SK C&C",
+        "en": "SK C&C"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "양혜진",
+        "en": "Hyejin Yang"
+      },
+      "destination": {
+        "ko": "KAI",
+        "en": "KAI"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "김성섭",
+        "en": "Seongseop Kim"
+      },
+      "destination": {
+        "ko": "KAI",
+        "en": "KAI"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "김재만",
+        "en": "Jaeman Kim"
+      },
+      "destination": {
+        "ko": "KAI",
+        "en": "KAI"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "최광현",
+        "en": "Gwanghyeon Choi"
+      },
+      "destination": {
+        "ko": "KT·KAI",
+        "en": "KT · KAI"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "박종열",
+        "en": "Jongyeol Park"
+      },
+      "destination": {
+        "ko": "Appia Engineering",
+        "en": "Appia Engineering"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "정세린",
+        "en": "Serin Jeong"
+      },
+      "destination": {
+        "ko": "엔테크서비스·NTS",
+        "en": "N Tech Service · NTS"
+      },
+      "type": "employment",
+      "slide": 30
+    },
+    {
+      "period": "2018–2021",
+      "name": {
+        "ko": "박수빈",
+        "en": "Subin Park"
+      },
+      "destination": {
+        "ko": "슈어소프트웨어",
+        "en": "Suresoft"
+      },
+      "type": "employment",
+      "slide": 30
+    }
+  ],
+  "careerSources": {
+    "slide": 30,
+    "englishOrganizationNames": {
+      "Cutback": "https://cutback.video/",
+      "JENTI": "https://jenti.ai/"
+    }
+  }
 }
