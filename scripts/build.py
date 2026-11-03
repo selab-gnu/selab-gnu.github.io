@@ -3,6 +3,7 @@ from pathlib import Path
 import json,re
 from publication_metadata import date_index,sort_groups
 from openlab_content import research_page,home_highlights
+from email_privacy import protect_public_emails
 root=Path(__file__).resolve().parents[1]
 groups=sort_groups(json.loads((root/'data/publications.json').read_text(encoding='utf-8')),date_index(root))
 openlab=json.loads((root/'data/openlab.json').read_text(encoding='utf-8'))
@@ -10,9 +11,10 @@ old='http://selab.gnu.ac.kr/index.php'
 def page(title,body,section=None):
  section=section or title
  nav=''.join(f'<a href="{url}"'+(' aria-current="page"' if label==section else '')+f'>{label}</a>' for label,url in [('Home','index.html'),('Research & Lab','research.html'),('Members','members.html'),('Publications','publications.html'),('News','news.html'),('Gallery','gallery.html')])
- return f'''<!doctype html>
+ markup=f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Software Evolution and Architecture Lab, Gyeongsang National University"><title>{title} — Software Evolution and Architecture Lab</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="refinements.css"><link rel="stylesheet" href="openlab.css"></head>
 <body id="top" class="page-{'research' if section=='Research & Lab' else section.lower()}"><a class="skip" href="#main">Skip to content</a><div class="site"><header><a class="brand" href="index.html"><span class="brand-identity"><img class="brand-logo" src="assets/branding/sea-lab-wordmark.png" width="1149" height="360" alt="SEA LAB — Software Evolution and Architecture Lab"><span class="brand-university">GYEONGSANG NATIONAL UNIVERSITY</span></span></a><form action="search.html" role="search"><label class="sr" for="header-search">Search publications</label><input id="header-search" name="q" type="search" placeholder="논문 검색"><button>Search</button></form><a class="manage-link" href="admin/">로그인 ↗</a></header><nav aria-label="Main navigation">{nav}</nav><div class="layout"><main id="main"><h1>{title}</h1>{body}<p id="language-note" class="language-note" data-i18n="languageNote">Paper titles, citations and member-written biographies are shown in their original language.</p><div class="breadcrumb">You are here: <a href="index.html">Home</a>{' / '+title if title!='Home' else ''}</div></main></div><footer><span class="footer-identity"><img src="assets/branding/sea-lab-wordmark.png" width="1149" height="360" alt="SEA LAB" loading="lazy"><span>© Software Evolution and Architecture Lab</span></span><a href="#top">Back to Top ↑</a></footer></div><script type="module" src="site.js"></script><script type="module" src="public-content.js"></script></body></html>'''
+ return protect_public_emails(markup)
 home_content=(root/'data/home.html').read_text(encoding='utf-8')
 first,separator,rest=home_content.partition('</div>')
 home='<div id="cloud-home"><div class="home-brand-banner">'+first+separator+'<img class="home-full-logo" src="assets/branding/sea-lab-full.png" width="1947" height="808" alt="SEA LAB — Software Evolution and Architecture Lab"></div>'+rest+'</div>'+home_highlights(openlab)

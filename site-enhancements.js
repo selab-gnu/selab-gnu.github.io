@@ -1,7 +1,9 @@
 import {setupLanguage,applyLanguage,t,localized} from './i18n.js';
 import {renderProfiles,splitLegacyMembers} from './member-profiles.js';
 import {loadMemberEmails,supplementMemberEmails} from './member-emails.js';
+import {setupEmailPrivacy,protectEmails} from './email-privacy.js';
 setupLanguage();
+setupEmailPrivacy();
 function professorSection(){
  if(!document.querySelector('.page-home')||document.getElementById('professor-introduction'))return;
  const section=document.createElement('section');section.id='professor-introduction';section.className='professor-introduction';
@@ -17,6 +19,7 @@ if(memberRoot){
 professorSection();
 function ui(){
  professorSection();
+ protectEmails(document.querySelector('main'));
  const paths={'index.html':'home','research.html':'research','members.html':'members','publications.html':'publications','news.html':'news','gallery.html':'gallery'};
  document.querySelectorAll('nav a').forEach(link=>{const key=paths[link.getAttribute('href')];if(key)localized(link,key);});
  const title=document.querySelector('main>h1');const path=location.pathname.split('/').pop()||'index.html';if(title&&paths[path])localized(title,paths[path]);

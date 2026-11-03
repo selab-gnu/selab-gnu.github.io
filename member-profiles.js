@@ -1,6 +1,7 @@
 import { clean } from './content.js';
 import {localized} from './i18n.js';
 import {supplementMemberUpdates} from './member-updates.js';
+import {protectEmailMarkup,restoreEmailMarkup} from './email-privacy.js';
 
 export const memberGroups = {
   current: 'Current Members',
@@ -13,7 +14,7 @@ export function profileHTML(profile) {
   bio.textContent = profile.bio || '';
   // Paragraphs and explicit breaks survive the existing content sanitizer.
   const biography = bio.innerHTML.replace(/\r?\n/g, '<br>');
-  return clean(profile.html) + (biography ? '<p>' + biography + '</p>' : '');
+  return clean(restoreEmailMarkup(profile.html)) + (biography ? '<p>' + biography + '</p>' : '');
 }
 
 export function isFaculty(profile) {
@@ -56,7 +57,7 @@ function memberCard(profile){
  const topic=text.match(/Research Topic\s*:\s*([^\n]+)/i)?.[1]?.trim();if(topic){const topicBox=document.createElement('p');topicBox.className='member-topic';const label=localized(document.createElement('strong'),'topic');topicBox.append(label,document.createElement('br'),document.createTextNode(topic));copy.append(topicBox);}
  if(profile.bio){const biography=document.createElement('p');biography.className='member-biography';biography.textContent=profile.bio;copy.append(biography);}
  const details=document.createElement('details');details.className='member-details';details.append(localized(document.createElement('summary'),'details'));content.querySelectorAll('a[href^="mailto:"]').forEach(el=>el.replaceWith(el.textContent));details.append(content);copy.append(details);
- card.append(portrait,copy);return card.outerHTML;
+ card.append(portrait,copy);return protectEmailMarkup(card.outerHTML);
 }
 export function renderProfiles(profiles) {
  profiles=supplementMemberUpdates(profiles);
@@ -72,7 +73,7 @@ export function renderProfiles(profiles) {
 // Split the legacy document at member-name headings, preserving original links
 // and text rather than guessing structured fields from inconsistent old markup.
 export function splitLegacyMembers(html) {
-  const doc = new DOMParser().parseFromString(clean(html), 'text/html');
+  const doc = new DOMParser().parseFromString(restoreEmailMarkup(clean(html)), 'text/html');
   const markers = [...doc.body.querySelectorAll('strong,b')].filter(e =>
     !e.parentElement.closest('strong,b') && e.textContent.trim());
   const records = [];

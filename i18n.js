@@ -1,4 +1,5 @@
 const translations={
+ revealEmail:['View email','이메일 보기'],hideEmail:['Hide','주소 숨기기'],
  research:['Research & Lab','연구실 소개'],researchOverview:['Research areas','연구 분야'],seeProjects:['Explore research ↗','대표 연구 보기 ↗'],seeAwards:['Awards & achievements ↗','수상실적 보기 ↗'],seeJoin:['Joining the lab ↗','연구 참여 안내 ↗'],
  openlabIntro:['Intelligent software engineering at the intersection of software engineering, AI and aviation.','소프트웨어공학·인공지능·항공을 연결하는 지능형 소프트웨어공학을 연구합니다.'],featuredProjects:['Featured research','대표 연구 사례'],projectsIntro:['Selected studies introduced in the 2026 Open Lab presentation.','2026 오픈랩 발표자료에서 소개한 연구 사례입니다.'],findRelatedPaper:['Find related publication ↗','관련 논문 찾기 ↗'],researchJourney:['Research journey · 2016–2026','연구의 흐름 · 2016–2026'],
  awardsTitle:['Awards & achievements','수상실적'],awardsSource:['Awards are grouped by year as listed in the supplied 2026 Open Lab presentation.','제공된 2026 오픈랩 발표자료의 수상 연도를 기준으로 정리했습니다.'],openlabSource:['Source: 2026 Open Lab presentation · Professor Seonah Lee’s laboratory.','출처: 2026 오픈랩 발표자료 · 이선아 교수님 연구실'],

@@ -28,6 +28,16 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
  await page.goto('http://localhost:8137/members.html');await page.waitForSelector('.member-faculty .member-portrait img');
  assert.equal(await page.locator('.member-faculty .member-portrait img').getAttribute('src'),'/assets/people/seonah-lee.png');
  assert(await page.locator('.member-faculty img').evaluate(img=>img.complete&&img.naturalWidth>0));await screenshot('members');
+ const seongjin=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Seongjin Go'})});
+ assert.equal(await seongjin.locator('.member-portrait img').getAttribute('src'),'/assets/people/seongjin-go.jpg');
+ assert(await seongjin.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
+ const kajal=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Patel Kajal'})});
+ assert.equal(await kajal.locator('.member-portrait img').getAttribute('src'),'/assets/people/kajal-patel.png');
+ assert(await kajal.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
+ const uicheon=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Uicheon Lee'})});
+ assert.equal(await uicheon.locator('.member-portrait img').getAttribute('src'),'/assets/people/uicheon-lee.jpg');
+ assert(await uicheon.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
+ assert((await uicheon.locator('.member-topic').textContent()).includes('Aircraft Simulation'));
  const checks=await page.evaluate(async()=>{
   const {supplementMemberUpdates}=await import('/member-updates.js');const {withMemberPhoto}=await import('/admin/member-photo.js');const {clean,validPhotoSource}=await import('/content.js');
   const profile={name:'Seonah Lee, Ph.D',group:'current',html:'<strong>Seonah Lee</strong><p>Professor</p>'};const first=supplementMemberUpdates([profile])[0];const removed={...first,html:withMemberPhoto(first.html,'',profile.name)};const custom={...profile,html:withMemberPhoto(profile.html,'https://example.org/new.png',profile.name)};

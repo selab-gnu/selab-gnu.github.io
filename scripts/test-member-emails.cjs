@@ -25,9 +25,12 @@ const root=path.resolve(__dirname,'..');
   await page.waitForFunction(()=>document.querySelectorAll('.member-profile').length===8);
   for(const entry of supplements){
    const card=page.locator('[id="member-'+entry.memberId+'"]');
+   assert.equal(await card.locator('a[href^="mailto:"]').count(),0);
+   await card.locator('.email-reveal').first().click();
    assert.equal(await card.locator('a[href="mailto:'+entry.email+'"]').count(),1);
    assert((await card.textContent()).includes('Keep biography'));assert.equal(await card.locator('img').count(),1);
   }
+  await page.locator('#member-existing .email-reveal').first().click();
   assert.equal(await page.locator('#member-existing a').getAttribute('href'),'mailto:existing@example.org');
   assert.equal(await page.locator('#member-unmatched a').count(),0);
   const checks=await page.evaluate(async({records,supplements})=>{
