@@ -47,21 +47,20 @@ def research_page(data):
         body+='<article><h3 data-i18n="'+key+'">'+title+'</h3><p data-i18n="'+desc+'"></p></article>'
     body+='</div><p class="source-note" data-i18n="scheduleNote"></p></section>'
     career_names={'컷백':'Cutback','젠티':'JENTI','슈어소프트웨어':'Suresoft','LIG넥스원':'LIG Nex1','현대로템':'Hyundai Rotem','모아소프트':'MOASOFT','포스코 기술연구원':'POSCO Technical Research Laboratories','엔테크서비스·NTS':'N Tech Service · NTS','엔스퀘어':'NSQUARE'}
-    body+='<section id="careers" class="openlab-section"><h2 data-i18n="careerPaths">Alumni pathways</h2><p data-i18n="careerIntro"></p><ul class="career-destinations">'+''.join(dual('li',label(name,career_names.get(name,name))) for name in data['careers'])+'</ul><a href="members.html" data-i18n="meetMembers">Meet our members ↗</a></section>'
-    # Preserve the deck's year groups; a range is not an exact employment date.
+    body+='<section id="careers" class="openlab-section"><h2 data-i18n="careerPaths">Alumni pathways</h2><p data-i18n="careerIntro"></p>'
+    body+=dual('p',label('기업·기관명을 누르면 취업·진학한 구성원과 자료에 기재된 연도를 볼 수 있습니다.','Select an organization to see the members and years listed in the presentation.'),'career-help')
+    body+='<div class="career-destinations">'
     outcomes=data.get('careerOutcomes',[])
-    career_detail=dual('p',label('2026 오픈랩 발표자료 30쪽에 기재된 취업·진학 내역입니다. 연도는 발표자료의 분류를 따르며 현재 재직 여부나 정확한 입사일을 뜻하지 않습니다.','Employment and further study listed on slide 30 of the 2026 Open Lab presentation. Years follow the presentation and do not confirm current employment or exact start dates.'),'source-note')
-    career_detail+='<div class="career-years">'
-    for period in dict.fromkeys(item['period'] for item in outcomes):
-        entries=[item for item in outcomes if item['period']==period]
-        career_detail+='<section class="career-year"><div class="career-year-heading"><h3>'+escape(period)+'</h3><span class="section-count">'+str(len(entries))+'</span></div><ul>'
+    for name in data['careers']:
+        entries=[item for item in outcomes if item['destination']['ko']==name or (name=='KAI' and item['destination']['ko']=='KT·KAI') or (name=='University of Manchester (PhD)' and item['type']=='phd')]
+        organization=label('맨체스터대학교 · 박사과정','University of Manchester · PhD') if name=='University of Manchester (PhD)' else label(name,career_names.get(name,name))
+        body+='<details class="career-organization"><summary>'+dual('span',organization)+'<span class="career-count">'+str(len(entries))+'</span></summary><ul>'
         for item in entries:
-            kind=label('박사과정 진학','PhD study') if item['type']=='phd' else label('취업','Employment')
-            career_detail+='<li class="career-outcome">'+dual('strong',item['name'])+'<div>'+dual('span',kind,'career-kind')+dual('p',item['destination'])+'</div></li>'
-        career_detail+='</ul></section>'
-    career_detail+='</div>'
-    # Insert the detailed records inside the existing pathways section.
-    body=body.replace('<a href="members.html" data-i18n="meetMembers">',career_detail+'<a href="members.html" data-i18n="meetMembers">')
+            body+='<li class="career-outcome">'+dual('strong',item['name'])+'<span class="career-period">'+escape(item['period'])+'</span>'
+            if item['destination']['ko']=='KT·KAI':body+=dual('small',item['destination'])
+            body+='</li>'
+        body+='</ul></details>'
+    body+='</div>'+dual('p',label('출처: 2026 오픈랩 발표자료 30쪽. 연도는 발표자료의 분류이며 현재 재직 여부나 정확한 입사일을 뜻하지 않습니다.','Source: slide 30 of the 2026 Open Lab presentation. Years follow the presentation and do not confirm current employment or exact start dates.'),'source-note')+'<a href="members.html" data-i18n="meetMembers">Meet our members ↗</a></section>'
     body+='<section id="join" class="openlab-section join-section"><h2 data-i18n="joinTitle">Join the lab</h2><div class="join-grid"><article><h3 data-i18n="foundations">Foundations</h3><p data-i18n="foundationsBody"></p><h3 data-i18n="preferred">Helpful experience</h3><p data-i18n="preferredBody"></p></article><article><h3 data-i18n="developSkills">What you will study</h3><p data-i18n="developSkillsBody"></p><h3 data-i18n="contactTitle">Contact</h3><a href="mailto:saleese@gnu.ac.kr">saleese@gnu.ac.kr</a><p data-i18n="contactLocation"></p></article></div></section>'
     body+='<p class="openlab-source" data-i18n="openlabSource">Based on the supplied 2026 Open Lab presentation.</p>'
     return body
