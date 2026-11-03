@@ -26,7 +26,7 @@ if(!['en','ko'].includes(requestedLanguage))try{language=localStorage.getItem('s
 try{localStorage.setItem('sea-lab-language',language);}catch{}
 export const getLanguage=()=>language;
 export const t=key=>translations[key]?.[language==='ko'?1:0]||key;
-export function localized(element,key){element.dataset.i18n=key;element.textContent=t(key);return element;}
+export function localized(element,key){if(key==='gallery'){element.setAttribute('translate','no');element.classList.add('notranslate');}element.dataset.i18n=key;element.textContent=t(key);return element;}
 export function applyLanguage(root=document){
  root.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
  root.querySelectorAll('[data-i18n-placeholder]').forEach(el=>el.placeholder=t(el.dataset.i18nPlaceholder));
