@@ -1,7 +1,7 @@
 // HTTPS images, explicitly approved bundled portraits, and small raster thumbnails only.
 export function validPhotoSource(value) {
  if(typeof value !== 'string' || value.length > 18000)return false;
- if(['/assets/people/seonah-lee.png','/assets/people/seongjin-go.jpg','/assets/people/kajal-patel.png','/assets/people/uicheon-lee.jpg'].includes(value))return true;
+ if(['/assets/people/seonah-lee.png','/assets/people/seongjin-go.jpg','/assets/people/kajal-patel.png','/assets/people/uicheon-lee.jpg','/assets/people/jueun-heo.jpg','/assets/people/dongeun-lee.jpg','/assets/people/det-virak.jpg','/assets/people/jia-shin.jpeg','/assets/people/seongwan-lim.png','/assets/people/gyutae-kim.jpg'].includes(value))return true;
  if(/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(value))return true;
  try {const url=new URL(value);return url.protocol==='https:' && !!url.hostname && !url.username && !url.password;}catch{return false;}
 }

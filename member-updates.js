@@ -5,7 +5,13 @@ const suppliedPhotos=[
  {name:/^(?:seonah\s+lee(?:,?\s*ph\.?d\.?)?|이선아(?:\s*교수)?)$/i,source:professorPhoto},
  {name:/^(?:seongjin\s+go|go\s+seongjin|고성진)$/i,source:'/assets/people/seongjin-go.jpg'},
  {name:/^(?:kajal\s+patel|patel\s+kajal|파텔\s*카잘)$/i,source:'/assets/people/kajal-patel.png'},
- {name:/^(?:uicheon\s+lee|lee\s+uicheon|이의천)$/i,source:'/assets/people/uicheon-lee.jpg'}
+ {name:/^(?:uicheon\s+lee|lee\s+uicheon|이의천)$/i,source:'/assets/people/uicheon-lee.jpg'},
+ {name:/^(?:jueun\s+heo|heo\s+jueun|허주은)$/i,source:'/assets/people/jueun-heo.jpg'},
+ {name:/^(?:dongeun\s+lee|lee\s+dongeun|이동은)$/i,source:'/assets/people/dongeun-lee.jpg'},
+ {name:/^(?:det\s+virak|virak\s+det|뎃\s*비락)$/i,source:'/assets/people/det-virak.jpg'},
+ {name:/^(?:jia\s+shin|shin\s+jia|신지아)$/i,source:'/assets/people/jia-shin.jpeg'},
+ {name:/^(?:seongwan\s+lim|lim\s+seongwan|임성완)$/i,source:'/assets/people/seongwan-lim.png'},
+ {name:/^(?:gyutae\s+kim|kim\s+gyutae|김규태)$/i,source:'/assets/people/gyutae-kim.jpg'}
 ];
 // This approved content correction is shared by the cloud reader and public renderer.
 // It upgrades the old topic once; later administrator edits are preserved.

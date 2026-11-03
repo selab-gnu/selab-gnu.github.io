@@ -38,6 +38,11 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
  assert.equal(await uicheon.locator('.member-portrait img').getAttribute('src'),'/assets/people/uicheon-lee.jpg');
  assert(await uicheon.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
  assert((await uicheon.locator('.member-topic').textContent()).includes('Aircraft Simulation'));
+ for(const [name,file] of [['Jueun Heo','jueun-heo.jpg'],['Dongeun Lee','dongeun-lee.jpg'],['det virak','det-virak.jpg'],['Jia Shin','jia-shin.jpeg'],['Seongwan Lim','seongwan-lim.png'],['Gyutae Kim','gyutae-kim.jpg']]){
+  const portrait=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:name})}).locator('.member-portrait img');
+  assert.equal(await portrait.getAttribute('src'),'/assets/people/'+file);
+  await portrait.scrollIntoViewIfNeeded();assert(await portrait.evaluate(img=>img.complete&&img.naturalWidth>0),name);
+ }
  const checks=await page.evaluate(async()=>{
   const {supplementMemberUpdates}=await import('/member-updates.js');const {withMemberPhoto}=await import('/admin/member-photo.js');const {clean,validPhotoSource}=await import('/content.js');
   const profile={name:'Seonah Lee, Ph.D',group:'current',html:'<strong>Seonah Lee</strong><p>Professor</p>'};const first=supplementMemberUpdates([profile])[0];const removed={...first,html:withMemberPhoto(first.html,'',profile.name)};const custom={...profile,html:withMemberPhoto(profile.html,'https://example.org/new.png',profile.name)};
