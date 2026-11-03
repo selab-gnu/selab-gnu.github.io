@@ -17,9 +17,9 @@ const root=path.resolve(__dirname,'..');
    else{
     if(url.pathname==='/data/sections.json'&&await page.evaluate(()=>window.courseFails)){await route.fulfill({status:503,body:''});return;}
     const file=path.join(root,url.pathname==='/'?'index.html':url.pathname);
-    if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}body=fs.readFileSync(file,'utf8');
+    if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}body=fs.readFileSync(file);
    }
-   await route.fulfill({contentType:url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8',body});
+   await route.fulfill({contentType:url.pathname.endsWith('.png')?'image/png':url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8',body});
   });
   for(const [path,title] of [['news.html','News'],['gallery.html','Gallery']]){
     await page.goto('http://localhost:8129/'+path);
@@ -29,7 +29,7 @@ const root=path.resolve(__dirname,'..');
   }
   await page.goto('http://localhost:8129/index.html');
   assert.equal(await page.locator('.hero,aside').count(),0);
-  assert.deepEqual(await page.locator('nav[aria-label="Main navigation"] a').allTextContents(),['Home','Members','Publications','News','Gallery']);
+  assert.deepEqual(await page.locator('nav[aria-label="Main navigation"] a').allTextContents(),['Home','Research & Lab','Members','Publications','News','Gallery']);
   await page.locator('[data-language="ko"]').click();
   await page.locator('#header-search').fill('object');await page.locator('header form button').click();
   await page.waitForFunction(()=>document.querySelector('#publication-result-count')?.textContent==='1편');
@@ -96,6 +96,6 @@ const root=path.resolve(__dirname,'..');
   await page.waitForFunction(()=>document.querySelector('#search-data-status')?.textContent.includes('최신 공개 논문을 확인하지 못해'));
   assert.equal(await page.locator('#publication-search-list li').count(),1);
   assert.deepEqual(errors,[]);
-  console.log('PASS: compact home, five navigation links, publication-only search, result anchors, empty/no-results/XSS, latest cloud paper tags, SE/AI/AERO and publication type filters, unclassified/empty intersections, URL persistence/back, safe metadata, offline fallback, mobile/desktop widths');
+  console.log('PASS: compact home, six navigation links, publication-only search, result anchors, empty/no-results/XSS, latest cloud paper tags, SE/AI/AERO and publication type filters, unclassified/empty intersections, URL persistence/back, safe metadata, offline fallback, mobile/desktop widths');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

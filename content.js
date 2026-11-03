@@ -1,6 +1,7 @@
-// Only HTTPS images and small raster thumbnails are accepted; SVG and script URLs are rejected.
+// HTTPS images, the exact bundled professor portrait, and small raster thumbnails only.
 export function validPhotoSource(value) {
  if(typeof value !== 'string' || value.length > 18000)return false;
+ if(value==='/assets/people/seonah-lee.png')return true;
  if(/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(value))return true;
  try {const url=new URL(value);return url.protocol==='https:' && !!url.hostname && !url.username && !url.password;}catch{return false;}
 }
@@ -20,8 +21,9 @@ export function clean(html) {
    );
    const span = ['td','th'].includes(e.localName) && ['colspan','rowspan'].includes(a.name) && /^[1-9][0-9]?$/.test(a.value);
    const paperTags = e.localName === 'span' && a.name === 'data-paper-tags' && /^(?:(?:SE|AI|AERO)(?: (?:SE|AI|AERO))*)?$/.test(a.value);
+   const photoPreference=e.localName==='span'&&a.name==='data-profile-photo'&&a.value==='none';
    const translation=(a.name==='data-i18n'&&/^[a-zA-Z]{1,40}$/.test(a.value))||(a.name==='data-lang'&&/^(en|ko)$/.test(a.value));
-   if (!link && !span && !photo && !paperTags && !translation) e.removeAttribute(a.name);
+   if (!link && !span && !photo && !paperTags && !translation && !photoPreference) e.removeAttribute(a.name);
   }
  }
  doc.body.querySelectorAll('img:not([src])').forEach(e=>e.remove());

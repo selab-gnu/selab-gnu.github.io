@@ -1,0 +1,518 @@
+{
+  "source": {
+    "name": "2026_OpenLab_발표자료_이선아 교수님 연구실.pptx",
+    "coverDate": "2026-11-06",
+    "slides": 37
+  },
+  "areas": [
+    {
+      "code": "SE",
+      "title": {
+        "ko": "소프트웨어 구조와 진화",
+        "en": "Software architecture & evolution"
+      },
+      "body": {
+        "ko": "소프트웨어 아키텍처, 요구사항 추적성, 코드 추천을 통해 개발과 유지보수를 지원합니다.",
+        "en": "Support development and maintenance through software architecture, requirements traceability and code recommendation."
+      },
+      "topics": {
+        "ko": "아키텍처 복원 · 요구사항 추적 · 코드 추천",
+        "en": "Architecture recovery · Traceability · Code recommendation"
+      },
+      "slides": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "code": "AI",
+      "title": {
+        "ko": "AI 기반 소프트웨어공학",
+        "en": "AI for software engineering"
+      },
+      "body": {
+        "ko": "LLM과 에이전트를 활용한 개발 자동화, 이슈 관리, 결함 위치 탐색과 설명 가능한 AI를 연구합니다.",
+        "en": "Study LLM- and agent-assisted development, issue management, bug localization and explainable AI."
+      },
+      "topics": {
+        "ko": "LLM · AI 에이전트 · NLP · XAI",
+        "en": "LLMs · AI agents · NLP · XAI"
+      },
+      "slides": [
+        9,
+        10,
+        16,
+        17,
+        19,
+        21,
+        22,
+        24
+      ]
+    },
+    {
+      "code": "AERO",
+      "title": {
+        "ko": "안전한 항공 자율시스템",
+        "en": "Safe autonomous aviation systems"
+      },
+      "body": {
+        "ko": "강화학습 자율비행, 유·무인기 협업, 충돌 회피, 항공 소프트웨어 안전성과 검증을 다룹니다.",
+        "en": "Investigate reinforcement-learning-based flight, manned-unmanned teaming, collision avoidance and aviation software safety and verification."
+      },
+      "topics": {
+        "ko": "자율비행 · 안전성 분석 · 시뮬레이션",
+        "en": "Autonomous flight · Safety analysis · Simulation"
+      },
+      "slides": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "slide": 19,
+      "area": "SE · AI",
+      "title": {
+        "ko": "치공구 설계 FreeCAD 자동화",
+        "en": "FreeCAD automation for fixture design"
+      },
+      "body": {
+        "ko": "RAG와 MCP 기반 멀티 에이전트로 치공구 설계를 위한 CAD 오토코딩을 연구합니다.",
+        "en": "RAG- and MCP-based multi-agent CAD autocoding for fixture design."
+      },
+      "query": "치공구 설계를 위한 RAG-MCP 기반 멀티 에이전트 FreeCAD 오토코딩 시스템",
+      "venue": "KCSE 2026"
+    },
+    {
+      "slide": 20,
+      "area": "AERO",
+      "title": {
+        "ko": "유·무인기 안전 알림 HMI",
+        "en": "Safety-alert HMI for manned-unmanned teaming"
+      },
+      "body": {
+        "ko": "LAH MUM-T 정찰·탐지 시나리오에서 다중 자율 무인기의 안전 알림 인터페이스를 설계합니다.",
+        "en": "Design safety-alert interfaces for multiple autonomous UAVs in LAH MUM-T reconnaissance and detection scenarios."
+      },
+      "query": "LAH MUM-T 정찰 및 탐지 시나리오에서의 다중 자율 무인기 안전 알림에 관한 HMI 설계",
+      "venue": "한국항공우주학회 춘계학술대회 2026"
+    },
+    {
+      "slide": 21,
+      "area": "SE · AI",
+      "title": {
+        "ko": "MCP 기반 결함 위치 탐색",
+        "en": "MCP-based bug localization"
+      },
+      "body": {
+        "ko": "유사 버그 보고서의 수정 빈도를 활용해 결함 위치 탐색을 지원합니다.",
+        "en": "Use modification frequencies from similar bug reports to support bug localization."
+      },
+      "query": "An MCP Tool for Bug Localization by Leveraging Modification Frequencies of Similar Bug Reports",
+      "venue": "IEEE Access · 2026"
+    },
+    {
+      "slide": 22,
+      "area": "SE · AI",
+      "title": {
+        "ko": "패키지 환각 탐지·분류",
+        "en": "Package hallucination detection"
+      },
+      "body": {
+        "ko": "생성형 AI가 제안하는 패키지의 환각을 탐지하고 분류하는 방법을 연구합니다.",
+        "en": "Investigate detection and classification of package hallucinations in generative AI outputs."
+      },
+      "query": "Package Hallucination Detection and Classification",
+      "venue": "KCC 2026"
+    },
+    {
+      "slide": 23,
+      "area": "AI · AERO",
+      "title": {
+        "ko": "AeroGuardian",
+        "en": "AeroGuardian"
+      },
+      "body": {
+        "ko": "UAS 목격 보고서에서 시뮬레이션으로 검증한 안전 정보를 생성합니다.",
+        "en": "Transform UAS sighting reports into simulation-validated safety intelligence."
+      },
+      "query": "AeroGuardian: From UAS Sighting Reports to Simulation-Validated Safety Intelligence",
+      "venue": "DASC 2026"
+    },
+    {
+      "slide": 24,
+      "area": "AI · AERO",
+      "title": {
+        "ko": "객체 탐지 실패 경계 분석",
+        "en": "Object-detection failure boundaries"
+      },
+      "body": {
+        "ko": "반사실적 설명을 이용해 자율비행 소프트웨어 객체 탐지의 실패 경계를 탐색합니다.",
+        "en": "Explore failure boundaries in autonomous-flight object detection using counterfactual explanations."
+      },
+      "query": "자율비행 소프트웨어의 객체 탐지에서 반사실적 설명 기반 실패 경계 탐색",
+      "venue": "KCC 2026"
+    },
+    {
+      "slide": 25,
+      "area": "AI · AERO",
+      "title": {
+        "ko": "다중 무인기 강화학습",
+        "en": "Multi-UAV reinforcement learning"
+      },
+      "body": {
+        "ko": "적대적 공동 진화와 제어 장벽 함수를 결합한 다중 무인기 공중전 강화학습을 연구합니다.",
+        "en": "Combine adversarial coevolution and control barrier functions for reinforcement learning in multi-UAV aerial combat."
+      },
+      "query": "적대적 공동 진화와 제어 장벽 함수를 결합한 다중 무인기 공중전 강화학습",
+      "venue": "ASSK 2026"
+    },
+    {
+      "slide": 26,
+      "area": "AERO",
+      "title": {
+        "ko": "도심 동적 장애물 회피",
+        "en": "Urban dynamic-obstacle avoidance"
+      },
+      "body": {
+        "ko": "유·무인기 팀워크에서 Velocity Obstacle과 Control Barrier Function을 이용한 장애물 회피를 연구합니다.",
+        "en": "Study obstacle avoidance in urban manned-unmanned teaming using Velocity Obstacles and Control Barrier Functions."
+      },
+      "query": "Dynamic Obstacle Collision Avoidance in Urban Manned-Unmanned Teaming",
+      "venue": "DASC 2026"
+    }
+  ],
+  "milestones": [
+    {
+      "year": 2016,
+      "title": {
+        "ko": "코드 추천을 통한 SW 개발 지원",
+        "en": "Code recommendation for software development"
+      },
+      "slide": 7
+    },
+    {
+      "year": 2017,
+      "title": {
+        "ko": "요구사항 추적성 강화",
+        "en": "Strengthening requirements traceability"
+      },
+      "slide": 8
+    },
+    {
+      "year": 2018,
+      "title": {
+        "ko": "SW 구조 복원·신경망 코드 추천",
+        "en": "Architecture recovery and neural code recommendation"
+      },
+      "slide": 9
+    },
+    {
+      "year": 2019,
+      "title": {
+        "ko": "AI 기반 이슈 분류",
+        "en": "AI-based issue classification"
+      },
+      "slide": 10
+    },
+    {
+      "year": 2020,
+      "title": {
+        "ko": "다중 UAV 정찰·항공 SW 시험",
+        "en": "Multi-UAV reconnaissance and aviation software testing"
+      },
+      "slide": 11
+    },
+    {
+      "year": 2021,
+      "title": {
+        "ko": "다중 무인기 시뮬레이션",
+        "en": "Multi-UAV simulation"
+      },
+      "slide": 12
+    },
+    {
+      "year": 2022,
+      "title": {
+        "ko": "고장·안전 분석",
+        "en": "Fault and safety analysis"
+      },
+      "slide": 13
+    },
+    {
+      "year": 2023,
+      "title": {
+        "ko": "항공 SW 신뢰성·AI 장애물 인식",
+        "en": "Aviation software reliability and AI obstacle recognition"
+      },
+      "slide": 14
+    },
+    {
+      "year": 2024,
+      "title": {
+        "ko": "충돌 회피 안전 요구사항",
+        "en": "Safety requirements for collision avoidance"
+      },
+      "slide": 15
+    },
+    {
+      "year": 2025,
+      "title": {
+        "ko": "LLM 문서 갱신·유무인 협업·강화학습 자율비행",
+        "en": "LLM document updates, teaming and reinforcement-learning-based flight"
+      },
+      "slide": 16
+    },
+    {
+      "year": 2026,
+      "title": {
+        "ko": "AI 결함 탐색·설명 가능한 경보·동적 장애물 회피",
+        "en": "AI bug localization, explainable warnings and dynamic-obstacle avoidance"
+      },
+      "slide": 17
+    }
+  ],
+  "awards": [
+    {
+      "id": "openlab-award-2017-1",
+      "year": 2017,
+      "event": {
+        "ko": "한국정보과학회 한국컴퓨터종합학술대회",
+        "en": "Korea Computer Congress (KCC)"
+      },
+      "name": {
+        "ko": "우수논문상",
+        "en": "Excellent Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2018-2",
+      "year": 2018,
+      "event": {
+        "ko": "한국정보과학회 한국소프트웨어공학 학술대회",
+        "en": "Korea Conference on Software Engineering (KCSE)"
+      },
+      "name": {
+        "ko": "우수논문상",
+        "en": "Excellent Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2021-3",
+      "year": 2021,
+      "event": {
+        "ko": "한국정보과학회 한국컴퓨터종합학술대회",
+        "en": "Korea Computer Congress (KCC)"
+      },
+      "name": {
+        "ko": "학부생 부문 우수상",
+        "en": "Undergraduate Excellence Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2021-4",
+      "year": 2021,
+      "event": {
+        "ko": "한국정보과학회 한국소프트웨어공학 학술대회",
+        "en": "Korea Conference on Software Engineering (KCSE)"
+      },
+      "name": {
+        "ko": "최우수논문상",
+        "en": "Best Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2023-5",
+      "year": 2023,
+      "event": {
+        "ko": "경상국립대 항공·기계 ICC센터 캡스톤디자인",
+        "en": "GNU Aerospace & Mechanical ICC Capstone Design"
+      },
+      "name": {
+        "ko": "금상",
+        "en": "Gold Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2023-6",
+      "year": 2023,
+      "event": {
+        "ko": "경상국립대 항공우주및소프트웨어공학 캡스톤디자인",
+        "en": "GNU Aerospace & Software Engineering Capstone Design"
+      },
+      "name": {
+        "ko": "대상",
+        "en": "Grand Prize"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2023-7",
+      "year": 2023,
+      "event": {
+        "ko": "경상국립대 항공우주및소프트웨어공학  우수성과발표회",
+        "en": "GNU Aerospace & Software Engineering Research Presentation"
+      },
+      "name": {
+        "ko": "최우수상",
+        "en": "Best Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2023-8",
+      "year": 2023,
+      "event": {
+        "ko": "경성대 LINC 3.0사업단 캡스톤디자인 경진대회",
+        "en": "Kyungsung University LINC 3.0 Capstone Design Competition"
+      },
+      "name": {
+        "ko": "최우수상",
+        "en": "Best Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2024-9",
+      "year": 2024,
+      "event": {
+        "ko": "한국정보과학회 한국소프트웨어공학 학술대회",
+        "en": "Korea Conference on Software Engineering (KCSE)"
+      },
+      "name": {
+        "ko": "최우수논문상",
+        "en": "Best Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2025-10",
+      "year": 2025,
+      "event": {
+        "ko": "울산·경남지역혁신플랫폼 스마트제조ICT사업단",
+        "en": "Ulsan–Gyeongnam Regional Innovation Platform, Smart Manufacturing ICT"
+      },
+      "name": {
+        "ko": "우수상",
+        "en": "Excellence Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2025-11",
+      "year": 2025,
+      "event": {
+        "ko": "MDPI 『Drones』",
+        "en": "MDPI Drones"
+      },
+      "name": {
+        "ko": "Best Paper Award",
+        "en": "Best Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2026-12",
+      "year": 2026,
+      "event": {
+        "ko": "45th Digital Avionics Systems Conference",
+        "en": "45th Digital Avionics Systems Conference (DASC)"
+      },
+      "name": {
+        "ko": "Best of Session",
+        "en": "Best of Session"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2026-13",
+      "year": 2026,
+      "event": {
+        "ko": "한국정보과학회 한국컴퓨터종합학술대회",
+        "en": "Korea Computer Congress (KCC)"
+      },
+      "name": {
+        "ko": "우수발표논문상",
+        "en": "Excellent Presentation Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2026-14",
+      "year": 2026,
+      "event": {
+        "ko": "한국정보과학회 한국소프트웨어공학 학술대회",
+        "en": "Korea Conference on Software Engineering (KCSE)"
+      },
+      "name": {
+        "ko": "우수산업체논문상",
+        "en": "Excellent Industry Paper Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2026-15",
+      "year": 2026,
+      "event": {
+        "ko": "한국항공우주학회 항공우주전자 심포지엄",
+        "en": "ASSK · Avionics Systems Symposium Korea"
+      },
+      "name": {
+        "ko": "최우수상",
+        "en": "Best Award"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2026-16",
+      "year": 2026,
+      "event": {
+        "ko": "경상국립대 RISE사업단 생성형 AI+X 경진대회",
+        "en": "GNU RISE Generative AI+X Competition"
+      },
+      "name": {
+        "ko": "대상",
+        "en": "Grand Prize"
+      },
+      "slide": 31
+    },
+    {
+      "id": "openlab-award-2026-17",
+      "year": 2026,
+      "event": {
+        "ko": "제4회 경남 AI·SW 경진대회",
+        "en": "4th Gyeongnam AI·SW Competition"
+      },
+      "name": {
+        "ko": "일반부 대상",
+        "en": "General Division Grand Prize"
+      },
+      "slide": 31
+    }
+  ],
+  "careers": [
+    "KAI",
+    "LIG넥스원",
+    "현대로템",
+    "모아소프트",
+    "SK C&C",
+    "포스코 기술연구원",
+    "Appia Engineering",
+    "엔테크서비스·NTS",
+    "엔스퀘어",
+    "University of Manchester (PhD)"
+  ]
+}

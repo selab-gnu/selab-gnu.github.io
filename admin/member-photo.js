@@ -6,11 +6,12 @@ export function memberPhoto(html) {
 export function withMemberPhoto(html, source, name) {
   const doc=new DOMParser().parseFromString(clean(html),'text/html');
   doc.querySelectorAll('img').forEach(img=>img.remove());
+  doc.querySelectorAll('[data-profile-photo]').forEach(el=>el.remove());
   if(source){
     if(!validPhotoSource(source))throw Error('사진 주소는 HTTPS 이미지 주소를 입력해주세요.');
     const img=doc.createElement('img');img.src=source;img.alt=name+' 프로필 사진';img.loading='lazy';img.width=160;img.height=200;
     doc.body.prepend(img);
-  }
+  }else{const preference=doc.createElement('span');preference.dataset.profilePhoto='none';doc.body.append(preference);}
   const result=doc.body.innerHTML;
   if(result.length>30000)throw Error('사진과 소개가 저장 용량을 초과했습니다. 사진을 줄이거나 소개를 짧게 해주세요.');
   return result;

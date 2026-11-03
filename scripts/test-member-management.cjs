@@ -45,9 +45,9 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
    else {
     const file=path.join(root,url.pathname==='/'?'index.html':url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname);
     if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}
-    source=fs.readFileSync(file,'utf8');
+    source=fs.readFileSync(file);
    }
-   const contentType=url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8';
+   const contentType=url.pathname.endsWith('.png')?'image/png':url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8';
    await route.fulfill({contentType,headers:{'Access-Control-Allow-Origin':'*'},body:source});
   });
   async function submitMember(name,expectedPhoto=false){

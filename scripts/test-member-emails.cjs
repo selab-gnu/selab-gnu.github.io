@@ -17,9 +17,9 @@ const root=path.resolve(__dirname,'..');
    if(url.pathname==='/firebase-client.js')body=`export const contentRef={firestore:{}};export const getDoc=async()=>({exists:()=>true,data:()=>({version:1,home:'',members:'',groups:window.emailFixture.groups,revision:2,memberDirectoryVersion:1})});export const runTransaction=async()=>{};export const serverTimestamp=()=>0;`;
    else if(url.pathname.endsWith('firebase-firestore.js'))body=`export const doc=(db,...parts)=>({firestore:db,path:parts.join('/')});export const collection=doc;export const getDocs=async()=>({docs:window.emailFixture.records.map(record=>({id:record.id,data:()=>record}))});`;
    else{
-    const file=path.join(root,url.pathname);if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}body=fs.readFileSync(file,'utf8');
+    const file=path.join(root,url.pathname);if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}body=fs.readFileSync(file);
    }
-   await route.fulfill({body,contentType:url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8'});
+   await route.fulfill({body,contentType:url.pathname.endsWith('.png')?'image/png':url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8'});
   });
   await page.goto('http://localhost:8129/members.html');
   await page.waitForFunction(()=>document.querySelectorAll('.member-profile').length===8);

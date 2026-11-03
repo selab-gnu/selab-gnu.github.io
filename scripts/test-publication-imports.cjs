@@ -20,9 +20,9 @@ const root=path.resolve(__dirname,'..');
    else{
     const file=path.join(root,url.pathname==='/'?'index.html':url.pathname);
     if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}
-    body=fs.readFileSync(file,'utf8');
+    body=fs.readFileSync(file);
    }
-   await route.fulfill({body,contentType:url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8'});
+   await route.fulfill({body,contentType:url.pathname.endsWith('.png')?'image/png':url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':url.pathname.endsWith('.json')?'application/json':'text/html; charset=utf-8'});
   });
   await page.goto('http://localhost:8129/publications.html');
   await page.waitForFunction(()=>document.querySelectorAll('.publications .paper-tags').length===139);

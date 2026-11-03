@@ -1,4 +1,5 @@
 import {loadMemberEmails,supplementMemberEmails} from '../member-emails.js';
+import {supplementMemberUpdates} from '../member-updates.js';
 import { memberPhoto, withMemberPhoto, setupPhoto } from './member-photo.js';
 import { clean } from '../content.js';
 import { compareMembers, isFaculty, memberCategory, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
@@ -63,7 +64,7 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
   async function load(content,revision){clear();const token=generation;const managing=canEdit('members');sourceContent=structuredClone(content);sourceRevision=revision;ready=content.memberDirectoryVersion===1;$('#member-migration').hidden=!managing||ready;$('#member-directory').hidden=!managing;$('#member-new-card').hidden=true;
     if(managing){
       if(ready){const loaded=await readProfiles();if(token!==generation)return;records=loaded;selected=records[0]||null;show();}
-      else {migration=supplementMemberEmails(splitLegacyMembers(content.members),await loadMemberEmails());if(token!==generation)return;records=migration;selected=records[0]||null;show();$('#member-migration-count').textContent=migration.length+'명의 소개를 멤버별로 나눴습니다. 기존 링크와 내용은 유지합니다.';$('#member-migration-preview').innerHTML=migration.map(r=>'<h3>'+memberGroups[r.group]+'</h3>'+profileHTML(r)+'<hr>').join('');}
+      else {migration=supplementMemberUpdates(supplementMemberEmails(splitLegacyMembers(content.members),await loadMemberEmails()));if(token!==generation)return;records=migration;selected=records[0]||null;show();$('#member-migration-count').textContent=migration.length+'명의 소개를 멤버별로 나눴습니다. 기존 링크와 내용은 유지합니다.';$('#member-migration-preview').innerHTML=migration.map(r=>'<h3>'+memberGroups[r.group]+'</h3>'+profileHTML(r)+'<hr>').join('');}
     }
     const ownId=getOwnMemberId();
     if(ownId){const loaded=await readProfile(ownId);if(token!==generation)return;own=loaded;$('#my-profile-editor').hidden=!own;$('#my-profile-status').textContent=own?'이름·직무·연락처는 관리자가 관리합니다. 본인은 자기소개만 수정할 수 있습니다.':'연결된 멤버를 찾을 수 없습니다. 관리자에게 연결 변경을 요청해주세요.';if(own){$('#my-profile-name').textContent=own.name;$('#my-profile-content').innerHTML=clean(own.html);$('#my-bio').value=own.bio;}}
