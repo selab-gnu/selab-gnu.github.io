@@ -68,7 +68,7 @@ function memberCard(profile){
  const mail=content.querySelector('a[href^="mailto:"]');if(mail){const contact=document.createElement('p');contact.className='member-email';contact.append(mail.cloneNode(true));copy.append(contact);}
  const topic=text.match(/Research Topic\s*:\s*([^\n]+)/i)?.[1]?.trim();if(topic){const topicBox=document.createElement('p');topicBox.className='member-topic';const label=localized(document.createElement('strong'),'topic');topicBox.append(label,document.createElement('br'),bilingualText('span',topic));copy.append(topicBox);}
  if(profile.bio)copy.append(bilingualText('p',profile.bio,'member-biography'));
- const details=document.createElement('details');details.className='member-details';details.append(localized(document.createElement('summary'),'details'));content.querySelectorAll('a[href^="mailto:"]').forEach(el=>el.replaceWith(el.textContent));details.append(bilingualProfileDetails(content,profile.name));copy.append(details);
+ const details=document.createElement('div');details.className='member-details';content.querySelectorAll('a[href^="mailto:"]').forEach(el=>el.replaceWith(el.textContent));details.append(bilingualProfileDetails(content,profile.name));copy.append(details);
  card.append(portrait,copy);return protectEmailMarkup(card.outerHTML);
 }
 export function renderProfiles(profiles) {

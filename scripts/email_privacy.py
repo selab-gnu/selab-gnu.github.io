@@ -8,7 +8,7 @@ ADDRESS=re.compile(r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}',re.I)
 
 def contact(address):
     token=base64.b64encode(address.encode('ascii')).decode('ascii')
-    return '<span class="email-contact" data-email-token="'+token+'"><button class="email-reveal" type="button" data-i18n="revealEmail" aria-expanded="false">View email</button></span>'
+    return '<span class="email-contact" data-email-token="'+token+'">'+html.escape(address.replace('@',' [at] '))+'</span>'
 
 def protect_public_emails(markup):
     def link(match):

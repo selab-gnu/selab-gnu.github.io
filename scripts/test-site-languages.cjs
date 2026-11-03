@@ -29,8 +29,8 @@ const removed='a893f9cf-5023-4546-90b4-47822e884917';
    assert.equal(await page.locator('.member-portrait').count(),13);assert.equal(await page.locator('[data-member-name="Yeonu Lee"]').count(),0);
    assert.equal(await page.locator('[data-member-name="det virak"] h3').innerText(),'Det Virak');
    assert.equal(await page.locator('[data-member-name="Patel Kajal"] h3').innerText(),'Kajal Patel');
-   await page.locator('[data-member-name="Uicheon Lee"] details').evaluate(el=>el.open=true);assert(!/[가-힣]/.test(await page.locator('[data-member-name="Uicheon Lee"]').innerText()));
-   await page.locator('[data-member-name="Uicheon Lee"] details').evaluate(el=>el.open=false);
+   assert(!/[가-힣]/.test(await page.locator('[data-member-name="Uicheon Lee"]').innerText()));
+
    assert.equal(await page.evaluate(()=>window.localeFixture.deletes.length),0,'Public reads must not delete backend data');
    await screenshot('members-en');
    await page.locator('[data-language=ko]').click();assert.equal(new URL(page.url()).searchParams.get('lang'),'ko');

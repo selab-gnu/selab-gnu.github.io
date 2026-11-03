@@ -12,13 +12,14 @@ const root=path.resolve(__dirname,'..');
  await page.goto('http://localhost:8137/members.html');await page.waitForSelector('.member-grid');
  assert.equal(await page.locator('main a[href^="mailto:"]').count(),0);assert(!emailPattern.test(await page.locator('main').innerText()));assert(!emailPattern.test(await page.locator('main').innerHTML()),'Collapsed profile details must not retain plain addresses');
  const card=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Seongjin Go'})});
- await card.locator('.member-email .email-reveal').click();assert.equal(await card.locator('.member-email .email-address').textContent(),'tjdwls9267@naver.com');assert.equal(await card.locator('.member-email .email-address').getAttribute('href'),'mailto:tjdwls9267@naver.com');
- await page.locator('[data-language=ko]').click();assert.equal(await card.locator('.member-email .email-hide').textContent(),'주소 숨기기');assert.equal(await card.locator('.member-email .email-address').count(),1);
- await card.locator('.member-email .email-hide').click();assert.equal(await card.locator('a[href^="mailto:"]').count(),0);assert(!emailPattern.test(await card.innerText()));
+ assert.equal(await card.locator('.member-email .email-contact').textContent(),'tjdwls9267 [at] naver.com');
+ assert.equal(await page.locator('.email-reveal,.email-hide,.member-profile details,.member-profile summary').count(),0);
+ assert(await card.locator('.member-details').isVisible());
+ await page.locator('[data-language=ko]').click();assert.equal(await card.locator('.member-email .email-contact').textContent(),'tjdwls9267 [at] naver.com');
  const restored=await page.evaluate(async()=>{const {splitLegacyMembers,profileHTML,renderProfiles}=await import('/member-profiles.js');const {restoreEmailMarkup}=await import('/email-privacy.js');const source=await(await fetch('/members.html')).text();const doc=new DOMParser().parseFromString(source,'text/html');const records=splitLegacyMembers(doc.querySelector('.imported-content').innerHTML);const go=records.find(r=>r.name==='Seongjin Go');const unsafe=restoreEmailMarkup('<span data-email-token="'+btoa('<img src=x onerror=alert(1)>')+'">Bad</span>');return {count:records.length,admin:profileHTML(go).includes('mailto:tjdwls9267@naver.com'),public:!renderProfiles([go]).includes('mailto:'),unsafe:unsafe.includes('<img')};});
  assert.equal(restored.count,29);assert(restored.admin&&restored.public&&!restored.unsafe);
  for(const file of ['index.html','research.html']){await page.goto('http://localhost:8137/'+file);await page.locator('.language-switch').waitFor();assert.equal(await page.locator('main a[href^="mailto:"]').count(),0);assert(!emailPattern.test(await page.locator('main').innerText()));}
  await page.setViewportSize({width:390,height:844});await page.goto('http://localhost:8137/members.html');await page.waitForSelector('.member-grid');assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
- assert.deepEqual(errors,[]);console.log('PASS: static source obfuscation, hidden public addresses, explicit reveal/mailto/hide, language changes, admin/legacy email preservation, invalid tokens, mobile layout; no backend writes.');
+ assert.deepEqual(errors,[]);console.log('PASS: static source obfuscation, visible [at] addresses without mailto/buttons, expanded profiles, language changes, admin/legacy email preservation, invalid tokens, mobile layout; no backend writes.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
