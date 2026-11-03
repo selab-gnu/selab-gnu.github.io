@@ -20,7 +20,8 @@ export function clean(html) {
    );
    const span = ['td','th'].includes(e.localName) && ['colspan','rowspan'].includes(a.name) && /^[1-9][0-9]?$/.test(a.value);
    const paperTags = e.localName === 'span' && a.name === 'data-paper-tags' && /^(?:(?:SE|AI|AERO)(?: (?:SE|AI|AERO))*)?$/.test(a.value);
-   if (!link && !span && !photo && !paperTags) e.removeAttribute(a.name);
+   const translation=(a.name==='data-i18n'&&/^[a-zA-Z]{1,40}$/.test(a.value))||(a.name==='data-lang'&&/^(en|ko)$/.test(a.value));
+   if (!link && !span && !photo && !paperTags && !translation) e.removeAttribute(a.name);
   }
  }
  doc.body.querySelectorAll('img:not([src])').forEach(e=>e.remove());

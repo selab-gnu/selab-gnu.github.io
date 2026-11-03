@@ -9,7 +9,7 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
    if (!validContent(d)) throw Error('Invalid content');
    const home = document.querySelector('#cloud-home');
    const members = document.querySelector('.page-members .imported-content');
-   if (home) home.innerHTML = clean(d.home);
+   if (home && !/This homepage is under (?:the )?construction/i.test(d.home)) home.innerHTML = clean(d.home);
    if (members) {
      if (d.memberDirectoryVersion===1) {
       const { readProfiles } = await import('./admin/member-store.js');
@@ -38,9 +38,9 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
      for(const [j,html] of g.items.entries()){const li=document.createElement('li');li.id='publication-'+i+'-'+j;const citation=document.createElement('div');citation.className='paper-citation';citation.innerHTML=clean(html);li.append(citation);ul.append(li);}
      document.querySelector('.category-links a[href="#category-'+i+'"]').textContent=g.category;
     });
-    document.dispatchEvent(new Event('content-updated'));
    }
   }
+  document.dispatchEvent(new Event('content-updated'));
  } catch(e) {
    console.warn('Cloud content unavailable; showing repository content.', e.code || e.message);
    if(document.querySelector('.page-members .imported-content')&&new URLSearchParams(location.search).has('added')){

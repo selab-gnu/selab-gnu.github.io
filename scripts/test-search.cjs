@@ -30,6 +30,7 @@ const root=path.resolve(__dirname,'..');
   await page.goto('http://localhost:8129/index.html');
   assert.equal(await page.locator('.hero,aside').count(),0);
   assert.deepEqual(await page.locator('nav[aria-label="Main navigation"] a').allTextContents(),['Home','Members','Publications','News','Gallery']);
+  await page.locator('[data-language="ko"]').click();
   await page.locator('#header-search').fill('object');await page.locator('header form button').click();
   await page.waitForFunction(()=>document.querySelector('#publication-result-count')?.textContent==='1편');
   assert.equal(await page.locator('#publication-search-list li').count(),1);

@@ -1,0 +1,118 @@
+{
+  "checkedAt": "2026-11-03",
+  "entries": [
+    {
+      "id": "gnu-dasc-2026",
+      "date": "2026-10-15",
+      "title": {
+        "ko": "뎃 비락·신지아·고성진, DASC 2026 연구 발표",
+        "en": "Det Virak, Jia Shin and Seongjin Go present at DASC 2026"
+      },
+      "body": {
+        "ko": "이선아 교수 지도 학생들이 DASC 2026에서 안전한 드론 운용 연구를 발표했습니다. 뎃 비락은 AeroGuardian 연구로 베스트 세션상을 받았으며, 신지아는 객체 탐지 성능 저하 조기경보를, 고성진은 도심 유·무인기 팀워크의 장애물 회피를 다뤘습니다.",
+        "en": "Students advised by Professor Seonah Lee presented drone-safety research at DASC 2026. Det Virak received a Best Session Award for AeroGuardian. Jia Shin studied early warning of object-detection degradation, and Seongjin Go investigated obstacle avoidance in urban manned-unmanned teaming."
+      },
+      "source": "https://new.gnu.ac.kr/main/na/ntt/selectNttInfo.do?mi=1290&nttSn=8913762",
+      "sourceName": "경상국립대학교 · GNU",
+      "people": [
+        "이선아",
+        "뎃 비락",
+        "신지아",
+        "고성진"
+      ]
+    },
+    {
+      "id": "gnu-assk-2026",
+      "date": "2026-07-14",
+      "title": {
+        "ko": "이의천, ASSK 2026 학생부문 최우수논문상 수상",
+        "en": "Uicheon Lee receives the ASSK 2026 student Best Paper Award"
+      },
+      "body": {
+        "ko": "이의천 박사과정생이 7월 2~3일 열린 항공우주전자 심포지엄 학생부문에서 최우수논문상을 받았습니다. 공동연구진은 적대적 공동 진화와 제어 장벽 함수를 결합한 다중 무인기 공중전 강화학습을 연구했습니다.",
+        "en": "PhD student Uicheon Lee received the student Best Paper Award at ASSK 2026, held July 2–3. The collaborative study combines adversarial coevolution and control barrier functions for reinforcement learning in multi-UAV aerial combat."
+      },
+      "source": "https://www.gnu.ac.kr/main/na/ntt/selectNttInfo.do?mi=1290&nttSn=7715801",
+      "sourceName": "경상국립대학교 · GNU",
+      "people": [
+        "이의천",
+        "고성진",
+        "이선아"
+      ]
+    },
+    {
+      "id": "ise-2026-program",
+      "date": "2026-05-22",
+      "dateKind": "event",
+      "title": {
+        "ko": "신지아·이의천·이선아, Intelligent SE 2026 발표 프로그램 등재",
+        "en": "Jia Shin, Uicheon Lee and Seonah Lee in the Intelligent SE 2026 program"
+      },
+      "body": {
+        "ko": "ICST 2026 연계 Intelligent SE 워크숍의 공식 프로그램에 설명 가능한 AI를 활용한 객체 탐지 모델 성능 저하 조기경보 연구가 등재됐습니다. 이선아 교수는 워크숍 연락 담당자로도 안내돼 있습니다.",
+        "en": "The official program for the Intelligent SE workshop at ICST 2026 lists their research on explainable-AI-based early warning of object-detection performance degradation. Professor Seonah Lee is also listed as a workshop contact."
+      },
+      "source": "https://conf.researchr.org/home/ise-2026",
+      "sourceName": "Intelligent SE 2026 · Official program",
+      "people": [
+        "신지아",
+        "이의천",
+        "이선아"
+      ]
+    },
+    {
+      "id": "gnu-heo-fellowship-2025",
+      "date": "2025-09-04",
+      "title": {
+        "ko": "허주은, 박사과정생 연구장려금 지원사업 선정",
+        "en": "Jueun Heo selected for doctoral research support"
+      },
+      "body": {
+        "ko": "이선아 교수 지도의 허주은 박사과정생이 2025년도 이공분야 학문후속세대 지원사업에 선정됐습니다. 연구 주제는 생성형 AI를 활용한 소프트웨어 진화 및 체계적 이슈 관리입니다.",
+        "en": "Jueun Heo, advised by Professor Seonah Lee, was selected for the 2025 doctoral research support program. The project studies systematic issue management using generative AI for software evolution."
+      },
+      "source": "https://www.gnu.ac.kr/main/na/ntt/selectNttInfo.do?bbsId=1021&mi=&nttSn=3289722",
+      "sourceName": "경상국립대학교 · GNU",
+      "people": [
+        "허주은",
+        "이선아"
+      ]
+    },
+    {
+      "id": "gnu-dasc-2025",
+      "date": "2025-08-21",
+      "title": {
+        "ko": "이의천 DASC 2025 발표 선정·고성진 해외 연구활동 참여",
+        "en": "Uicheon Lee selected for DASC 2025 presentation; Seongjin Go joins overseas research activities"
+      },
+      "body": {
+        "ko": "학과 뉴스는 이의천의 도심 유·무인기 팀워크와 자율비행 편대 비교 연구가 DASC 2025에서 발표될 예정이라고 전했습니다. 고성진은 GADIST 해외과제발굴 프로그램을 통해 학회와 해외 대학 탐방에 참여할 예정으로 소개됐습니다.",
+        "en": "Department news announced Uicheon Lee’s upcoming DASC 2025 presentation comparing autonomous flight formations in urban manned-unmanned teaming. Seongjin Go was listed as joining conference and university visits through a GADIST overseas research program."
+      },
+      "source": "https://www.gnu.ac.kr/soft/na/ntt/selectNttInfo.do?bbsId=4234&mi=&nttSn=3048043",
+      "sourceName": "경상국립대학교 소프트웨어공학과",
+      "people": [
+        "이의천",
+        "고성진",
+        "이선아"
+      ]
+    },
+    {
+      "id": "kaist-appointment-2016",
+      "date": "2016-03-21",
+      "title": {
+        "ko": "이선아 교수, 경상대학교 조교수 임용 소식",
+        "en": "Seonah Lee appointed assistant professor at Gyeongsang National University"
+      },
+      "body": {
+        "ko": "KAIST 전산학부는 이선아 박사가 2016년 3월 경상대학교 항공우주 및 소프트웨어공학전공 조교수로 임용됐다고 알렸습니다. 소프트웨어 진화와 개발자의 코드 이해를 돕는 연구 경력을 소개한 기록입니다.",
+        "en": "KAIST’s School of Computing announced Seonah Lee’s appointment as an assistant professor in aerospace and software engineering in March 2016. The announcement introduces her work on software evolution and developer support."
+      },
+      "source": "https://cs.kaist.ac.kr/board/view?bbs_id=news&bbs_sn=6998&menu=83",
+      "sourceName": "KAIST School of Computing",
+      "people": [
+        "이선아"
+      ]
+    }
+  ]
+}

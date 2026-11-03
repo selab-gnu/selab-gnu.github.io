@@ -1,7 +1,7 @@
 import {loadMemberEmails,supplementMemberEmails} from '../member-emails.js';
 import { memberPhoto, withMemberPhoto, setupPhoto } from './member-photo.js';
 import { clean } from '../content.js';
-import { compareMembers, isFaculty, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
+import { compareMembers, isFaculty, memberCategory, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
 import { formatMember } from './member-format.js';
 import { canEdit, getOwnMemberId } from './auth.js';
 import { readProfiles, readProfile, migrateProfiles, saveProfile, saveProfileOrder, deleteProfile } from './member-store.js';
@@ -19,13 +19,13 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
   function fillGroups(select){select.replaceChildren();for(const [key,name] of Object.entries(memberGroups)){const o=document.createElement('option');o.value=key;o.textContent=name;select.append(o);}}
   fillGroups($('#member-edit-group'));fillGroups($('#member-group'));
   function roleOptions(){const select=$('#role-member');const old=select.value;select.replaceChildren(new Option('멤버 연결 안 함',''));for(const record of records.filter(r=>r.revision>0))select.append(new Option(record.name+' · '+memberGroups[record.group],record.id));select.value=old;}
-  function list(){$('#member-summary').textContent=records.length+'명 · 전체 멤버 추가·수정·삭제 가능';const q=$('#member-search').value.toLocaleLowerCase();const box=$('#member-list');box.replaceChildren();for(const record of records.filter(r=>r.name.toLocaleLowerCase().includes(q)).sort(compareMembers)){const b=document.createElement('button');b.type='button';b.dataset.memberId=record.id;b.draggable=!isFaculty(record);b.title=isFaculty(record)?'교수님은 현재 멤버의 맨 위에 표시됩니다.':'드래그하여 같은 구분 안에서 이동 · Alt + 위/아래 방향키';
+  function list(){$('#member-summary').textContent=records.length+'명 · 전체 멤버 추가·수정·삭제 가능';const q=$('#member-search').value.toLocaleLowerCase();const box=$('#member-list');box.replaceChildren();for(const record of records.filter(r=>r.name.toLocaleLowerCase().includes(q)).sort(compareMembers)){const b=document.createElement('button');b.type='button';b.dataset.memberId=record.id;b.draggable=!isFaculty(record);b.title=isFaculty(record)?'교수님은 현재 멤버의 맨 위에 표시됩니다.':'드래그하여 같은 구분·과정 안에서 이동 · Alt + 위/아래 방향키';
       b.ondragstart=e=>{draggedMemberId=record.id;e.dataTransfer.setData('text/plain',record.id);e.dataTransfer.effectAllowed='move';};
       b.ondragend=()=>{draggedMemberId=null;box.querySelectorAll('.drop-target').forEach(el=>el.classList.remove('drop-target'));};
       b.ondragover=e=>{const source=records.find(r=>r.id===draggedMemberId);if(source&&source.group===record.group&&!isFaculty(record)){e.preventDefault();b.classList.add('drop-target');}};
       b.ondragleave=()=>b.classList.remove('drop-target');
       b.ondrop=e=>{e.preventDefault();b.classList.remove('drop-target');const id=draggedMemberId;draggedMemberId=null;moveMember(id,record.id);};
-      b.onkeydown=e=>{if(e.altKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();const group=records.filter(r=>r.group===record.group).sort(compareMembers);const target=group[group.findIndex(r=>r.id===record.id)+(e.key==='ArrowUp'?-1:1)];if(target)moveMember(record.id,target.id);}};
+      b.onkeydown=e=>{if(e.altKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();const group=records.filter(r=>r.group===record.group&&(r.group!=='current'||memberCategory(r).level===memberCategory(record).level)).sort(compareMembers);const target=group[group.findIndex(r=>r.id===record.id)+(e.key==='ArrowUp'?-1:1)];if(target)moveMember(record.id,target.id);}};
       b.textContent=record.name+' · '+memberGroups[record.group];b.classList.toggle('selected',selected?.id===record.id);b.onclick=()=>{if(!discard())return;selected=record;$('#member-new-card').hidden=true;show();};box.append(b);}if(!box.children.length)box.textContent='등록된 멤버 또는 검색 결과가 없습니다.';roleOptions();}
   function moveMember(id, targetId) {
     return perform(async()=>{
@@ -35,6 +35,7 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
       const source=records.find(r=>r.id===id),target=records.find(r=>r.id===targetId);
       if(!source||!target||id===targetId)return;
       if(source.group!==target.group)throw Error('같은 구분 안에서 순서를 변경해주세요. 구분은 멤버 수정에서 변경할 수 있습니다.');
+      if(source.group==='current'&&memberCategory(source).level!==memberCategory(target).level)throw Error('과정별 정렬을 유지합니다. 같은 과정 안에서 순서를 바꿔주세요.');
       if(isFaculty(source)||isFaculty(target))throw Error('교수님은 현재 멤버의 맨 위에 유지됩니다.');
       const group=records.filter(r=>r.group===source.group).sort(compareMembers);
       const from=group.findIndex(r=>r.id===id),to=group.findIndex(r=>r.id===targetId);

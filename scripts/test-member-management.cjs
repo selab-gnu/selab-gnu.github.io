@@ -62,11 +62,11 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
       const cards=[...document.querySelectorAll('.member-profile')];
       const records=Object.entries(window.fixture.docs).filter(([key])=>key.startsWith('memberProfiles/')).map(([key,value])=>({id:key.split('/')[1],...value}));
       const added=records.find(r=>r.id===id);
-      const category=cards.filter(card=>records.find(r=>card.id==='member-'+r.id)?.group===added.group);
+      const category=[...document.getElementById('member-'+id).parentElement.querySelectorAll(':scope > .member-profile')];
       return {first:cards[0].textContent,last:category.at(-1).id};
     },target);
     assert(ordering.first.includes('Seonah Lee'),'Professor remains first');
-    assert.equal(ordering.last,'member-'+target,'New member is last in the selected category');
+    assert.equal(ordering.last,'member-'+target,'New member is last in the selected degree/category');
     await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
     await page.locator('[data-tab="members"]').click();
     await page.locator('#member-list button').filter({hasText:name}).click();
@@ -150,8 +150,8 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert.equal(await page.locator('#viewer-title').textContent(),'함께하는 연구 활동');
   await page.keyboard.press('Escape');assert(await page.locator('#gallery-viewer').isHidden());
   for(const width of [390,1440]){await page.setViewportSize({width,height:1100});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
-  await page.goto('http://localhost:8129/news.html');await page.locator('.news-card').waitFor();
-  assert((await page.locator('.news-body').textContent()).includes('<script>alert(1)</script>'));
+  await page.goto('http://localhost:8129/news.html');await page.locator('.news-card').filter({hasText:'연구실 세미나 안내'}).waitFor();
+  assert((await page.locator('.news-card').filter({hasText:'연구실 세미나 안내'}).locator('.news-body').textContent()).includes('<script>alert(1)</script>'));
   assert.equal(await page.locator('.news-card script').count(),0);
   await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   await page.locator('[data-tab="gallery"]').click();await page.locator('#gallery-form').waitFor();
@@ -239,7 +239,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert.equal(reordered[0],records[0].id);
   assert(reordered.indexOf(movable[1].id)<reordered.indexOf(movable[0].id));
   await page.goto('http://localhost:8129/members.html');
-  await page.locator('.member-profile').first().waitFor();
+  await page.locator('[id="member-'+reordered[0]+'"]').waitFor();
   assert.deepEqual(await page.locator('.member-profile').evaluateAll(nodes=>nodes.map(n=>n.id.replace('member-',''))),reordered);
   await page.goto('http://localhost:8129/admin/');await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   await page.locator('[data-tab="members"]').click();
@@ -364,7 +364,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   // a biography saved through the self-only editor.
   await page.goto('http://localhost:8129/members.html');
   await page.waitForFunction(()=>document.querySelector('.imported-content').textContent.includes('내가 직접 수정한 소개'));
-  assert.equal(await page.locator('.imported-content h2').count(),3);
+  assert.deepEqual(await page.locator('.member-group-heading').evaluateAll(nodes=>nodes.map(n=>n.dataset.i18n)),['faculty','phd','ms','undergrad','alumniGraduate','alumniUndergrad']);
   assert.equal(await page.locator('.imported-content script').count(),0);
   console.log('PASS: public directory reads individual profiles and updated biographies');
   // First use of the administrator, before siteContent/main even exists.

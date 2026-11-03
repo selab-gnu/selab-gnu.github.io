@@ -13,7 +13,7 @@ const root=path.resolve(__dirname,'..');
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
-  await page.addInitScript(groups=>window.importFixture={version:1,home:'<p>Cloud homepage</p>',members:'<p>Cloud members</p>',groups,revision:200},old);
+  await page.addInitScript(groups=>{localStorage.setItem('sea-lab-language','ko');window.importFixture={version:1,home:'<p>Cloud homepage</p>',members:'<p>Cloud members</p>',groups,revision:200};},old);
   await page.route('**/*',async route=>{
    const url=new URL(route.request().url());let body;
    if(url.pathname==='/firebase-client.js')body=`export const contentRef={};export const getDoc=async()=>({exists:()=>true,data:()=>window.importFixture});`;

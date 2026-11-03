@@ -1,4 +1,6 @@
 import {loadPaperTags,paperTags,tagBadges} from './publication-tags.js';
+import './site-enhancements.js';
+import {setupPublicationFilters} from './publication-filters.js';
 // Search results link directly to a publication; every paper stays visible.
 function highlightPublication(){
  document.querySelectorAll('.publication-target').forEach(el=>el.classList.remove('publication-target'));
@@ -19,5 +21,6 @@ function renderPaperTags(){
 }
 if(document.querySelector('.publications')){
  document.addEventListener('content-updated',renderPaperTags);
- await loadPaperTags();renderPaperTags();
+ document.addEventListener('language-changed',renderPaperTags);
+ await loadPaperTags();renderPaperTags();setupPublicationFilters();
 }

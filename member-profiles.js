@@ -1,4 +1,6 @@
 import { clean } from './content.js';
+import {localized} from './i18n.js';
+import {supplementMemberUpdates} from './member-updates.js';
 
 export const memberGroups = {
   current: 'Current Members',
@@ -28,14 +30,43 @@ export function compareMembers(a, b) {
   const groups = Object.keys(memberGroups);
   const category = groups.indexOf(a.group) - groups.indexOf(b.group);
   if (category) return category;
-  return Number(isFaculty(b)) - Number(isFaculty(a)) || a.order - b.order || a.id.localeCompare(b.id);
+  return Number(isFaculty(b)) - Number(isFaculty(a)) || (a.group==='current' ? memberRank(a)-memberRank(b) : 0) || a.order - b.order || a.id.localeCompare(b.id);
 }
 
+export function memberCategory(profile){
+ const doc=new DOMParser().parseFromString(clean(profile.html),'text/html');doc.querySelectorAll('br').forEach(el=>el.replaceWith('\n'));
+ const text=doc.body.textContent;
+ const level=/ph\.?\s*d|박사/i.test(text)?'phd':/\bMS\b|M\.S\.|석사/i.test(text)?'ms':/undergraduate|학부/i.test(text)?'undergrad':'other';
+ return {level};
+}
+function memberRank(profile){return ['phd','ms','undergrad','other'].indexOf(memberCategory(profile).level);}
+function memberCard(profile){
+ const card=document.createElement('section');card.id='member-'+profile.id;card.className='member-profile'+(isFaculty(profile)?' member-faculty':'');
+ const content=document.createElement('div');content.className='member-copy';content.innerHTML=profileHTML(profile);content.querySelectorAll('hr').forEach(el=>el.remove());
+ const walker=document.createTreeWalker(content,NodeFilter.SHOW_TEXT);let textNode;while(textNode=walker.nextNode())textNode.textContent=textNode.textContent.replace(/(?:part|full)[ -]?time\s*/ig,'').replace(/Enrollment:\s*/g,'');
+ const img=content.querySelector('img');
+ const portrait=document.createElement('div');portrait.className='member-portrait';
+ if(img){portrait.append(img);img.alt=profile.name;}
+ else{const initials=document.createElement('span');initials.className='member-initials';initials.textContent=profile.name.split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();portrait.append(initials,localized(document.createElement('small'),'photoPending'));}
+ const raw=content.cloneNode(true);raw.querySelectorAll('br').forEach(el=>el.replaceWith('\n'));raw.querySelectorAll('p,div').forEach(el=>el.append('\n'));const text=raw.textContent.replace(/\u00a0/g,' ');
+ const name=document.createElement('h3');name.textContent=profile.name;const role=localized(document.createElement('p'),isFaculty(profile)?'faculty':memberCategory(profile).level);role.className='member-role';
+ const heading=document.createElement('div');heading.className='member-card-heading';heading.append(name,role);const copy=document.createElement('div');copy.className='member-copy';copy.append(heading);
+ if(isFaculty(profile)&&/seonah\s+lee|이선아/i.test(profile.name)){copy.append(localized(document.createElement('p'),'professorDept'),localized(document.createElement('p'),'professorIntro'));const website=document.createElement('a');website.href='https://saleese.github.io/';localized(website,'professorLink');copy.append(website);}
+ const mail=content.querySelector('a[href^="mailto:"]');if(mail){const contact=document.createElement('p');contact.className='member-email';contact.append(mail.cloneNode(true));copy.append(contact);}
+ const topic=text.match(/Research Topic\s*:\s*([^\n]+)/i)?.[1]?.trim();if(topic){const topicBox=document.createElement('p');topicBox.className='member-topic';const label=localized(document.createElement('strong'),'topic');topicBox.append(label,document.createElement('br'),document.createTextNode(topic));copy.append(topicBox);}
+ if(profile.bio){const biography=document.createElement('p');biography.className='member-biography';biography.textContent=profile.bio;copy.append(biography);}
+ const details=document.createElement('details');details.className='member-details';details.append(localized(document.createElement('summary'),'details'));content.querySelectorAll('a[href^="mailto:"]').forEach(el=>el.replaceWith(el.textContent));details.append(content);copy.append(details);
+ card.append(portrait,copy);return card.outerHTML;
+}
 export function renderProfiles(profiles) {
-  return Object.entries(memberGroups).map(([group, label]) => {
-    const members = profiles.filter(p => p.group === group).sort(compareMembers);
-    return members.length ? '<h2>' + label + '</h2>' + members.map(p => {const card=document.createElement('section');card.id='member-'+p.id;card.className='member-profile';card.innerHTML=profileHTML(p)+'<hr>';return card.outerHTML;}).join('') : '';
-  }).join('');
+ profiles=supplementMemberUpdates(profiles);
+ const sections=[];
+ const section=(key,items,sub=false)=>{if(!items.length)return;const heading=localized(document.createElement(sub?'h3':'h2'),key);heading.className='member-group-heading';const grid=document.createElement('div');grid.className='member-grid';grid.innerHTML=items.sort(compareMembers).map(memberCard).join('');sections.push(heading.outerHTML+grid.outerHTML);};
+ section('faculty',profiles.filter(isFaculty));
+ const rows=profiles.filter(p=>p.group==='current'&&!isFaculty(p));
+ for(const level of ['phd','ms','undergrad','other'])section(level,rows.filter(p=>memberCategory(p).level===level));
+ section('alumniGraduate',profiles.filter(p=>p.group==='graduates'));section('alumniUndergrad',profiles.filter(p=>p.group==='undergraduates'));
+ return sections.join('');
 }
 
 // Split the legacy document at member-name headings, preserving original links
