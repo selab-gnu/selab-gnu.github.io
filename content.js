@@ -22,7 +22,7 @@ export function clean(html) {
    const span = ['td','th'].includes(e.localName) && ['colspan','rowspan'].includes(a.name) && /^[1-9][0-9]?$/.test(a.value);
    const paperTags = e.localName === 'span' && a.name === 'data-paper-tags' && /^(?:(?:SE|AI|AERO)(?: (?:SE|AI|AERO))*)?$/.test(a.value);
    const photoPreference=e.localName==='span'&&a.name==='data-profile-photo'&&a.value==='none';
-   const emailToken=e.localName==='span'&&a.name==='data-email-token'&&/^[A-Za-z0-9+/]{1,424}={0,2}$/.test(a.value);
+   const emailToken=e.localName==='span'&&['data-email-token','data-email-user','data-email-domain'].includes(a.name)&&/^[A-Za-z0-9+/]{1,424}={0,2}$/.test(a.value);
    const translation=(a.name==='data-i18n'&&/^[a-zA-Z]{1,40}$/.test(a.value))||(a.name==='data-lang'&&/^(en|ko)$/.test(a.value));
    if (!link && !span && !photo && !paperTags && !translation && !photoPreference && !emailToken) e.removeAttribute(a.name);
   }
