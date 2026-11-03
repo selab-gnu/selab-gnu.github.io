@@ -1,5 +1,6 @@
 import { renderProfiles } from './member-profiles.js';
 import { clean, validContent } from './content.js';
+import {getLanguage,t} from './i18n.js';
 if (document.querySelector('#cloud-home, .page-members .imported-content, .publication-group')) {
  try {
   const { contentRef, getDoc } = await import('./firebase-client.js');
@@ -19,7 +20,7 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
       const profile=profiles.find(record=>record.id===added);
       if(profile){
         const card=document.getElementById('member-'+profile.id);
-        const notice=document.createElement('p');notice.className='member-registration-status';notice.setAttribute('role','status');notice.textContent=profile.name+' 멤버가 등록되었습니다.';
+        const notice=document.createElement('p');notice.className='member-registration-status';notice.setAttribute('role','status');notice.textContent=getLanguage()==='ko'?profile.name+' 멤버가 등록되었습니다.':t('registeredMember')+': '+profile.name;
         card.prepend(notice);card.classList.add('member-just-added');card.scrollIntoView({block:'center'});
       }
      } else {
@@ -44,7 +45,7 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
  } catch(e) {
    console.warn('Cloud content unavailable; showing repository content.', e.code || e.message);
    if(document.querySelector('.page-members .imported-content')&&new URLSearchParams(location.search).has('added')){
-     const notice=document.createElement('p');notice.setAttribute('role','alert');notice.textContent='최신 멤버 정보를 불러오지 못했습니다. 잠시 후 새로고침해 등록한 소개를 확인해주세요.';
+     const notice=document.createElement('p');notice.setAttribute('role','alert');notice.dataset.i18n='memberLoadError';notice.textContent=t('memberLoadError');
      document.querySelector('.page-members .imported-content').prepend(notice);
    }
  }

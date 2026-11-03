@@ -1,5 +1,5 @@
 import {clean} from './content.js';
-import {getLanguage,t} from './i18n.js';
+import {getLanguage,t,languageURL} from './i18n.js';
 
 export const researchAreas={SE:'소프트웨어공학',AI:'인공지능',AERO:'항공우주공학'};
 export const publicationTypes=['international-journals','international-conferences','domestic-journals','domestic-conferences'];
@@ -45,7 +45,7 @@ export function tagBadges(tags,links=false){
   const box=document.createElement('div');box.className='paper-tags';box.setAttribute('aria-label',t('area'));
   for(const tag of normalizeTags(tags)){
     const badge=document.createElement(links?'a':'span');badge.className='paper-tag tag-'+tag.toLowerCase();badge.textContent=tag;badge.title=getLanguage()==='ko'?researchAreas[tag]:{SE:'Software Engineering',AI:'Artificial Intelligence',AERO:'Aerospace Engineering'}[tag];
-    if(links)badge.href='search.html?tag='+tag;
+    if(links)badge.href=languageURL('search.html?tag='+tag);
     box.append(badge);
   }
   if(!box.children.length){const badge=document.createElement('span');badge.className='paper-tag tag-unclassified';badge.textContent=t('unclassified');box.append(badge);}

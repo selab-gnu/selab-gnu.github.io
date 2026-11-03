@@ -2,16 +2,25 @@ import { contentRef, getDoc, runTransaction, serverTimestamp } from '../firebase
 import { doc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
 import {loadMemberEmails,supplementMemberEmails} from '../member-emails.js';
 import {supplementMemberUpdates} from '../member-updates.js';
+import {visibleMembers,removedMemberIds,isRemovedMember} from '../member-localization.js';
 
 const ref = id => doc(contentRef.firestore, 'memberProfiles', id);
+// Called only by the administrator's member loader. Public reads never write.
+export async function purgeRemovedProfiles(){
+ for(const id of removedMemberIds)await runTransaction(contentRef.firestore,async tx=>{
+  const snapshot=await tx.get(ref(id));if(!snapshot.exists())return;
+  const record={id:snapshot.id,...snapshot.data()};
+  if(/^(?:이연우|yeonu\s+lee|yeonwoo\s+lee|lee\s+yeonu)$/i.test(record.name.trim())&&isRemovedMember(record))tx.delete(ref(id));
+ });
+}
 export async function readProfiles() {
   const profiles=(await getDocs(collection(contentRef.firestore, 'memberProfiles'))).docs.map(d=>({id:d.id,...d.data()}));
-  return supplementMemberUpdates(supplementMemberEmails(profiles,await loadMemberEmails()));
+  return visibleMembers(supplementMemberUpdates(supplementMemberEmails(profiles,await loadMemberEmails())));
 }
 export async function readProfile(id) {
   const snap = await getDoc(ref(id));
   if(!snap.exists())return null;
-  return supplementMemberUpdates(supplementMemberEmails([{id:snap.id,...snap.data()}],await loadMemberEmails()))[0];
+  return visibleMembers(supplementMemberUpdates(supplementMemberEmails([{id:snap.id,...snap.data()}],await loadMemberEmails())))[0]||null;
 }
 export async function migrateProfiles(records, revision, initialContent) {
   await runTransaction(contentRef.firestore, async tx=>{

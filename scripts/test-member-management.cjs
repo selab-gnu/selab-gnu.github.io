@@ -57,7 +57,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
     assert((await page.locator('.member-registration-status').textContent()).includes(name));
     const target=new URL(page.url()).searchParams.get('added');
     assert(await page.locator('[id="member-'+target+'"]').isVisible());
-    if(expectedPhoto){const photo=page.locator('[id="member-'+target+'"] img');assert.equal(await photo.count(),1);assert((await photo.getAttribute('src')).startsWith('data:image/jpeg;base64,'));assert(await photo.evaluate(img=>img.complete&&img.naturalWidth>0));}
+    if(expectedPhoto){const photo=page.locator('[id="member-'+target+'"] img');const stored=await page.evaluate(id=>window.fixture.docs['memberProfiles/'+id],target);assert(stored.html.includes('data:image/jpeg;base64,'));if(stored.group==='current'){assert.equal(await photo.count(),1);assert(await photo.evaluate(img=>img.complete&&img.naturalWidth>0));}else assert.equal(await photo.count(),0,'Alumni keep their records without a public photo area');}
     const ordering=await page.evaluate(id=>{
       const cards=[...document.querySelectorAll('.member-profile')];
       const records=Object.entries(window.fixture.docs).filter(([key])=>key.startsWith('memberProfiles/')).map(([key,value])=>({id:key.split('/')[1],...value}));
@@ -272,7 +272,8 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await submitMember('Test Member',true);
   assert((await page.locator('#member-edit-photo').inputValue()).startsWith('data:image/jpeg'));
   await page.locator('#member-edit-photo-url').fill('https://example.org/replacement.jpg');
-  await page.locator('#member-edit-photo-url').dispatchEvent('change');
+  await page.locator('#member-edit-photo-url').press('Tab');
+  await page.waitForFunction(()=>document.querySelector('#member-edit-photo').value==='https://example.org/replacement.jpg');
   await page.locator('#member-save').click();
   await page.waitForFunction(()=>document.querySelector('#status').textContent==='선택한 멤버를 공개 저장했습니다.');
   assert((await page.evaluate(()=>Object.values(window.fixture.docs).find(r=>r.name==='Test Member').html)).includes('https://example.org/replacement.jpg'));

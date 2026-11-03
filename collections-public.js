@@ -20,12 +20,13 @@ async function load(){
 function render(){
   list.replaceChildren();
   const language=getLanguage();const publishedSources=new Set(saved.map(e=>e.source).filter(Boolean));
+  if(dialog){document.getElementById('viewer-close').textContent=t('closeViewer');document.getElementById('viewer-close').setAttribute('aria-label',t('closeViewer'));}
   const entries=[...saved,...curated.filter(e=>!saved.some(s=>s.id===e.id)&&!publishedSources.has(e.source)).map(e=>({...e,title:e.title[language],body:e.body[language],curated:true}))].sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id));
   for(const entry of entries){
     const card=node('article',null,kind==='gallery'?'gallery-card':'news-card');card.id=kind+'-'+entry.id;
     const date=node('time',entry.date);date.dateTime=entry.date;
     if(kind==='gallery'){
-      const button=node('button',null,'gallery-open');button.type='button';button.setAttribute('aria-label',entry.title+' 사진 크게 보기');
+      const button=node('button',null,'gallery-open');button.type='button';button.setAttribute('aria-label',t('photoView')+' · '+entry.title);
       const image=node('img');image.src=entry.image;image.alt=entry.title;image.loading='lazy';image.width=800;image.height=600;
       button.append(image);button.onclick=()=>{
         const full=document.getElementById('viewer-image');full.src=entry.image;full.alt=entry.title;
@@ -35,7 +36,7 @@ function render(){
     }else{
       if(entry.curated)date.title=entry.dateKind==='event'?(language==='ko'?'공식 프로그램 행사일':'Official program event date'):t('sourceDate');
       card.append(date,node('h2',entry.title),node('p',entry.body,'news-body'));
-      if(entry.source){const source=node('a',t('source')+' · '+entry.sourceName,'news-source');source.href=entry.source;card.append(source);}
+      if(entry.source){const sourceName=language==='en'?({'경상국립대학교 · GNU':'Gyeongsang National University · GNU','경상국립대학교 소프트웨어공학과':'GNU Department of Software Engineering'}[entry.sourceName]||entry.sourceName):entry.sourceName;const source=node('a',t('source')+' · '+sourceName,'news-source');source.href=entry.source;card.append(source);}
     }
     list.append(card);
   }

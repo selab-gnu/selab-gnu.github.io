@@ -27,7 +27,8 @@ def research_page(data):
     body+='<section id="areas" class="openlab-section"><h2 data-i18n="researchOverview">Research areas</h2>'+research_cards(data)+'</section>'
     body+='<section id="projects" class="openlab-section"><h2 data-i18n="featuredProjects">Featured research</h2><p data-i18n="projectsIntro">Selected studies introduced in the 2026 Open Lab presentation.</p><div class="project-grid">'
     for project in data['projects']:
-        body+='<article class="research-project"><p class="project-area">'+escape(project['area'])+'</p>'+dual('h3',project['title'])+dual('p',project['body'])+'<p class="project-venue">'+escape(project['venue'])+'</p><a href="search.html?q='+quote(project['query'])+'" data-i18n="findRelatedPaper">Find related publication ↗</a></article>'
+        venue=label(project['venue'],'KSAS Spring Conference 2026' if project['venue']=='한국항공우주학회 춘계학술대회 2026' else project['venue'])
+        body+='<article class="research-project"><p class="project-area">'+escape(project['area'])+'</p>'+dual('h3',project['title'])+dual('p',project['body'])+dual('p',venue,'project-venue')+'<a href="search.html?q='+quote(project['query'])+'" data-i18n="findRelatedPaper">Find related publication ↗</a></article>'
     body+='</div></section>'
     body+='<section id="journey" class="openlab-section"><h2 data-i18n="researchJourney">Research journey</h2><ol class="research-timeline">'
     for milestone in data['milestones']:
@@ -45,7 +46,8 @@ def research_page(data):
         ('schedule','Regular schedule','scheduleBody'),('events','Annual activities','eventsBody'),('learning','Learning together','learningBody')]:
         body+='<article><h3 data-i18n="'+key+'">'+title+'</h3><p data-i18n="'+desc+'"></p></article>'
     body+='</div><p class="source-note" data-i18n="scheduleNote"></p></section>'
-    body+='<section id="careers" class="openlab-section"><h2 data-i18n="careerPaths">Alumni pathways</h2><p data-i18n="careerIntro"></p><ul class="career-destinations">'+''.join('<li>'+escape(name)+'</li>' for name in data['careers'])+'</ul><a href="members.html" data-i18n="meetMembers">Meet our members ↗</a></section>'
+    career_names={'LIG넥스원':'LIG Nex1','현대로템':'Hyundai Rotem','모아소프트':'MOASOFT','포스코 기술연구원':'POSCO Technical Research Laboratories','엔테크서비스·NTS':'N Tech Service · NTS','엔스퀘어':'NSQUARE'}
+    body+='<section id="careers" class="openlab-section"><h2 data-i18n="careerPaths">Alumni pathways</h2><p data-i18n="careerIntro"></p><ul class="career-destinations">'+''.join(dual('li',label(name,career_names.get(name,name))) for name in data['careers'])+'</ul><a href="members.html" data-i18n="meetMembers">Meet our members ↗</a></section>'
     body+='<section id="join" class="openlab-section join-section"><h2 data-i18n="joinTitle">Join the lab</h2><div class="join-grid"><article><h3 data-i18n="foundations">Foundations</h3><p data-i18n="foundationsBody"></p><h3 data-i18n="preferred">Helpful experience</h3><p data-i18n="preferredBody"></p></article><article><h3 data-i18n="developSkills">What you will study</h3><p data-i18n="developSkillsBody"></p><h3 data-i18n="contactTitle">Contact</h3><a href="mailto:saleese@gnu.ac.kr">saleese@gnu.ac.kr</a><p data-i18n="contactLocation"></p></article></div></section>'
     body+='<p class="openlab-source" data-i18n="openlabSource">Based on the supplied 2026 Open Lab presentation.</p>'
     return body

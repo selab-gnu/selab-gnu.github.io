@@ -1,5 +1,6 @@
 const translations={
  revealEmail:['View email','이메일 보기'],hideEmail:['Hide','주소 숨기기'],
+ searchTitle:['Publication search','논문 검색'],closeViewer:['Close ×','닫기 ×'],photoView:['View larger photo','사진 크게 보기'],registeredMember:['Member registered','멤버가 등록되었습니다'],memberLoadError:['Unable to load the latest member profiles. Please reload shortly.','최신 멤버 정보를 불러오지 못했습니다. 잠시 후 새로고침해주세요.'],
  research:['Research & Lab','연구실 소개'],researchOverview:['Research areas','연구 분야'],seeProjects:['Explore research ↗','대표 연구 보기 ↗'],seeAwards:['Awards & achievements ↗','수상실적 보기 ↗'],seeJoin:['Joining the lab ↗','연구 참여 안내 ↗'],
  openlabIntro:['Intelligent software engineering at the intersection of software engineering, AI and aviation.','소프트웨어공학·인공지능·항공을 연결하는 지능형 소프트웨어공학을 연구합니다.'],featuredProjects:['Featured research','대표 연구 사례'],projectsIntro:['Selected studies introduced in the 2026 Open Lab presentation.','2026 오픈랩 발표자료에서 소개한 연구 사례입니다.'],findRelatedPaper:['Find related publication ↗','관련 논문 찾기 ↗'],researchJourney:['Research journey · 2016–2026','연구의 흐름 · 2016–2026'],
  awardsTitle:['Awards & achievements','수상실적'],awardsSource:['Awards are grouped by year as listed in the supplied 2026 Open Lab presentation.','제공된 2026 오픈랩 발표자료의 수상 연도를 기준으로 정리했습니다.'],openlabSource:['Source: 2026 Open Lab presentation · Professor Seonah Lee’s laboratory.','출처: 2026 오픈랩 발표자료 · 이선아 교수님 연구실'],
@@ -15,11 +16,14 @@ const translations={
  professorTitle:['Meet our professor','지도교수 소개'],professorName:['Seonah Lee','이선아'],professorRole:['Professor · Gyeongsang National University','경상국립대학교 교수'],professorIntro:['Research on software evolution, trustworthy AI and safe autonomous drone systems.','소프트웨어 진화, 신뢰할 수 있는 AI, 안전한 드론 자율비행을 연구합니다.'],professorDept:['Software Engineering · AI Convergence Engineering','소프트웨어공학과 · AI융합공학과'],professorLink:['Professor’s website ↗','교수님 개인 홈페이지 ↗'],professorSource:['University profile ↗','대학 공식 소개 ↗'],professorTopics:['Research interests','주요 연구 분야'],se:['Software evolution & architecture','소프트웨어 진화·아키텍처'],ai:['AI for software engineering','소프트웨어공학을 위한 AI'],aero:['Autonomous flight & safety analysis','자율비행·안전성 분석'],
  newsIntro:['Research, achievements and activities at SEA Lab.','SEA Lab의 연구·성과·활동을 전합니다.'],galleryIntro:['Moments from our laboratory.','함께 연구하고 성장하는 연구실의 순간들입니다.'],source:['Read source ↗','원문 보기 ↗'],sourceDate:['Source publication date','원문 게시일'],galleryEmpty:['No photographs have been posted yet.','아직 등록된 사진이 없습니다.'],newsEmpty:['No news has been posted yet.','아직 등록된 소식이 없습니다.'],loading:['Loading posts…','게시물을 불러오는 중입니다…'],loadError:['Unable to load saved posts. Please try again.','저장된 게시물을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.'],
  internationalJournals:['International Journals','국제학술지'],internationalConferences:['International Conferences','국제학회'],domesticJournals:['Domestic Journals','국내학술지'],domesticConferences:['Domestic Conferences','국내학회'],
- publicationIntro:['Publications by SEA Lab members and Professor Seonah Lee, including earlier work.','SEA Lab 구성원과 이선아 교수님의 논문을 소개합니다. 이전 소속에서 발표한 연구도 포함합니다.'],publicationSource:['Professor Lee’s publication list ↗','교수님 논문 목록 ↗'],languageNote:['Paper titles, citations and member-written biographies are shown in their original language.','논문 제목·서지정보와 멤버가 작성한 자기소개는 원문 언어로 표시합니다.'],
+ publicationIntro:['Publications by SEA Lab members and Professor Seonah Lee, including earlier work.','SEA Lab 구성원과 이선아 교수님의 논문을 소개합니다. 이전 소속에서 발표한 연구도 포함합니다.'],publicationSource:['Professor Lee’s publication list ↗','교수님 논문 목록 ↗'],languageNote:['Paper titles and citations are kept in their original language.','논문 제목과 서지정보는 원문 언어로 유지합니다.'],
  homeTitle:['Software Evolution and Architecture Lab','소프트웨어 진화 및 아키텍처 연구실'],homeIntro:['We study software evolution and architecture, AI-assisted development, and safe autonomous systems.','소프트웨어 진화와 아키텍처, AI를 활용한 개발, 안전한 자율 시스템을 연구합니다.'],principles:['Our principles','연구실 운영 원칙'],self:['Self-determination','자기주도성'],selfBody:['Members shape their research and run the laboratory together.','구성원이 연구 주제를 주도적으로 탐구하고 함께 연구실을 운영합니다.'],open:['Openness','개방성'],openBody:['We welcome collaboration with other researchers and laboratories.','다른 연구자·연구실과의 협력을 지향합니다.'],ethics:['Research ethics','연구 윤리'],ethicsBody:['We follow professional ethics in software engineering and research.','소프트웨어공학의 직업 윤리와 연구 윤리를 준수합니다.'],location:['Location','위치'],locationBody:['Room 804, Building 601, Gyeongsang National University, Jinju, Korea','경남 진주시 진주대로 501, 경상국립대학교 601동 804호'],
  topic:['Research interests','연구 주제'],autonomous:['Autonomous Flight','자율비행'],reinforcement:['Deep Reinforcement Learning','심층 강화학습'],cad:['3D CAD Automation','3D CAD 자동화'],safety:['System/SW Safety Analysis','시스템·소프트웨어 안전성 분석'],simulation:['Aircraft Simulation','항공기 시뮬레이션']
 };
-let language='en';try{language=localStorage.getItem('sea-lab-language')==='ko'?'ko':'en';}catch{}
+const requestedLanguage=new URLSearchParams(location.search).get('lang');
+let language=['en','ko'].includes(requestedLanguage)?requestedLanguage:'en';
+if(!['en','ko'].includes(requestedLanguage))try{language=localStorage.getItem('sea-lab-language')==='ko'?'ko':'en';}catch{}
+try{localStorage.setItem('sea-lab-language',language);}catch{}
 export const getLanguage=()=>language;
 export const t=key=>translations[key]?.[language==='ko'?1:0]||key;
 export function localized(element,key){element.dataset.i18n=key;element.textContent=t(key);return element;}
@@ -30,10 +34,13 @@ export function applyLanguage(root=document){
  document.documentElement.lang=language;
  document.querySelectorAll('[data-language]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.language===language)));
 }
-export function setLanguage(value){if(!['en','ko'].includes(value))return;language=value;try{localStorage.setItem('sea-lab-language',value);}catch{}applyLanguage();document.dispatchEvent(new Event('language-changed'));}
+export function languageURL(href,value=language){const url=new URL(href,location.href);if(url.origin!==location.origin)return href;url.searchParams.set('lang',value);return url.pathname+url.search+url.hash;}
+export function setLanguage(value){if(!['en','ko'].includes(value))return;language=value;try{localStorage.setItem('sea-lab-language',value);}catch{}history.replaceState(null,'',languageURL(location.href));applyLanguage();document.dispatchEvent(new Event('language-changed'));}
 export function setupLanguage(){
  if(!document.querySelector('header')||document.querySelector('.language-switch'))return;
+ if(new URLSearchParams(location.search).get('lang')!==language)history.replaceState(null,'',languageURL(location.href));
  const control=document.createElement('div');control.className='language-switch';control.setAttribute('role','group');control.setAttribute('aria-label','Language / 언어');
  for(const [value,label] of [['en','EN'],['ko','한국어']]){const button=document.createElement('button');button.type='button';button.dataset.language=value;button.textContent=label;button.onclick=()=>setLanguage(value);control.append(button);}document.querySelector('header').append(control);
  applyLanguage();
 }
+window.addEventListener('popstate',()=>{const value=new URLSearchParams(location.search).get('lang');if(['en','ko'].includes(value)&&value!==language){language=value;try{localStorage.setItem('sea-lab-language',value);}catch{}applyLanguage();document.dispatchEvent(new Event('language-changed'));}});

@@ -5,7 +5,7 @@ import { clean } from '../content.js';
 import { compareMembers, isFaculty, memberCategory, memberGroups, profileHTML, splitLegacyMembers } from '../member-profiles.js';
 import { formatMember } from './member-format.js';
 import { canEdit, getOwnMemberId } from './auth.js';
-import { readProfiles, readProfile, migrateProfiles, saveProfile, saveProfileOrder, deleteProfile } from './member-store.js';
+import { readProfiles, readProfile, migrateProfiles, saveProfile, saveProfileOrder, deleteProfile, purgeRemovedProfiles } from './member-store.js';
 
 let draggedMemberId=null;
 const $=s=>document.querySelector(s);
@@ -63,7 +63,7 @@ export function setupMembers({message,refreshPreview,onMigration,getRevision,onM
   function clear(){generation++;records=[];selected=null;own=null;migration=[];ready=false;pending=false;ownPending=false;busy=false;editPhoto.set();$('#member-form').reset();newPhoto.set();$('#my-bio').value='';$('#my-profile-content').replaceChildren();$('#member-list').replaceChildren();$('#member-detail').hidden=true;$('#member-new-card').hidden=true;$('#my-profile-editor').hidden=true;roleOptions();}
   async function load(content,revision){clear();const token=generation;const managing=canEdit('members');sourceContent=structuredClone(content);sourceRevision=revision;ready=content.memberDirectoryVersion===1;$('#member-migration').hidden=!managing||ready;$('#member-directory').hidden=!managing;$('#member-new-card').hidden=true;
     if(managing){
-      if(ready){const loaded=await readProfiles();if(token!==generation)return;records=loaded;selected=records[0]||null;show();}
+      if(ready){await purgeRemovedProfiles();const loaded=await readProfiles();if(token!==generation)return;records=loaded;selected=records[0]||null;show();}
       else {migration=supplementMemberUpdates(supplementMemberEmails(splitLegacyMembers(content.members),await loadMemberEmails()));if(token!==generation)return;records=migration;selected=records[0]||null;show();$('#member-migration-count').textContent=migration.length+'명의 소개를 멤버별로 나눴습니다. 기존 링크와 내용은 유지합니다.';$('#member-migration-preview').innerHTML=migration.map(r=>'<h3>'+memberGroups[r.group]+'</h3>'+profileHTML(r)+'<hr>').join('');}
     }
     const ownId=getOwnMemberId();

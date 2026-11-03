@@ -44,7 +44,7 @@ const shot=async(page,name)=>{if(process.env.REFINEMENTS_SCREENSHOTS){fs.mkdirSy
  const uicheon=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Uicheon'})});
  const topics=await uicheon.locator('.member-topic').textContent();for(const topic of ['Autonomous Flight','Deep Reinforcement Learning','3D CAD Automation','System/SW Safety Analysis','Aircraft Simulation'])assert(topics.includes(topic));
  assert(!(await page.locator('.member-grid').allTextContents()).join('').toLowerCase().includes('part-time'));
- assert.equal(await page.locator('.member-profile').count(),await page.locator('.member-portrait').count());
+ assert.equal(await page.locator('.member-profile:not(.member-alumnus)').count(),await page.locator('.member-portrait').count());assert.equal(await page.locator('.member-alumnus .member-portrait').count(),0);
  await shot(page,'members');
  await page.setViewportSize({width:390,height:844});assert((await studentGrids.nth(1).evaluate(el=>getComputedStyle(el).gridTemplateColumns)).split(' ').length===1);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

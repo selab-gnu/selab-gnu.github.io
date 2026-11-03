@@ -31,7 +31,7 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
  const seongjin=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Seongjin Go'})});
  assert.equal(await seongjin.locator('.member-portrait img').getAttribute('src'),'/assets/people/seongjin-go.jpg');
  assert(await seongjin.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
- const kajal=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Patel Kajal'})});
+ const kajal=page.locator('.member-profile[data-member-name="Patel Kajal"]');
  assert.equal(await kajal.locator('.member-portrait img').getAttribute('src'),'/assets/people/kajal-patel.png');
  assert(await kajal.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
  const uicheon=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Uicheon Lee'})});

@@ -1,7 +1,7 @@
 import {loadPublicationImports,mergePublicationImports} from './publication-imports.js';
 import {loadPaperTags,paperTags,tagBadges,researchAreas,publicationTypes} from './publication-tags.js';
 import { validContent } from './content.js';
-import {getLanguage,t} from './i18n.js';
+import {getLanguage,t,languageURL} from './i18n.js';
 const ko=()=>getLanguage()==='ko';
 
 const $=selector=>document.querySelector(selector);
@@ -34,7 +34,7 @@ function renderList(id,entries){
   const list=$(id);list.replaceChildren();
   for(const entry of entries){
     const li=document.createElement('li'),heading=document.createElement('h3'),link=document.createElement('a'),meta=document.createElement('p'),summary=document.createElement('p');
-    link.href='publications.html#'+entry.anchor;
+    link.href=languageURL('publications.html#'+entry.anchor);
     highlighted(link,entry.title);heading.append(link);
     meta.className='search-result-kind';meta.textContent=t(['internationalJournals','internationalConferences','domesticJournals','domesticConferences'][publicationTypes.indexOf(entry.type)])||entry.category;
     summary.className='search-excerpt';highlighted(summary,excerpt(entry.text));li.append(meta,heading,tagBadges(entry.tags),summary);list.append(li);
