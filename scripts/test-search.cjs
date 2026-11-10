@@ -38,7 +38,8 @@ const root=path.resolve(__dirname,'..');
   for(const width of [390,1440]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.locator('#publication-search-list h3 a').click();
   await page.waitForFunction(n=>document.querySelectorAll('.publications li').length===n,paperCount);
-  assert.equal(await page.locator('main input[type=search]').count(),0);
+  await page.locator('#publication-text-query').waitFor();assert.equal(await page.locator('main input[type=search]').count(),1);
+  await page.locator('#publication-text-query').fill('zzzz-no-matching-publication');assert.equal(await page.locator('.publications li:not([hidden])').count(),0);await page.locator('#publication-text-query').fill('');await page.locator('.publication-advanced summary').click();assert(await page.locator('#filter-year').isVisible());
   assert.equal(await page.locator('.publications li[hidden]').count(),0);
   assert.equal(await page.locator('header input[type=search]').count(),1);
   assert(await page.evaluate(()=>!!document.querySelector(location.hash)));

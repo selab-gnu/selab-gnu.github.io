@@ -18,7 +18,7 @@ def page(title,body,section=None):
  return protect_public_emails(markup)
 home_content=(root/'data/home.html').read_text(encoding='utf-8')
 first,separator,rest=home_content.partition('</div>')
-home='<div id="cloud-home"><div class="home-brand-banner">'+first+separator+'<img class="home-full-logo" src="assets/branding/sea-lab-full.png" width="1947" height="808" alt="SEA LAB — Software Evolution and Architecture Lab"></div>'+rest+'</div>'+home_highlights(openlab)
+home='<div id="cloud-home"><div class="home-brand-banner">'+first+separator+'</div>'+rest+'</div>'+home_highlights(openlab)
 (root/'index.html').write_text(page('Home',home),encoding='utf-8')
 (root/'research.html').write_text(page('Research & Lab',research_page(openlab)),encoding='utf-8')
 intro='<p data-i18n="publicationIntro">Publications by SEA Lab members and Professor Seonah Lee, including earlier work.</p><p><a href="https://saleese.github.io/publications/" data-i18n="publicationSource">Professor Lee’s publication list ↗</a></p>'

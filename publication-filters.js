@@ -47,9 +47,10 @@ export function setupPublicationFilters(){
  const groups=[...document.querySelectorAll('.publication-group')];if(!groups.length)return;
  const panel=document.createElement('section');panel.className='publication-explorer';panel.setAttribute('aria-label',t('filters'));
  const heading=localized(document.createElement('h2'),'filters');const intro=localized(document.createElement('p'),'filterIntro');panel.append(heading,intro);
+ const query=document.createElement('input');query.type='search';query.id='publication-text-query';const queryLabel=document.createElement('label');queryLabel.htmlFor=query.id;panel.append(queryLabel,query);const queryCopy=()=>{queryLabel.textContent=document.documentElement.lang==='ko'?'논문 제목·저자·연도 검색':'Search title, author or year';query.placeholder=document.documentElement.lang==='ko'?'검색어를 입력하세요':'Enter search terms';};queryCopy();query.oninput=()=>{writeURL();render();};
  const controls=document.createElement('div');controls.className='publication-filter-grid';const selects={};
  for(const field of ['year','author','venue','area']){const box=document.createElement('div'),label=localized(document.createElement('label'),field),select=document.createElement('select');select.id='filter-'+field;label.htmlFor=select.id;selects[field]=select;box.append(label,select);controls.append(box);select.onchange=()=>{writeURL();render();};}
- const reset=localized(document.createElement('button'),'reset');reset.type='button';reset.id='publication-filter-reset';reset.onclick=()=>{Object.values(selects).forEach(el=>el.value='');writeURL();render();};controls.append(reset);panel.append(controls);
+ const reset=localized(document.createElement('button'),'reset');reset.type='button';reset.id='publication-filter-reset';reset.onclick=()=>{query.value='';Object.values(selects).forEach(el=>el.value='');writeURL();render();};controls.append(reset);const advanced=document.createElement('details');advanced.className='publication-advanced';const toggle=document.createElement('summary');advanced.append(toggle,controls);panel.append(advanced);const advancedCopy=()=>toggle.textContent=document.documentElement.lang==='ko'?'상세 필터 (연도·저자·학술지·분야)':'More filters (year, author, venue, area)';advancedCopy();
  const summary=document.createElement('p');summary.id='publication-filter-summary';summary.setAttribute('role','status');summary.setAttribute('aria-live','polite');panel.append(summary);
  const empty=localized(document.createElement('p'),'noPapers');empty.id='publication-filter-empty';empty.hidden=true;panel.append(empty);
  document.querySelector('.category-links').before(panel);
@@ -63,16 +64,16 @@ export function setupPublicationFilters(){
    if([...select.options].some(o=>o.value===prior))select.value=prior;
   }
  }
- function matches(p){return Object.entries(selects).every(([key,select])=>!select.value||(key==='author'?p.authors.includes(select.value):key==='area'?select.value==='unclassified'?!p.tags.length:p.tags.includes(select.value):(p[key]||'unknown')===select.value));}
+ function matches(p){return p.element.textContent.toLocaleLowerCase().includes(query.value.trim().toLocaleLowerCase())&&Object.entries(selects).every(([key,select])=>!select.value||(key==='author'?p.authors.includes(select.value):key==='area'?select.value==='unclassified'?!p.tags.length:p.tags.includes(select.value):(p[key]||'unknown')===select.value));}
  function render(){
   let visible=0;
   for(const paper of papers){paper.element.hidden=!matches(paper);if(!paper.element.hidden)visible++;}
   groups.forEach((group,index)=>{const all=papers.filter(p=>p.group===index),shown=all.filter(p=>!p.element.hidden).length;group.hidden=shown===0;group.querySelector('h2').textContent=t(categoryKeys[index])+' · '+countLabel(shown,all.length);const link=document.querySelector('.category-links a[href="#'+group.id+'"]');if(link)link.textContent=t(categoryKeys[index])+' ('+countLabel(shown,all.length)+')';});
   summary.textContent=document.documentElement.lang==='ko'?`전체 ${papers.length}편 중 ${visible}편 표시`:`Showing ${visible} of ${papers.length} publications`;empty.hidden=visible!==0;
  }
- function writeURL(){const url=new URL(location.href);for(const [key,select] of Object.entries(selects)){if(select.value)url.searchParams.set(key,select.value);else url.searchParams.delete(key);}history.replaceState(null,'',url);}
- function restore(){const params=new URLSearchParams(location.search);for(const [key,select] of Object.entries(selects)){const value=params.get(key);if([...select.options].some(o=>o.value===value))select.value=value;}}
+ function writeURL(){const url=new URL(location.href);if(query.value.trim())url.searchParams.set('q',query.value.trim());else url.searchParams.delete('q');for(const [key,select] of Object.entries(selects)){if(select.value)url.searchParams.set(key,select.value);else url.searchParams.delete(key);}history.replaceState(null,'',url);}
+ function restore(){const params=new URLSearchParams(location.search);query.value=params.get('q')||'';for(const [key,select] of Object.entries(selects)){const value=params.get(key);if([...select.options].some(o=>o.value===value))select.value=value;}advanced.open=Object.values(selects).some(select=>select.value);}
  function collect(){const previous=Object.fromEntries(Object.entries(selects).map(([key,select])=>[key,select.value]));papers=groups.flatMap((group,index)=>[...group.querySelectorAll('li')].map(element=>({...citationMetadata(element.querySelector('.paper-citation')?.innerHTML||element.innerHTML),element,group:index})));options();restore();for(const [key,value] of Object.entries(previous))if(value&&[...selects[key].options].some(o=>o.value===value))selects[key].value=value;revealTarget();render();}
- function revealTarget(){const target=papers.find(p=>'#'+p.element.id===location.hash);if(target&&!matches(target)){Object.values(selects).forEach(el=>el.value='');writeURL();}}
- document.addEventListener('content-updated',collect);document.addEventListener('language-changed',()=>{options();render();});window.addEventListener('popstate',()=>{restore();render();});window.addEventListener('hashchange',()=>{revealTarget();render();});collect();
+ function revealTarget(){const target=papers.find(p=>'#'+p.element.id===location.hash);if(target&&!matches(target)){query.value='';Object.values(selects).forEach(el=>el.value='');writeURL();}}
+ document.addEventListener('content-updated',collect);document.addEventListener('language-changed',()=>{queryCopy();advancedCopy();options();render();});window.addEventListener('popstate',()=>{restore();render();});window.addEventListener('hashchange',()=>{revealTarget();render();});collect();
 }
