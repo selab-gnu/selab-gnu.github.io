@@ -31,7 +31,7 @@ const root=path.resolve(__dirname,'..');
   assert.equal(await page.locator('.hero,aside').count(),0);
   assert.deepEqual(await page.locator('nav[aria-label="Main navigation"] a').allTextContents(),['Home','Research & Lab','Members','Publications','News','Gallery']);
   await page.locator('[data-language="ko"]').click();
-  await page.locator('#header-search').fill('object');await page.locator('header form button').click();
+  assert.equal(await page.locator('header form').getAttribute('action'),'site-search.html');await page.goto('http://localhost:8129/search.html?q=object&lang=ko');
   await page.waitForFunction(()=>document.querySelector('#publication-result-count')?.textContent==='1편');
   assert.equal(await page.locator('#publication-search-list li').count(),1);
   assert.equal(await page.locator('#course-results,[data-search-scope]').count(),0);

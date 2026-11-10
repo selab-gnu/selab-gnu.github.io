@@ -20,7 +20,7 @@ professorSection();
 function ui(){
  professorSection();
  protectEmails(document.querySelector('main'));
- const paths={'index.html':'home','research.html':'research','members.html':'members','publications.html':'publications','news.html':'news','gallery.html':'gallery'};
+ const paths={'index.html':'home','research.html':'research','members.html':'members','publications.html':'publications','news.html':'news','gallery.html':'gallery','site-search.html':'siteSearch','search.html':'publicationSearch'};
  document.querySelectorAll('nav a').forEach(link=>{const key=paths[link.getAttribute('href')];if(key)localized(link,key);});
  const title=document.querySelector('main>h1');const path=location.pathname.split('/').pop()||'index.html';if(title&&paths[path])localized(title,paths[path]);
  const login=document.querySelector('.manage-link');if(login)localized(login,'login');
