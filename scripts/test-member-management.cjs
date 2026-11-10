@@ -105,6 +105,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.locator('#save').click();await page.waitForFunction(()=>document.querySelector('#status').textContent.startsWith('공개 저장했습니다'));
   const tagged=await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups[1].items[0]);
   assert(tagged.includes('Tagged Test Paper')&&tagged.includes('data-paper-tags="AI AERO"'));
+  assert.equal(await page.locator('#paper-title').inputValue(),'');assert(await page.locator('#save-success').isVisible());await page.locator('#publication-list button').filter({hasText:'Tagged Test Paper'}).click();
   await page.locator('#delete-publication').click();await page.locator('#save').click();
   await page.waitForFunction(()=>!window.fixture.docs['siteContent/main'].groups.some(g=>g.items.some(html=>html.includes('Tagged Test Paper'))));
   assert.equal(await page.evaluate(()=>window.fixture.docs['siteContent/main'].groups.reduce((n,g)=>n+g.items.length,0)),groups.reduce((n,g)=>n+g.items.length,0));
@@ -136,6 +137,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
     await page.locator('#gallery-form button[type="submit"]').click();
     await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent.includes('공개 저장했습니다'));
   }
+  assert.equal(await page.locator('#gallery-title').inputValue(),'');assert.equal(await page.locator('#gallery-preview img').count(),0);assert(await page.locator('#save-success').isVisible());
   const galleryDocs=await page.evaluate(()=>Object.values(window.fixture.docs).filter(d=>d.image));
   assert(galleryDocs.every(d=>d.image.length<=240000));
   if(process.env.TEST_EDITOR_SCREENSHOT)await page.screenshot({path:process.env.TEST_EDITOR_SCREENSHOT,fullPage:true});
@@ -211,8 +213,8 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
     ].sort(compareMembers).map(r=>r.id);
   });
   assert.deepEqual(sorted,['professor','student','alumni']);
-  assert.equal(records.filter(r=>r.group==='current').length,13);
-  assert.equal(records.filter(r=>r.group==='graduates').length,9);
+  assert.equal(records.filter(r=>r.group==='current').length,11);
+  assert.equal(records.filter(r=>r.group==='graduates').length,11);
   assert.equal(records.filter(r=>r.group==='undergraduates').length,7);
   assert(records.some(r=>r.name==='Uicheon Lee'));
   assert(migrationInfo.links.includes('mailto:saleese@gmail.com'));

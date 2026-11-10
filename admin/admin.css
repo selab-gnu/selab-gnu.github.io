@@ -39,3 +39,5 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .paper-area-fields{margin:18px 0;padding:14px 16px;border:1px solid var(--lab-border);border-radius:8px}.paper-area-fields legend{font-size:13px;font-weight:700;color:var(--lab-navy);padding:0 5px}.paper-area-fields>div{display:flex;flex-wrap:wrap;gap:10px 18px}.paper-area-fields label{display:flex;align-items:center;gap:7px;margin:0;min-height:42px;cursor:pointer}.paper-area-fields input{width:18px;height:18px;min-height:18px;margin:0;accent-color:var(--lab-teal)}
 
 .login-help{font-size:12px;margin:10px 0 0;color:var(--lab-muted)}#login-redirect{margin-top:6px}
+
+#save-success{position:fixed;right:24px;bottom:24px;z-index:1000;max-width:min(480px,calc(100vw - 48px));padding:18px 22px;border:1px solid #97c8b6;border-radius:10px;background:#e9f7ef;color:#18583f;box-shadow:0 5px 24px #173e6626;font-size:15px;line-height:1.7}#save-success[hidden]{display:none}

@@ -69,10 +69,11 @@ export function setupCollections({message}){
         const entry={id:state.selected?.id||crypto.randomUUID(),revision:state.selected?.revision||0,title:get('title').value.trim(),date:get('date').value};
         if(kind==='gallery'){entry.image=state.image;entry.caption=get('caption').value.trim();if(!validGalleryImage(entry.image))throw Error('사진 파일이나 HTTPS 이미지 주소를 선택해주세요.');}
         else entry.body=get('body').value.trim();
+        const adding=!state.selected;
         const saved=await saveEntry(kind,entry);
         if(token!==generation)return;
-        state.records=[...state.records.filter(record=>record.id!==saved.id),saved];edit(saved);
-        get('status').textContent='공개 저장했습니다. 홈페이지에 바로 반영됩니다.';message((kind==='gallery'?'갤러리':'뉴스')+' 게시물을 공개 저장했습니다.');
+        state.records=[...state.records.filter(record=>record.id!==saved.id),saved];edit(adding?null:saved);
+        const notice='공개 저장했습니다. '+(kind==='gallery'?'갤러리':'뉴스')+' ‘'+saved.title+'’ '+(adding?'등록':'수정')+'이 완료되었습니다.'+(adding?' 다음 게시물을 입력할 수 있도록 입력란을 초기화했습니다.':'');get('status').textContent=notice;message(notice,true);
       });
     };
     get('delete').onclick=()=>perform(async token=>{
