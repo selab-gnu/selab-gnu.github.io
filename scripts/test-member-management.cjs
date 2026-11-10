@@ -148,9 +148,9 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert(await page.locator('.event-album img').first().evaluate(img=>img.complete&&img.naturalWidth>0));
   if(process.env.TEST_GALLERY_SCREENSHOT)await page.screenshot({path:process.env.TEST_GALLERY_SCREENSHOT,fullPage:true});
   await page.locator('#gallery-search').fill('없는 앨범 검색어');assert.equal(await page.locator('.event-album').count(),0);assert(await page.locator('#gallery-empty').isVisible());await page.locator('#gallery-search').fill('');assert.equal(await page.locator('.event-album').count(),2);
-  await page.locator('.album-cover').first().click();assert(await page.locator('#gallery-album').isVisible());assert.equal(await page.locator('#album-photos img').count(),2);await page.locator('.album-photo').first().click();
+  await page.locator('.album-cover').first().click();assert(await page.locator('#gallery-album').isVisible());assert.equal(await page.locator('#album-photos img').count(),2);assert.equal(await page.locator('#album-photos figcaption').count(),2);assert((await page.locator('#album-photos figcaption').first().textContent()).includes('함께 연구하고'));await page.locator('.album-photo').first().click();
   assert(await page.locator('#gallery-viewer').isVisible());
-  assert.equal(await page.locator('#viewer-title').textContent(),'함께하는 연구 활동');
+  assert.equal(await page.locator('#viewer-title').textContent(),'함께하는 연구 활동');assert(await page.locator('#viewer-caption').isVisible());assert((await page.locator('#viewer-caption').textContent()).includes('함께 연구하고'));
   await page.locator('#viewer-next').click();assert.equal(await page.locator('#viewer-position').textContent(),'2 / 2');await page.keyboard.press('Escape');assert(await page.locator('#gallery-viewer').isHidden());await page.keyboard.press('Escape');assert(await page.locator('#gallery-album').isHidden());
   for(const width of [390,1440]){await page.setViewportSize({width,height:1100});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.goto('http://localhost:8129/news.html');await page.locator('.news-card').filter({hasText:'연구실 세미나 안내'}).waitFor();
