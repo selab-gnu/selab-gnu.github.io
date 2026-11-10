@@ -1,3 +1,4 @@
+import {setupNaverLogin} from './naver-login.js';
 // Load the existing authorization module first. This also upgrades an older
 // cached popup handler without creating a second authorization state instance.
 import './auth.js';
@@ -12,4 +13,5 @@ const flow=setupGoogleLogin({
  signInWithPopup,signInWithRedirect,getRedirectResult,
  login:document.getElementById('login'),redirect:document.getElementById('login-redirect'),status:document.getElementById('auth-status')
 });
-onAuthStateChanged(auth,user=>{flow.authChanged(user);document.getElementById('login-help').hidden=!!user;});
+const naver=setupNaverLogin({auth,button:document.getElementById('login-naver'),status:document.getElementById('auth-status')});
+onAuthStateChanged(auth,user=>{flow.authChanged(user);naver.authChanged(user);document.getElementById('login-help').hidden=!!user;});

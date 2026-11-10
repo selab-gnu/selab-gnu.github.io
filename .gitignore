@@ -1,2 +1,7 @@
 __pycache__/
 *.py[cod]
+
+functions/node_modules/
+functions/.env*
+!functions/.env.example
+functions/.secret.local

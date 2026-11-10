@@ -48,13 +48,16 @@ export function watchAuth(callback) {
   document.querySelector('#account-heading').textContent='로그인';
   document.querySelector('#login-heading').textContent='관리자·멤버 로그인';
   logout.hidden=!user;login.hidden=!!user;
-  status.textContent=user?'계정 권한을 확인하는 중입니다…':'방문자는 로그인 없이 공개 자료를 볼 수 있습니다. 관리자·멤버는 Google 계정으로 로그인하세요.';
+  status.textContent=user?'계정 권한을 확인하는 중입니다…':'방문자는 로그인 없이 공개 자료를 볼 수 있습니다. 관리자·멤버는 Google 또는 네이버 계정으로 로그인하세요.';
   if(!user)return;
   try{
    const token=await user.getIdTokenResult();
-   if(user.emailVerified&&token.signInProvider==='google.com'){
-    if(user.email.toLowerCase()===adminEmail.toLowerCase())role='admin';
-    else {const snap=await getDoc(doc(contentRef.firestore,'editorRoles',user.email.toLowerCase()));if(generation!==authGeneration)return;const data=snap.exists()?snap.data():{};role=['admin','member','visitor'].includes(data.role)?data.role:'visitor';ownMemberId=role!=='visitor'?(data.memberId||''):'';}
+   const google=user.emailVerified&&token.signInProvider==='google.com';
+   const naver=token.signInProvider==='custom'&&token.claims?.loginProvider==='naver'&&/^naver_[a-f0-9]{64}$/.test(user.uid);
+   const accountKey=naver?user.uid:user.email?.toLowerCase();
+   if(google||naver){
+    if(google&&user.email.toLowerCase()===adminEmail.toLowerCase())role='admin';
+    else {const snap=await getDoc(doc(contentRef.firestore,'editorRoles',accountKey));if(generation!==authGeneration)return;const data=snap.exists()?snap.data():{};role=['admin','member','visitor'].includes(data.role)?data.role:'visitor';ownMemberId=role!=='visitor'?(data.memberId||''):'';}
    }
    if(generation!==authGeneration)return;
    const allowed=hasEditorAccess();
@@ -65,11 +68,12 @@ export function watchAuth(callback) {
    document.querySelector('#workspace').hidden=!allowed;
    document.querySelector('#role-management').hidden=!isAdmin();
    for(const section of ['publications','home','members','news','gallery','my-profile'])document.querySelector('[data-tab="'+section+'"]').hidden=!canEdit(section);
-   status.textContent=allowed?user.email+' · '+({admin:'관리자',member:'멤버 (자기소개만 편집)',visitor:'방문자'}[role]):user.email+' · 방문자: 공개 자료만 열람할 수 있습니다. 자기소개를 수정하려면 관리자에게 멤버 등록을 요청해주세요.';
+   const account=user.email||user.uid;
+   status.textContent=allowed?account+' · '+({admin:'관리자',member:'멤버 (자기소개만 편집)',visitor:'방문자'}[role]):account+' · 방문자: 공개 자료만 열람할 수 있습니다. 자기소개를 수정하려면 관리자에게 멤버 등록을 요청해주세요.';
    callback(allowed);
   }catch(e){role='visitor';status.textContent='권한 확인 실패: '+(e.code||e.message)+'. 관리자에게 문의해주세요.';}
  });
 }
 export async function listRoles(){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');return (await getDocs(collection(contentRef.firestore,'editorRoles'))).docs.map(d=>({email:d.id,...d.data()}));}
-export async function grantRole(email,value,memberId=''){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');email=email.trim().toLowerCase();if(email===adminEmail.toLowerCase()||!email.includes('@')||email.includes('/'))throw Error('추가할 편집자의 이메일을 입력해주세요.');if(!['admin','member','visitor'].includes(value))throw Error('잘못된 권한입니다.');if(value==='visitor')memberId='';if(value==='member'&&!memberId)throw Error('자기소개를 수정할 멤버를 연결해주세요.');if(memberId&&!(await getDoc(doc(contentRef.firestore,'memberProfiles',memberId))).exists())throw Error('공개 저장된 멤버를 선택해주세요.');await setDoc(doc(contentRef.firestore,'editorRoles',email),{role:value,...(memberId?{memberId}:{})});}
+export async function grantRole(email,value,memberId=''){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');email=email.trim().toLowerCase();if(email===adminEmail.toLowerCase()||(!email.includes('@')&&!/^naver_[a-f0-9]{64}$/.test(email))||email.includes('/'))throw Error('Google 이메일 또는 네이버 로그인 ID를 입력해주세요.');if(!['admin','member','visitor'].includes(value))throw Error('잘못된 권한입니다.');if(value==='visitor')memberId='';if(value==='member'&&!memberId)throw Error('자기소개를 수정할 멤버를 연결해주세요.');if(memberId&&!(await getDoc(doc(contentRef.firestore,'memberProfiles',memberId))).exists())throw Error('공개 저장된 멤버를 선택해주세요.');await setDoc(doc(contentRef.firestore,'editorRoles',email),{role:value,...(memberId?{memberId}:{})});}
 export async function revokeRole(email){if(!isAdmin())throw Error('관리자만 사용할 수 있습니다.');if(email.trim().toLowerCase()===adminEmail.toLowerCase())throw Error('기본 관리자 계정은 해제할 수 없습니다.');await deleteDoc(doc(contentRef.firestore,'editorRoles',email));}

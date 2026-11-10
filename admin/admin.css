@@ -41,3 +41,5 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .login-help{font-size:12px;margin:10px 0 0;color:var(--lab-muted)}#login-redirect{margin-top:6px}
 
 #save-success{position:fixed;right:24px;bottom:24px;z-index:1000;max-width:min(480px,calc(100vw - 48px));padding:18px 22px;border:1px solid #97c8b6;border-radius:10px;background:#e9f7ef;color:#18583f;box-shadow:0 5px 24px #173e6626;font-size:15px;line-height:1.7}#save-success[hidden]{display:none}
+
+.naver-login{background:#03c75a;color:white;border-color:#03b852}.naver-login:hover{background:#02b451}

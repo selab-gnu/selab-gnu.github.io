@@ -3,21 +3,29 @@ service cloud.firestore {
  match /databases/{database}/documents {
   function bootstrapAdmin() {
    return request.auth != null
-    && request.auth.token.email == 'yeonu7787@gmail.com'
+    && request.auth.token.firebase.sign_in_provider == 'google.com'
     && request.auth.token.email_verified == true
-    && request.auth.token.firebase.sign_in_provider == 'google.com';
+    && request.auth.token.email == 'yeonu7787@gmail.com';
+  }
+  function trustedLogin() {
+   return request.auth != null && (
+    (request.auth.token.firebase.sign_in_provider == 'google.com' && request.auth.token.email_verified == true)
+    || (request.auth.token.firebase.sign_in_provider == 'custom'
+     && request.auth.token.loginProvider == 'naver' && request.auth.uid.matches('^naver_[a-f0-9]{64}$')));
+  }
+  function roleKey() {
+   return request.auth.token.firebase.sign_in_provider == 'custom' ? request.auth.uid : request.auth.token.email.lower();
   }
   function editorRole(role) {
-   return request.auth != null && request.auth.token.email_verified == true
-    && request.auth.token.firebase.sign_in_provider == 'google.com'
-    && exists(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower()))
-    && get(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower())).data.role == role;
+   return trustedLogin()
+    && exists(/databases/$(database)/documents/editorRoles/$(roleKey()))
+    && get(/databases/$(database)/documents/editorRoles/$(roleKey())).data.role == role;
   }
   function admin() {
    return bootstrapAdmin() || editorRole('admin');
   }
   match /editorRoles/{email} {
-   allow get: if admin() || (request.auth != null && request.auth.token.email_verified == true && request.auth.token.email.lower() == email);
+   allow get: if admin() || (trustedLogin() && roleKey() == email);
    allow list, delete: if admin();
    allow create, update: if admin() && request.resource.data.keys().hasAll(['role'])
     && request.resource.data.keys().hasOnly(['role','memberId'])
@@ -47,7 +55,7 @@ service cloud.firestore {
   }
   function ownProfile(id) {
    return editorRole('member')
-    && get(/databases/$(database)/documents/editorRoles/$(request.auth.token.email.lower())).data.memberId == id;
+    && get(/databases/$(database)/documents/editorRoles/$(roleKey())).data.memberId == id;
   }
   function validProfile() {
    let d = request.resource.data;
