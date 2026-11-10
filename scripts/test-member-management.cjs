@@ -132,7 +132,7 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
     await page.locator('#gallery-title').fill(title);
     await page.locator('#gallery-date').fill('2026-10-'+(20+index));
     await page.locator('#gallery-caption').fill('함께 연구하고 이야기 나눈 시간입니다.');
-    await page.locator('#gallery-file').setInputFiles({name:'workshop.png',mimeType:'image/png',buffer:Buffer.from(galleryPhoto,'base64')});
+    const files=Array.from({length:index?2:1},(_,i)=>({name:'workshop-'+i+'.png',mimeType:'image/png',buffer:Buffer.from(galleryPhoto,'base64')}));await page.locator('#gallery-file').setInputFiles(files);
     await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent.includes('사진 준비가 끝났습니다'));
     await page.locator('#gallery-form button[type="submit"]').click();
     await page.waitForFunction(()=>document.querySelector('#gallery-status').textContent.includes('공개 저장했습니다'));
@@ -142,15 +142,16 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   assert(galleryDocs.every(d=>d.image.length<=240000));
   if(process.env.TEST_EDITOR_SCREENSHOT)await page.screenshot({path:process.env.TEST_EDITOR_SCREENSHOT,fullPage:true});
   await page.goto('http://localhost:8129/gallery.html');
-  await page.locator('.gallery-card').first().waitFor();
-  assert.equal(await page.locator('.gallery-card').count(),2);
-  assert.equal(await page.locator('.gallery-card h2').first().textContent(),'함께하는 연구 활동');
-  assert(await page.locator('.gallery-card img').first().evaluate(img=>img.complete&&img.naturalWidth>0));
+  await page.locator('.event-album').first().waitFor();
+  assert.equal(await page.locator('.event-album').count(),2);
+  assert.equal(await page.locator('.event-album h2').first().textContent(),'함께하는 연구 활동');
+  assert(await page.locator('.event-album img').first().evaluate(img=>img.complete&&img.naturalWidth>0));
   if(process.env.TEST_GALLERY_SCREENSHOT)await page.screenshot({path:process.env.TEST_GALLERY_SCREENSHOT,fullPage:true});
-  await page.locator('.gallery-open').first().click();
+  await page.locator('#gallery-search').fill('없는 앨범 검색어');assert.equal(await page.locator('.event-album').count(),0);assert(await page.locator('#gallery-empty').isVisible());await page.locator('#gallery-search').fill('');assert.equal(await page.locator('.event-album').count(),2);
+  await page.locator('.album-cover').first().click();assert(await page.locator('#gallery-album').isVisible());assert.equal(await page.locator('#album-photos img').count(),2);await page.locator('.album-photo').first().click();
   assert(await page.locator('#gallery-viewer').isVisible());
   assert.equal(await page.locator('#viewer-title').textContent(),'함께하는 연구 활동');
-  await page.keyboard.press('Escape');assert(await page.locator('#gallery-viewer').isHidden());
+  await page.locator('#viewer-next').click();assert.equal(await page.locator('#viewer-position').textContent(),'2 / 2');await page.keyboard.press('Escape');assert(await page.locator('#gallery-viewer').isHidden());await page.keyboard.press('Escape');assert(await page.locator('#gallery-album').isHidden());
   for(const width of [390,1440]){await page.setViewportSize({width,height:1100});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.goto('http://localhost:8129/news.html');await page.locator('.news-card').filter({hasText:'연구실 세미나 안내'}).waitFor();
   assert((await page.locator('.news-card').filter({hasText:'연구실 세미나 안내'}).locator('.news-body').textContent()).includes('<script>alert(1)</script>'));

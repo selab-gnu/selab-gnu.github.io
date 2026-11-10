@@ -43,3 +43,5 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 #save-success{position:fixed;right:24px;bottom:24px;z-index:1000;max-width:min(480px,calc(100vw - 48px));padding:18px 22px;border:1px solid #97c8b6;border-radius:10px;background:#e9f7ef;color:#18583f;box-shadow:0 5px 24px #173e6626;font-size:15px;line-height:1.7}#save-success[hidden]{display:none}
 
 .naver-login{background:#03c75a;color:white;border-color:#03b852}.naver-login:hover{background:#02b451}
+
+#gallery-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.album-edit-photo{min-width:0;background:#f3f7f9;padding:8px;border-radius:7px}.album-edit-photo img{display:block;width:100%;height:110px;object-fit:cover;margin-bottom:7px}.album-edit-photo button{font-size:11px;padding:5px;margin:3px 3px 0 0}@media(max-width:600px){#gallery-preview{grid-template-columns:repeat(2,minmax(0,1fr))}}

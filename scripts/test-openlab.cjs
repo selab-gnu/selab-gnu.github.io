@@ -18,7 +18,8 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
  });
  await page.goto('http://localhost:8137/index.html');await page.locator('#professor-introduction .professor-photo').waitFor();
  await page.locator('[data-language=ko]').click();
- for(const selector of ['.brand-logo','.home-full-logo','.professor-photo','footer img'])assert(await page.locator(selector).evaluate(img=>img.complete&&img.naturalWidth>0),selector);
+ for(const selector of ['.brand-logo','.professor-photo','footer img'])assert(await page.locator(selector).evaluate(img=>img.complete&&img.naturalWidth>0),selector);
+ assert.equal(await page.locator('.home-full-logo').count(),0);
  assert.equal(await page.locator('nav[aria-label="Main navigation"] a').count(),6);
  assert.equal(await page.locator('.research-area-card').count(),3);
  assert(!(await page.locator('#cloud-home').textContent()).includes('Wednesdays'));

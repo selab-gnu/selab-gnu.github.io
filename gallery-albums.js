@@ -1,0 +1,2 @@
+// Existing single-photo documents remain unchanged; title + date identifies an event album.
+export function galleryAlbums(records){const groups=new Map();for(const photo of records){const key=JSON.stringify([photo.title.normalize('NFKC').trim(),photo.date]);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(photo);}return [...groups.values()].map(photos=>{photos.sort((a,b)=>a.id.localeCompare(b.id));return {...photos[0],photos};}).sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id));}
