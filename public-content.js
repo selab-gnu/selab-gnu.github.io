@@ -37,7 +37,7 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
      section.querySelector('h2').textContent=g.category;
      const ul=section.querySelector('ul');ul.replaceChildren();
      for(const [j,html] of g.items.entries()){const li=document.createElement('li');li.id='publication-'+i+'-'+j;const citation=document.createElement('div');citation.className='paper-citation';citation.innerHTML=clean(html);li.append(citation);ul.append(li);}
-     document.querySelector('.category-links a[href="#category-'+i+'"]').textContent=g.category;
+     document.querySelector('.category-links a[data-category-index="'+i+'"]').textContent=g.category;
     });
    }
   }

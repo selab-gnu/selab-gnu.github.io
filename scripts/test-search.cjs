@@ -96,6 +96,7 @@ const root=path.resolve(__dirname,'..');
   await page.goto('http://localhost:8129/search.html?q=object');
   await page.waitForFunction(()=>document.querySelector('#search-data-status')?.textContent.includes('최신 공개 논문을 확인하지 못해'));
   assert.equal(await page.locator('#publication-search-list li').count(),1);
+  for(const [i,type] of ['international-journals','international-conferences','domestic-journals','domestic-conferences'].entries()){await page.goto('http://localhost:8137/publications.html?lang=ko');await page.locator('.category-links a[data-category-index="'+i+'"]').click();await page.waitForFunction(()=>document.querySelectorAll('#publication-search-list li').length>0);assert.equal(new URL(page.url()).searchParams.get('type'),type);assert.equal(await page.locator('#publication-type-filter').inputValue(),type);assert.equal(new URL(page.url()).searchParams.get('lang'),'ko');}
   assert.deepEqual(errors,[]);
   console.log('PASS: compact home, six navigation links, publication-only search, result anchors, empty/no-results/XSS, latest cloud paper tags, SE/AI/AERO and publication type filters, unclassified/empty intersections, URL persistence/back, safe metadata, offline fallback, mobile/desktop widths');
  }finally{await browser.close();}

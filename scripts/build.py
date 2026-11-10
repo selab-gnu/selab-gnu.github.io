@@ -23,7 +23,8 @@ home='<div id="cloud-home"><div class="home-brand-banner">'+first+separator+'</d
 (root/'research.html').write_text(page('Research & Lab',research_page(openlab)),encoding='utf-8')
 intro='<p data-i18n="publicationIntro">Publications by SEA Lab members and Professor Seonah Lee, including earlier work.</p><p><a href="https://saleese.github.io/publications/" data-i18n="publicationSource">Professor Lee’s publication list ↗</a></p>'
 body=intro
-body+='<div class="category-links">'+''.join(f'<a href="#category-{i}">{g["category"]}</a>' for i,g in enumerate(groups))+'</div>'
+types=['international-journals','international-conferences','domestic-journals','domestic-conferences']
+body+='<div class="category-links">'+''.join(f'<a data-category-index="{i}" href="search.html?type={types[i]}">{g["category"]} ({len(g["items"])})</a>' for i,g in enumerate(groups))+'</div>'
 for i,g in enumerate(groups): body+=f'<section class="publication-group" id="category-{i}"><h2>{g["category"]}</h2><ul class="publications">'+''.join(f'<li id="publication-{i}-{j}"><div class="paper-citation">'+x+'</div></li>' for j,x in enumerate(g['items']))+'</ul></section>'
 (root/'publications.html').write_text(page('Publications',body),encoding='utf-8')
 print('Built Home and Publications:',sum(len(g['items']) for g in groups),'entries')

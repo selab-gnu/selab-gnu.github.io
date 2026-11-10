@@ -68,7 +68,7 @@ export function setupPublicationFilters(){
  function render(){
   let visible=0;
   for(const paper of papers){paper.element.hidden=!matches(paper);if(!paper.element.hidden)visible++;}
-  groups.forEach((group,index)=>{const all=papers.filter(p=>p.group===index),shown=all.filter(p=>!p.element.hidden).length;group.hidden=shown===0;group.querySelector('h2').textContent=t(categoryKeys[index])+' · '+countLabel(shown,all.length);const link=document.querySelector('.category-links a[href="#'+group.id+'"]');if(link)link.textContent=t(categoryKeys[index])+' ('+countLabel(shown,all.length)+')';});
+  groups.forEach((group,index)=>{const all=papers.filter(p=>p.group===index),shown=all.filter(p=>!p.element.hidden).length;group.hidden=shown===0;group.querySelector('h2').textContent=t(categoryKeys[index])+' · '+countLabel(shown,all.length);const link=document.querySelector('.category-links a[data-category-index="'+index+'"]');if(link)link.textContent=t(categoryKeys[index])+' ('+countLabel(shown,all.length)+')';});
   summary.textContent=document.documentElement.lang==='ko'?`전체 ${papers.length}편 중 ${visible}편 표시`:`Showing ${visible} of ${papers.length} publications`;empty.hidden=visible!==0;
  }
  function writeURL(){const url=new URL(location.href);if(query.value.trim())url.searchParams.set('q',query.value.trim());else url.searchParams.delete('q');for(const [key,select] of Object.entries(selects)){if(select.value)url.searchParams.set(key,select.value);else url.searchParams.delete(key);}history.replaceState(null,'',url);}
