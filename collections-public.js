@@ -15,7 +15,7 @@ async function load(){
  const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('timeout')),6000);});
  await Promise.allSettled([
   Promise.race([readEntries(kind),timeout]).then(entries=>{saved=entries;render();}).catch(()=>{failed=true;render();}).finally(()=>clearTimeout(timer)),
-  kind==='news'?fetch('./data/news-curated.json').then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{curated=data.entries;render();}).catch(()=>{}):Promise.resolve()
+  kind==='news'?fetch('./data/news-curated.json?v=20261117-news33',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{curated=data.entries;render();}).catch(()=>{}):Promise.resolve()
  ]);
 }
 function render(){
