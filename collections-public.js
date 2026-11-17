@@ -1,3 +1,4 @@
+import {mergeNews} from './news-data.js';
 import {readEntries} from './collections.js';
 import {getLanguage,t} from './i18n.js';
 const kind=document.body.classList.contains('page-gallery')?'gallery':'news';
@@ -19,9 +20,9 @@ async function load(){
 }
 function render(){
   list.replaceChildren();
-  const language=getLanguage();const publishedSources=new Set(saved.map(e=>e.source).filter(Boolean));
+  const language=getLanguage();
   if(dialog){document.getElementById('viewer-close').textContent=t('closeViewer');document.getElementById('viewer-close').setAttribute('aria-label',t('closeViewer'));}
-  const entries=[...saved,...curated.filter(e=>!saved.some(s=>s.id===e.id)&&!publishedSources.has(e.source)).map(e=>({...e,title:e.title[language],body:e.body[language],curated:true}))].sort((a,b)=>b.date.localeCompare(a.date)||a.id.localeCompare(b.id));
+  const entries=mergeNews(saved,curated).map(e=>typeof e.title==='object'?{...e,title:e.title[language],body:e.body[language],curated:true}:e);
   for(const entry of entries){
     const card=node('article',null,kind==='gallery'?'gallery-card':'news-card');card.id=kind+'-'+entry.id;
     const date=node('time',entry.date);date.dateTime=entry.date;
@@ -35,8 +36,10 @@ function render(){
       card.append(button,node('h2',entry.title),date,node('p',entry.caption,'gallery-caption'));
     }else{
       if(entry.curated)date.title=entry.dateKind==='event'?(language==='ko'?'공식 프로그램 행사일':'Official program event date'):t('sourceDate');
-      card.append(date,node('h2',entry.title),node('p',entry.body,'news-body'));
-      if(entry.source){const sourceName=language==='en'?({'경상국립대학교 · GNU':'Gyeongsang National University · GNU','경상국립대학교 소프트웨어공학과':'GNU Department of Software Engineering'}[entry.sourceName]||entry.sourceName):entry.sourceName;const source=node('a',t('source')+' · '+sourceName,'news-source');source.href=entry.source;card.append(source);}
+      const dateKind=node('span',entry.dateKind==='event'?(language==='ko'?'행사일':'Event date'):entry.dateKind==='video'?(language==='ko'?'영상 공개일':'Video released'):(language==='ko'?'게시일':'Posted'),'news-date-kind');card.append(date,dateKind,node('h2',entry.title),node('p',entry.body,'news-body'));
+      const sources=entry.sources|| (entry.source?[{url:entry.source,name:{ko:entry.sourceName||'출처',en:({'경상국립대학교 · GNU':'Gyeongsang National University · GNU','경상국립대학교 소프트웨어공학과':'GNU Department of Software Engineering'}[entry.sourceName]||entry.sourceName||'Source')},label:{ko:'원문 보기',en:'Read source'}}]:[]);
+      const links=node('div',null,'news-source-links');for(const item of sources){if(!/^https?:\/\//i.test(item.url))continue;const name=typeof item.name==='object'?item.name[language]:item.name;const label=item.label?.[language]||(language==='ko'?'원문 보기':'Read source');const source=node('a',label+' ↗ · '+name,'news-source');source.href=item.url;links.append(source);}if(links.childNodes.length)card.append(links);
+
     }
     list.append(card);
   }
