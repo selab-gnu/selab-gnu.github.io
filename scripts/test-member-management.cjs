@@ -145,9 +145,10 @@ const client=`export const app={},db={};export const contentRef={firestore:db,pa
   await page.locator('.event-album').first().waitFor();
   assert.equal(await page.locator('.event-album').count(),2);
   assert.equal(await page.locator('.event-album h2').first().textContent(),'함께하는 연구 활동');
+  await page.waitForFunction(()=>{const img=document.querySelector('.event-album img');return img?.complete&&img.naturalWidth>0;});
   assert(await page.locator('.event-album img').first().evaluate(img=>img.complete&&img.naturalWidth>0));
   if(process.env.TEST_GALLERY_SCREENSHOT)await page.screenshot({path:process.env.TEST_GALLERY_SCREENSHOT,fullPage:true});
-  await page.locator('#gallery-search').fill('없는 앨범 검색어');assert.equal(await page.locator('.event-album').count(),0);assert(await page.locator('#gallery-empty').isVisible());await page.locator('#gallery-search').fill('');assert.equal(await page.locator('.event-album').count(),2);
+  await page.locator('#gallery-search-tools>summary').click();await page.locator('#gallery-search').fill('없는 앨범 검색어');assert.equal(await page.locator('.event-album').count(),0);assert(await page.locator('#gallery-empty').isVisible());await page.locator('#gallery-search').fill('');assert.equal(await page.locator('.event-album').count(),2);
   await page.locator('.album-cover').first().click();assert(await page.locator('#gallery-album').isVisible());assert.equal(await page.locator('#album-photos img').count(),2);assert.equal(await page.locator('#album-photos figcaption').count(),2);assert((await page.locator('#album-photos figcaption').first().textContent()).includes('함께 연구하고'));await page.locator('.album-photo').first().click();
   assert(await page.locator('#gallery-viewer').isVisible());
   assert.equal(await page.locator('#viewer-title').textContent(),'함께하는 연구 활동');assert(await page.locator('#viewer-caption').isHidden());assert(await page.locator('#viewer-image').isVisible());assert((await page.locator('#viewer-caption').textContent()).includes('함께 연구하고'));

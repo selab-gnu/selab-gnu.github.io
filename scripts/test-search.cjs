@@ -38,7 +38,7 @@ const root=path.resolve(__dirname,'..');
   for(const width of [390,1440]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
   await page.locator('#publication-search-list h3 a').click();
   await page.waitForFunction(n=>document.querySelectorAll('.publications li').length===n,paperCount);
-  await page.locator('#publication-text-query').waitFor();assert.equal(await page.locator('main input[type=search]').count(),1);
+  await page.locator('#publication-text-query').waitFor({state:'attached'});await page.locator('#publication-search-tools>summary').click();assert.equal(await page.locator('main input[type=search]').count(),1);
   await page.locator('#publication-text-query').fill('zzzz-no-matching-publication');assert.equal(await page.locator('.publications li:not([hidden])').count(),0);await page.locator('#publication-text-query').fill('');await page.locator('.publication-advanced summary').click();assert(await page.locator('#filter-year').isVisible());
   assert.equal(await page.locator('.publications li[hidden]').count(),0);
   assert.equal(await page.locator('header input[type=search]').count(),1);
@@ -97,6 +97,7 @@ const root=path.resolve(__dirname,'..');
   await page.waitForFunction(()=>document.querySelector('#search-data-status')?.textContent.includes('최신 공개 논문을 확인하지 못해'));
   assert.equal(await page.locator('#publication-search-list li').count(),1);
   for(const [i,type] of ['international-journals','international-conferences','domestic-journals','domestic-conferences'].entries()){await page.goto('http://localhost:8137/publications.html?lang=ko');await page.locator('.category-links a[data-category-index="'+i+'"]').click();await page.waitForFunction(()=>document.querySelectorAll('#publication-search-list li').length>0);assert.equal(new URL(page.url()).searchParams.get('type'),type);assert.equal(await page.locator('#publication-type-filter').inputValue(),type);assert.equal(new URL(page.url()).searchParams.get('lang'),'ko');}
+  await page.goto('http://localhost:8129/publications.html?lang=ko');await page.waitForFunction(()=>document.querySelectorAll('#latest-publications li').length===3);assert(!(await page.locator('#publication-search-tools').evaluate(el=>el.open)));assert(await page.locator('#latest-publications').isVisible());await page.locator('#latest-publications a').first().click();await page.waitForFunction(()=>!!location.hash);assert(await page.locator('#latest-publications').isHidden());
   assert.deepEqual(errors,[]);
   console.log('PASS: compact home, six navigation links, publication-only search, result anchors, empty/no-results/XSS, latest cloud paper tags, SE/AI/AERO and publication type filters, unclassified/empty intersections, URL persistence/back, safe metadata, offline fallback, mobile/desktop widths');
  }finally{await browser.close();}

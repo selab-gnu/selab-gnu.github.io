@@ -1,6 +1,6 @@
 import {loadPaperTags,paperTags,tagBadges} from './publication-tags.js';
-import './site-enhancements.js?v=20261124-content';
-import {setupPublicationFilters} from './publication-filters.js';
+import './site-enhancements.js?v=20261124-latest';
+import {setupPublicationFilters} from './publication-filters.js?v=20261124-latest';
 // Search results link directly to a publication; every paper stays visible.
 function highlightPublication(){
  document.querySelectorAll('.publication-target').forEach(el=>el.classList.remove('publication-target'));

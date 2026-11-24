@@ -25,7 +25,7 @@ const shot=async(page,name)=>{if(process.env.REFINEMENTS_SCREENSHOTS){fs.mkdirSy
  assert(!metadata.some(p=>p.authors.some(name=>/^(?:Ahn|Cho|Lee|Kim|Seonah|Sungwon|& Kim)$/.test(name))),'No split surname/given-name fragments');
  const topicUpgrade=await page.evaluate(async()=>{const {supplementMemberUpdates}=await import('/member-updates.js');const old={name:'Uicheon Lee',html:'<p>Research Topic: Reinforcement Learning</p>'};const first=supplementMemberUpdates([old]);const changed={...old,html:'<p>Research Topic: Future topic</p>'};return {updated:first[0].html,stable:JSON.stringify(first)===JSON.stringify(supplementMemberUpdates(first)),preserved:new DOMParser().parseFromString(supplementMemberUpdates([changed])[0].html,'text/html').body.textContent==='Research Topic: Future topic'};});
  assert(topicUpgrade.updated.includes('Aircraft Simulation')&&topicUpgrade.stable&&topicUpgrade.preserved);
- await page.locator('.publication-advanced summary').click();await page.locator('#filter-year').selectOption('2025');
+ await page.locator('#publication-search-tools>summary').click();await page.locator('.publication-advanced summary').click();await page.locator('#filter-year').selectOption('2025');
  const yearVisible=await page.locator('.publications li:visible').count();assert(yearVisible>0&&yearVisible<total);
  await page.locator('#filter-author').selectOption('Uicheon Lee / 이의천');
  const combined=await page.locator('.publications li:visible').count();assert(combined>0&&combined<=yearVisible);
