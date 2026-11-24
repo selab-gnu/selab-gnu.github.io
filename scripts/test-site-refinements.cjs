@@ -25,7 +25,7 @@ const shot=async(page,name)=>{if(process.env.REFINEMENTS_SCREENSHOTS){fs.mkdirSy
  assert(!metadata.some(p=>p.authors.some(name=>/^(?:Ahn|Cho|Lee|Kim|Seonah|Sungwon|& Kim)$/.test(name))),'No split surname/given-name fragments');
  const topicUpgrade=await page.evaluate(async()=>{const {supplementMemberUpdates}=await import('/member-updates.js');const old={name:'Uicheon Lee',html:'<p>Research Topic: Reinforcement Learning</p>'};const first=supplementMemberUpdates([old]);const changed={...old,html:'<p>Research Topic: Future topic</p>'};return {updated:first[0].html,stable:JSON.stringify(first)===JSON.stringify(supplementMemberUpdates(first)),preserved:new DOMParser().parseFromString(supplementMemberUpdates([changed])[0].html,'text/html').body.textContent==='Research Topic: Future topic'};});
  assert(topicUpgrade.updated.includes('Aircraft Simulation')&&topicUpgrade.stable&&topicUpgrade.preserved);
- await page.locator('#filter-year').selectOption('2025');
+ await page.locator('.publication-advanced summary').click();await page.locator('#filter-year').selectOption('2025');
  const yearVisible=await page.locator('.publications li:visible').count();assert(yearVisible>0&&yearVisible<total);
  await page.locator('#filter-author').selectOption('Uicheon Lee / 이의천');
  const combined=await page.locator('.publications li:visible').count();assert(combined>0&&combined<=yearVisible);
@@ -49,14 +49,14 @@ const shot=async(page,name)=>{if(process.env.REFINEMENTS_SCREENSHOTS){fs.mkdirSy
  await page.setViewportSize({width:390,height:844});assert((await studentGrids.nth(1).evaluate(el=>getComputedStyle(el).gridTemplateColumns)).split(' ').length===1);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await shot(page,'members-mobile');await page.setViewportSize({width:1440,height:1100});
- await page.goto('http://localhost:8137/news.html');await page.waitForSelector('.news-source');assert.equal(await page.locator('.news-card').count(),6);
- assert((await page.locator('.news-card').first().textContent()).includes('신지아'));
- await shot(page,'news');await page.locator('[data-language=en]').click();assert((await page.locator('.news-card').first().textContent()).includes('Jia Shin'));
- await page.goto('http://localhost:8137/index.html');await page.waitForSelector('#professor-introduction h2');assert.equal(await page.locator('html').getAttribute('lang'),'en');assert((await page.locator('#professor-introduction').textContent()).includes('Seonah Lee'));
+ await page.goto('http://localhost:8137/news.html');await page.waitForSelector('.news-source');assert.equal(await page.locator('.news-card').count(),33);
+ assert((await page.locator('.news-card').first().textContent()).includes('대하장학회'));
+ await shot(page,'news');await page.locator('[data-language=en]').click();assert((await page.locator('.news-card').first().textContent()).includes('Daeha'));
+ await page.goto('http://localhost:8137/index.html');await page.locator('.language-switch').waitFor();assert.equal(await page.locator('html').getAttribute('lang'),'en');assert.equal(await page.locator('#professor-introduction').count(),0);
  assert.equal(await page.locator('#cloud-home .home-introduction').count(),1);
- await page.locator('[data-language=ko]').click();assert((await page.locator('#professor-introduction').textContent()).includes('이선아'));
+ await page.locator('[data-language=ko]').click();assert((await page.locator('.home-introduction').innerText()).includes('소프트웨어'));
  await shot(page,'home');
  assert.deepEqual(errors,[]);
- console.log('PASS: 139 publications, combined filters/counts/reset/deep links, language persistence, degree order, faculty pinned, approved topics, responsive cards, 6 sourced bilingual news items, professor introduction.');
+ console.log('PASS: 139 publications, combined filters/counts/reset/deep links, language persistence, degree order, faculty pinned, approved topics, responsive cards, 33 sourced bilingual news items, content-first home without duplicate professor introduction.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

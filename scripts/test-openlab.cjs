@@ -16,19 +16,18 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
   const file=path.join(root,url.pathname==='/'?'index.html':url.pathname);if(!fs.existsSync(file)){await route.fulfill({status:404,body:''});return;}
   await route.fulfill({contentType:mime[path.extname(file)]||'application/octet-stream',body:fs.readFileSync(file)});
  });
- await page.goto('http://localhost:8137/index.html');await page.locator('#professor-introduction .professor-photo').waitFor();
+ await page.goto('http://localhost:8137/index.html');await page.locator('.language-switch').waitFor();assert.equal(await page.locator('#professor-introduction').count(),0);
  await page.locator('[data-language=ko]').click();
- for(const selector of ['.brand-logo','.professor-photo','footer img'])assert(await page.locator(selector).evaluate(img=>img.complete&&img.naturalWidth>0),selector);
+ for(const selector of ['.brand-logo','footer img'])assert(await page.locator(selector).evaluate(img=>img.complete&&img.naturalWidth>0),selector);
  assert.equal(await page.locator('.home-full-logo').count(),0);
  assert.equal(await page.locator('nav[aria-label="Main navigation"] a').count(),6);
  assert.equal(await page.locator('.research-area-card').count(),3);
  assert(!(await page.locator('#cloud-home').textContent()).includes('Wednesdays'));
  assert((await page.locator('#cloud-home').textContent()).includes('월요일'));
- await page.locator('.professor-history summary').click();assert((await page.locator('.professor-history').textContent()).includes('삼성전자'));
- await page.locator('.professor-history summary').click();await screenshot('home');
+ await screenshot('home');
  await page.goto('http://localhost:8137/members.html');await page.waitForSelector('.member-faculty .member-portrait img');
  assert.equal(await page.locator('.member-faculty .member-portrait img').getAttribute('src'),'/assets/people/seonah-lee.png');
- assert(await page.locator('.member-faculty img').evaluate(img=>img.complete&&img.naturalWidth>0));await screenshot('members');
+ assert(await page.locator('.member-faculty img').evaluate(img=>img.complete&&img.naturalWidth>0));await page.locator('.member-faculty .professor-history summary').click();assert((await page.locator('.member-faculty .professor-history').innerText()).includes('삼성전자'));await page.locator('.member-faculty .professor-history summary').click();await screenshot('members');
  const seongjin=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Seongjin Go'})});
  assert.equal(await seongjin.locator('.member-portrait img').getAttribute('src'),'/assets/people/seongjin-go.jpg');
  assert(await seongjin.locator('.member-portrait img').evaluate(img=>img.complete&&img.naturalWidth>0));
@@ -64,7 +63,7 @@ const mime={'.js':'text/javascript','.css':'text/css','.json':'application/json'
  await page.locator('[data-language=en]').click();assert.equal(await page.locator('main>h1').textContent(),'Research & Lab');assert((await page.locator('#awards').innerText()).includes('Grand Prize'));
  const links=await page.locator('.research-project a').evaluateAll(nodes=>nodes.map(a=>a.getAttribute('href')));
  for(const link of links){await page.goto('http://localhost:8137/'+link);await page.waitForFunction(()=>document.querySelectorAll('#publication-search-list li').length>0);assert.equal(await page.locator('#publication-search-list li').count(),1,link);}
- for(const width of [390,768,1440]){await page.setViewportSize({width,height:1100});for(const file of ['index.html','research.html','members.html','publications.html','news.html','gallery.html']){await page.goto('http://localhost:8137/'+file);await page.locator('.language-switch').waitFor();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),file+' at '+width);}}
+ for(const width of [390,768,1440]){await page.setViewportSize({width,height:1100});for(const file of ['index.html','research.html','members.html','publications.html','news.html','gallery.html']){await page.goto('http://localhost:8137/'+file);await page.locator('.language-switch').waitFor();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),file+' at '+width);const first={'index.html':'.research-area-card','research.html':'#areas .research-area-card','members.html':'.member-faculty','publications.html':'.publications li','news.html':'.news-card','gallery.html':'.gallery-toolbar'}[file];await page.locator(first).first().waitFor();if(file==='publications.html')await page.locator('#publication-text-query').waitFor();const entry=await page.locator(first).first().boundingBox();if(entry.y>=650)await screenshot('entry-'+width+'-'+file);assert(entry.y<650,file+' primary content below first viewport at '+width+': '+entry.y);}}
  await page.setViewportSize({width:390,height:1000});await page.goto('http://localhost:8137/index.html');await page.locator('[data-language=ko]').click();await screenshot('mobile-home');
  assert.deepEqual(errors,[]);
  console.log('PASS: supplied logo assets, professor photo/default/custom/removal, bilingual research page, 3 areas, 8 linked studies, 11 milestones, 17 sourced awards, updated seminar, 390/768/1440 layouts, no browser errors or cloud writes.');

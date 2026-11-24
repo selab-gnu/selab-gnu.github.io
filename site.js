@@ -1,5 +1,5 @@
 import {loadPaperTags,paperTags,tagBadges} from './publication-tags.js';
-import './site-enhancements.js';
+import './site-enhancements.js?v=20261124-content';
 import {setupPublicationFilters} from './publication-filters.js';
 // Search results link directly to a publication; every paper stays visible.
 function highlightPublication(){

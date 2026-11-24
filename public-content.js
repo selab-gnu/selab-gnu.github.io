@@ -10,7 +10,7 @@ if (document.querySelector('#cloud-home, .page-members .imported-content, .publi
    if (!validContent(d)) throw Error('Invalid content');
    const home = document.querySelector('#cloud-home');
    const members = document.querySelector('.page-members .imported-content');
-   if (home && !/This homepage is under (?:the )?construction/i.test(d.home)) home.innerHTML = clean(d.home);
+   if (home && !/This homepage is under (?:the )?construction/i.test(d.home)){const highlights=home.querySelector('.openlab-highlights')?.cloneNode(true);home.innerHTML=clean(d.home);if(highlights&&!home.querySelector('.openlab-highlights')){const intro=home.querySelector('.home-introduction');if(intro)intro.after(highlights);else home.prepend(highlights);}}
    if (members) {
      if (d.memberDirectoryVersion===1) {
       const { readProfiles } = await import('./admin/member-store.js');

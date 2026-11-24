@@ -13,12 +13,12 @@ const root=path.resolve(__dirname,'..');
  assert.equal(await page.locator('main a[href^="mailto:"]').count(),0);assert(emailPattern.test(await page.locator('main').innerText()));assert.equal(await page.locator('.email-contact[data-email-user][data-email-domain]').count(),await page.locator('.email-contact').count());
  const card=page.locator('.member-profile').filter({has:page.locator('h3',{hasText:'Seongjin Go'})});
  assert.equal(await card.locator('.member-email .email-contact').textContent(),'tjdwls9267@naver.com');
- assert.equal(await page.locator('.email-reveal,.email-hide,.member-profile details,.member-profile summary').count(),0);
+ assert.equal(await page.locator('.email-reveal,.email-hide,details.member-details,.member-details summary').count(),0);
  assert(await card.locator('.member-details').isVisible());
  await page.locator('[data-language=ko]').click();assert.equal(await card.locator('.member-email .email-contact').textContent(),'tjdwls9267@naver.com');
  const restored=await page.evaluate(async()=>{const {splitLegacyMembers,profileHTML,renderProfiles}=await import('/member-profiles.js');const {restoreEmailMarkup}=await import('/email-privacy.js');const source=await(await fetch('/members.html')).text();const doc=new DOMParser().parseFromString(source,'text/html');const records=splitLegacyMembers(doc.querySelector('.imported-content').innerHTML);const go=records.find(r=>r.name==='Seongjin Go');const unsafe=restoreEmailMarkup('<span data-email-token="'+btoa('<img src=x onerror=alert(1)>')+'">Bad</span>');return {count:records.length,admin:profileHTML(go).includes('mailto:tjdwls9267@naver.com'),public:!renderProfiles([go]).includes('mailto:'),unsafe:unsafe.includes('<img')};});
  assert.equal(restored.count,29);assert(restored.admin&&restored.public&&!restored.unsafe);
- for(const file of ['index.html','research.html']){await page.goto('http://localhost:8137/'+file);await page.locator('.language-switch').waitFor();assert.equal(await page.locator('main a[href^="mailto:"]').count(),0);assert(emailPattern.test(await page.locator('main').innerText()));}
+ for(const file of ['index.html','research.html']){await page.goto('http://localhost:8137/'+file);await page.locator('.language-switch').waitFor();assert.equal(await page.locator('main a[href^="mailto:"]').count(),0);assert.equal(emailPattern.test(await page.locator('main').innerText()),file==='research.html');}
  await page.setViewportSize({width:390,height:844});await page.goto('http://localhost:8137/members.html');await page.waitForSelector('.member-grid');assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  assert.deepEqual(errors,[]);console.log('PASS: static source obfuscation, JS-assembled visible addresses from separate user/domain parts without mailto/buttons, expanded profiles, language changes, admin/legacy email preservation, invalid tokens, mobile layout; no backend writes.');
  }finally{await browser.close();}
